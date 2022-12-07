@@ -1,38 +1,100 @@
-.App {
-  text-align: center;
+body {
+  font-family: 'Cabin', sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.menu a.active {
+  @apply bg-accent;
+  @apply font-semibold;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+.menu span {
+  @apply text-accent;
+  @apply uppercase;
+  @apply text-xs;
+  @apply block;
+  @apply pl-3;
+  @apply pt-4;
+  @apply pb-2;
 }
 
-.App-header {
-  background-color: #282c34;
+.menu a {
+  @apply rounded-none;
+}
+
+.menu :where(li) a.active+ul {
+  position: unset;
+  display: unset;
+  margin-left: 30px;
+  margin-top: 10px;
+}
+
+
+.menu :where(li) ul a {
+  @apply text-sm;
+  padding: 5px 50px;
+}
+
+.menu :where(li) a.active+ul a {
+  padding: 5px 0;
+  background: unset;
+  border-radius: 0 !important;
+}
+
+.menu :where(li) a.active+ul a::before {
+  content: '';
+  width: 5px;
+  height: 5px;
+  @apply bg-accent;
+}
+
+
+
+.menu span::after {
+  content: '';
+  width: 25px;
+  height: 1px;
+  @apply bg-accent;
+  position: absolute;
+  top: 62%;
+  margin-left: 5px;
+}
+
+.drawer-toggle~.drawer-side {
+  max-height: unset !important;
+}
+
+.drawer {
+  height: unset;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+/* ========== */
+
+.form-control input {
+  @apply input input-bordered;
+  border-color: #e5e7eb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+.form-control.sm input {
+  @apply input input-bordered input-sm;
+  border-color: #e5e7eb;
+}
+
+.form-control select {
+  @apply select select-bordered;
+}
+
+.form-control.sm select {
+  @apply select select-bordered select-sm;
+}
+
+.flex .col {
+  padding: 10px;
+}
+
+@media(min-width: 1024px) {
+  .drawer-side {
+    overflow-y: unset !important;
   }
 }
