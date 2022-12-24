@@ -5,6 +5,8 @@ import { useLoaderData, useLocation } from 'react-router-dom';
 const AddDoctor = () => {
   const doctor = useLoaderData();
   const location = useLocation();
+  const edit = location.pathname === '/dashboard/doctors/add-new' ? false : true;
+
 
   let addNew = '';
   if (location.pathname === '/dashboard/doctors/add-new') {
@@ -77,7 +79,7 @@ const AddDoctor = () => {
     setRepeter(newRepeter);
   }
 
-
+  console.log(doctor);
 
   return (
     <form onSubmit={handleSubmit(doctor ? handleEditDoctor : handleAddDoctor)}>
@@ -91,7 +93,7 @@ const AddDoctor = () => {
               <div className='basis-full p-5'>
                 <div className="form-control">
                   <label className="label"><span className="label-text">Name</span></label>
-                  <input {...register("name", { required: true })} defaultValue={doctor?.name} />
+                  <input name='name' defaultValue={doctor?.name} required />
                 </div>
               </div>
             </div>

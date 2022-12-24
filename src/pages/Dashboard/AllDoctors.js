@@ -22,7 +22,9 @@ const AllDoctors = () => {
           <tr>
             <th>No.</th>
             <th>Name</th>
-            <th>Price</th>
+            <th>Email</th>
+            <th>Qualifications</th>
+            <th>Designation</th>
             <th className='text-right'>Actions</th>
           </tr>
         </thead>
@@ -32,7 +34,9 @@ const AllDoctors = () => {
               <tr key={index}>
                 <th>{index + 1}</th>
                 <td>{doctor?.name}</td>
-                <td>${doctor?.price}</td>
+                <td>{doctor?.email}</td>
+                <td>{doctor?.qualifications}</td>
+                <td>{doctor?.designation}</td>
                 <td className='text-right'>
                   <Link to={`/dashboard/doctors/${doctor?._id}`}><FaRegEdit className='inline'></FaRegEdit></Link>
                 </td>

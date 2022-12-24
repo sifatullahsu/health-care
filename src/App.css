@@ -72,7 +72,7 @@ body {
 /* ========== */
 
 .form-control input {
-  @apply input input-bordered;
+  @apply input input-bordered w-full;
   border-color: #e5e7eb;
 }
 

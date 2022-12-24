@@ -1,23 +1,22 @@
-import React, { useState } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import React from 'react';
+import { useContext } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
+import { AuthContext } from '../contexts/AuthProvider';
+import logo from '../assets/images/logo.png';
 
 const AdminSidebar = () => {
 
   const location = useLocation();
   const path = location.pathname;
 
-  return (
-    <div className='bg-primary text-gray-300'>
-      <div className='mt-5 mb-10 px-4'>
-        <div className='text-2xl font-semibold'>Logo</div>
-      </div>
-      <ul className="menu w-80 ">
-        <li><NavLink to='/dashboard' className={({ isActive }) => isActive && path === '/dashboard' ? 'active' : ''}>Dashboard</NavLink></li>
-        <li><NavLink to='/dashboard/hospital-services' className={path.includes('/checkout') && 'active'}>Hospital Services</NavLink></li>
+  const { user } = useContext(AuthContext);
 
-        <div className='relative'>
-          <span>Admin</span>
-        </div>
+
+
+  const adminMenu = () => {
+    return (
+      <>
+        <div className='relative'><span>Admin</span></div>
 
         <li>
           <NavLink to='/dashboard/doctors'>Doctors</NavLink>
@@ -63,17 +62,50 @@ const AdminSidebar = () => {
             <li><NavLink to='/dashboard/users/add-new'>Add New</NavLink></li>
           </ul>
         </li>
+      </>
+    );
+  }
 
-        <div className='relative'>
-          <span>Account</span>
-        </div>
-        <li><NavLink to='/dashboard/my-appointments'>My Appointments</NavLink></li>
-        <li><NavLink to='/dashboard/settings'>Settings</NavLink></li>
-        <li><NavLink to='/logout'>Logout</NavLink></li>
-      </ul>
-      <div className='px-4'>
 
+  return (
+    <div className='bg-primary text-gray-300'>
+      <div className='mt-5 mb-10 px-4'>
+        <Link to='/'>
+          <img src={logo} className='w-[200px]' alt="" />
+        </Link>
       </div>
+      <ul className="menu w-80 ">
+
+        <li>
+          <NavLink to='/dashboard'
+            className={({ isActive }) => isActive && path === '/dashboard' ? 'active' : ''}
+          >Dashboard</NavLink>
+        </li>
+
+        <li>
+          <NavLink to='/dashboard/hospital-services'
+            className={path.includes('/checkout') && 'active'}
+          >Hospital Services</NavLink>
+        </li>
+
+        {
+          user?.uid &&
+          adminMenu()
+        }
+
+        <div className='relative'><span>Account</span></div>
+
+        {
+          user?.uid &&
+          <>
+            <li><NavLink to='/dashboard/my-appointments'>My Appointments</NavLink></li>
+            <li><NavLink to='/dashboard/settings'>Settings</NavLink></li>
+            <li><NavLink to='/logout'>Logout</NavLink></li>
+          </>
+        }
+
+      </ul>
+      <div className='px-4'></div>
     </div>
   );
 };

@@ -12,6 +12,7 @@ import MyAppointments from "../pages/Dashboard/MyAppointments";
 import ServiceAddNew from "../pages/Dashboard/ServiceAddNew";
 import ServicesSingle from "../pages/Dashboard/ServicesSingle";
 import Settings from "../pages/Dashboard/Settings";
+import HomePage from "../pages/HomePage";
 import DashboardTemp from "../templates/Dashboard";
 import Main from "../templates/Main";
 
@@ -22,18 +23,18 @@ export const route = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <div>Home</div>
+        element: <HomePage></HomePage>
       },
       {
         path: '/appointment',
         element: <AppointmentPage></AppointmentPage>
       },
       {
-        path: '/login',
+        path: 'login',
         element: <Login></Login>
       },
       {
-        path: '/signup',
+        path: 'signup',
         element: <SignUp></SignUp>
       }
     ]

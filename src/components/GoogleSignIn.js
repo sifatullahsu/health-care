@@ -22,8 +22,8 @@ const GoogleSignIn = ({ from }) => {
 
   return (
     <>
-      <button onClick={handleGoogleSignIn} className='bg-white py-2 px-5 border border-border'>
-        <FcGoogle className='inline'></FcGoogle> Google
+      <button onClick={handleGoogleSignIn} className='btn btn-outline w-full'>
+        <FcGoogle className='inline-block mr-2'></FcGoogle> CONTINUE WITH GOOGLE
       </button>
     </>
   );
