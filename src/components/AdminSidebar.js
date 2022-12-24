@@ -3,13 +3,19 @@ import { useContext } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthProvider';
 import logo from '../assets/images/logo.png';
+import { toast } from 'react-hot-toast';
 
 const AdminSidebar = () => {
 
   const location = useLocation();
   const path = location.pathname;
 
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    logOut()
+      .then(data => toast.success('Logout Successfull'))
+  }
 
 
 
@@ -100,7 +106,7 @@ const AdminSidebar = () => {
           <>
             <li><NavLink to='/dashboard/my-appointments'>My Appointments</NavLink></li>
             <li><NavLink to='/dashboard/settings'>Settings</NavLink></li>
-            <li><NavLink to='/logout'>Logout</NavLink></li>
+            <li><button onClick={handleLogout}>Logout</button></li>
           </>
         }
 

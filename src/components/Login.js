@@ -11,7 +11,7 @@ const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const from = location.state?.from?.pathname || '/';
+  const from = location.state?.from?.pathname || '/dashboard';
 
   const handleLogin = data => {
     console.log(data);
@@ -65,7 +65,7 @@ const Login = () => {
         </form>
         <p>New to Doctors Portal <Link className='text-secondary' to="/signup">Create new Account</Link></p>
         <div className="divider">OR</div>
-        <GoogleSignIn></GoogleSignIn>
+        <GoogleSignIn form={from}></GoogleSignIn>
       </div>
     </div>
   );

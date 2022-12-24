@@ -13,7 +13,7 @@ const GoogleSignIn = ({ from }) => {
     userSocialLogin('google')
       .then(res => {
         toast.success('Successfully logged in!!');
-        navigate('/');
+        navigate(from);
       })
       .catch(err => {
         toast.error('Something is wrong!!');

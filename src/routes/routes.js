@@ -15,6 +15,7 @@ import Settings from "../pages/Dashboard/Settings";
 import HomePage from "../pages/HomePage";
 import DashboardTemp from "../templates/Dashboard";
 import Main from "../templates/Main";
+import PrivateRoute from "./PrivateRoute";
 
 export const route = createBrowserRouter([
   {
@@ -45,7 +46,7 @@ export const route = createBrowserRouter([
     children: [
       {
         path: '',
-        element: <Dashboard></Dashboard>,
+        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
       },
       {
         path: 'hospital-services',
