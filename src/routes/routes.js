@@ -3,10 +3,13 @@ import Login from "../components/Login";
 import SignUp from "../components/SignUp";
 import AppointmentPage from "../pages/AppointmentPage";
 import AddDoctor from "../pages/Dashboard/AddDoctor";
+import AddService from "../pages/Dashboard/AddService";
 import AllDoctors from "../pages/Dashboard/AllDoctors";
 import AllServices from "../pages/Dashboard/AllServices";
 import Checkout from "../pages/Dashboard/Checkout";
 import Dashboard from "../pages/Dashboard/Dashboard";
+import EditDoctor from "../pages/Dashboard/EditDoctor";
+import EditService from "../pages/Dashboard/EditService";
 import HospitalServices from "../pages/Dashboard/HospitalServices";
 import MyAppointments from "../pages/Dashboard/MyAppointments";
 import ServiceAddNew from "../pages/Dashboard/ServiceAddNew";
@@ -62,7 +65,7 @@ export const route = createBrowserRouter([
       },
       {
         path: 'doctors/:id',
-        element: <AddDoctor></AddDoctor>,
+        element: <EditDoctor></EditDoctor>,
         loader: ({ params }) => fetch(`http://localhost:5001/doctors/${params.id}`)
       },
       {
@@ -71,11 +74,11 @@ export const route = createBrowserRouter([
       },
       {
         path: 'services/add-new',
-        element: <ServiceAddNew></ServiceAddNew>
+        element: <AddService></AddService>
       },
       {
         path: 'services/:id',
-        element: <ServicesSingle></ServicesSingle>,
+        element: <EditService></EditService>,
         loader: ({ params }) => fetch(`http://localhost:5001/services/${params.id}`)
       },
       {

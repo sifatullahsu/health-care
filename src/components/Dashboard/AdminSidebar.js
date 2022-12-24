@@ -1,8 +1,8 @@
 import React from 'react';
 import { useContext } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { AuthContext } from '../contexts/AuthProvider';
-import logo from '../assets/images/logo.png';
+import { AuthContext } from '../../contexts/AuthProvider';
+import logo from '../../assets/images/logo.png';
 import { toast } from 'react-hot-toast';
 
 const AdminSidebar = () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import AdminSidebar from '../components/AdminSidebar';
+import AdminSidebar from '../components/Dashboard/AdminSidebar';
 import DashHeader from '../components/DashHeader';
 
 const DashboardTemp = () => {
