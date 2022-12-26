@@ -12,8 +12,6 @@ import EditDoctor from "../pages/Dashboard/EditDoctor";
 import EditService from "../pages/Dashboard/EditService";
 import HospitalServices from "../pages/Dashboard/HospitalServices";
 import MyAppointments from "../pages/Dashboard/MyAppointments";
-import ServiceAddNew from "../pages/Dashboard/ServiceAddNew";
-import ServicesSingle from "../pages/Dashboard/ServicesSingle";
 import Settings from "../pages/Dashboard/Settings";
 import HomePage from "../pages/HomePage";
 import DashboardTemp from "../templates/Dashboard";
