@@ -86,7 +86,7 @@ body {
 }
 
 .form-control.sm select {
-  @apply select select-bordered select-sm;
+  @apply select select-bordered select-sm w-full;
 }
 
 .flex .col {
@@ -97,4 +97,45 @@ body {
   .drawer-side {
     overflow-y: unset !important;
   }
+}
+
+
+
+
+
+
+.swiper {
+  width: 100%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.swiper-slide {
+  height: unset !important;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  top: unset !important;
+  bottom: 0;
+}
+
+.swiper-button-next,
+.swiper-rtl .swiper-button-prev {
+  right: 0 !important;
+}
+
+.swiper-button-prev,
+.swiper-rtl .swiper-button-next {
+  left: auto !important;
+  right: 20px !important;
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  font-size: 12px !important;
+  background: black;
+  padding: 10px 5px;
+  color: #fff;
 }

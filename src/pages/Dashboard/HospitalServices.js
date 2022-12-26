@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import Services from '../../templates/loops/Services';
-import { DayPicker } from 'react-day-picker';
+// import { DayPicker } from 'react-day-picker';
 import { format } from 'date-fns';
+
+
+
 
 const HospitalServices = () => {
 
@@ -11,16 +14,17 @@ const HospitalServices = () => {
   const formatedDate = format(selectedDate, 'PP');
 
 
-  const { data: services = [], refetch, isLoading } = useQuery({
+  const { data: services = [], isLoading } = useQuery({
     queryKey: ['services'],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5001/appointments?date=${formatedDate}`);
+      const res = await fetch(`http://localhost:5001/services`);
       const data = await res.json();
 
       return data;
     }
   });
 
+  console.log(services);
 
   const footer = selectedDate ? (
     <p>You selected {format(selectedDate, 'PP')}.</p>
@@ -37,7 +41,7 @@ const HospitalServices = () => {
 
   return (
     <div>
-      <div className='mb-10'>
+      {/* <div className='mb-10'>
         <DayPicker
           mode="single"
           disabled={{ before: date }}
@@ -49,8 +53,10 @@ const HospitalServices = () => {
           }}
           footer={footer}
         />
-      </div>
+      </div> */}
       <Services services={services} selectedDate={selectedDate}></Services>
+
+
     </div>
   );
 };

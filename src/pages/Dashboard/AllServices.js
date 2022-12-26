@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const AllServices = () => {
 
-  const { data: services = [], refetch, isLoading } = useQuery({
+  const { data: services = [] } = useQuery({
     queryKey: ['services'],
     queryFn: async () => {
       const res = await fetch(`http://localhost:5001/services`);

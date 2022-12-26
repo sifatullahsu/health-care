@@ -95,7 +95,9 @@ const DoctorForm = ({ data }) => {
       .then(req => req.json())
       .then(data => {
         if (data.acknowledged) {
-          toast.success('Doctor Added Successful..')
+          toast.success('Doctor Added Successful..');
+          form.reset();
+          setRepeter([]);
         }
         else {
           toast.error('Doctor Added Faild..');
