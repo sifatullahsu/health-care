@@ -24,7 +24,6 @@ const HospitalServices = () => {
     }
   });
 
-  console.log(services);
 
   const footer = selectedDate ? (
     <p>You selected {format(selectedDate, 'PP')}.</p>

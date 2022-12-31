@@ -51,7 +51,7 @@ const Service = ({ service, selectedDate }) => {
             );
           })}
         </Swiper>
-        <Link to={`/dashboard/checkout/${_id}`} className='btn btn-primary btn-sm mt-3'>Book Appointment</Link>
+        <Link to={`/dashboard/hospital-services/${_id}`} className='btn btn-primary btn-sm mt-3'>Book Appointment</Link>
       </div>
     </div>
   );

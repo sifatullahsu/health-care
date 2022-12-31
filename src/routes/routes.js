@@ -11,6 +11,7 @@ import Dashboard from "../pages/Dashboard/Dashboard";
 import EditDoctor from "../pages/Dashboard/EditDoctor";
 import EditService from "../pages/Dashboard/EditService";
 import HospitalServices from "../pages/Dashboard/HospitalServices";
+import HospitalServicesDetails from "../pages/Dashboard/HospitalServicesDetails";
 import MyAppointments from "../pages/Dashboard/MyAppointments";
 import Settings from "../pages/Dashboard/Settings";
 import HomePage from "../pages/HomePage";
@@ -52,6 +53,10 @@ export const route = createBrowserRouter([
       {
         path: 'hospital-services',
         element: <HospitalServices></HospitalServices>
+      },
+      {
+        path: 'hospital-services/:id',
+        element: <HospitalServicesDetails></HospitalServicesDetails>
       },
       {
         path: 'doctors',
