@@ -47,7 +47,7 @@ const DoctorForm = ({ data }) => {
 
     const processData = { name, email, qualifications, designation, image, slots, about }
 
-    fetch(`http://localhost:5001/doctors/edit/${id}`, {
+    fetch(`http://localhost:5000/api/v1/doctors/edit/${id}`, {
       method: 'PATCH',
       headers: {
         'content-type': 'application/json'
@@ -56,7 +56,7 @@ const DoctorForm = ({ data }) => {
     })
       .then(req => req.json())
       .then(data => {
-        if (data.acknowledged) {
+        if (data.status) {
           toast.success('Doctor Update Successful..')
         }
         else {
@@ -85,7 +85,7 @@ const DoctorForm = ({ data }) => {
     const processData = { name, email, qualifications, designation, image, slots, about }
 
 
-    fetch('http://localhost:5001/doctors/add', {
+    fetch('http://localhost:5000/api/v1/doctors/create', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -94,7 +94,7 @@ const DoctorForm = ({ data }) => {
     })
       .then(req => req.json())
       .then(data => {
-        if (data.acknowledged) {
+        if (data.status) {
           toast.success('Doctor Added Successful..');
           form.reset();
           setRepeter([]);

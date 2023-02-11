@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 
 const AllDoctors = () => {
 
-  const { data: doctors = [], refetch, isLoading } = useQuery({
+  const { data: doctors = [] } = useQuery({
     queryKey: ['doctors'],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5001/doctors`);
+      const res = await fetch(`http://localhost:5000/api/v1/doctors/list`);
       const data = await res.json();
 
       return data;
@@ -29,7 +29,7 @@ const AllDoctors = () => {
           </tr>
         </thead>
         <tbody>
-          {doctors.map((doctor, index) => {
+          {doctors?.data?.map((doctor, index) => {
             return (
               <tr key={index}>
                 <th>{index + 1}</th>

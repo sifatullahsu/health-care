@@ -6,7 +6,7 @@ const EditService = () => {
   const service = useLoaderData();
 
   return (
-    <ServiceForm data={service}></ServiceForm>
+    <ServiceForm data={service?.data}></ServiceForm>
   );
 };
 

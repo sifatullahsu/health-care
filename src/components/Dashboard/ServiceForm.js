@@ -4,14 +4,18 @@ import { useLocation } from 'react-router-dom';
 import AsyncSelect from 'react-select/async';
 
 const ServiceForm = ({ data }) => {
-
   const id = useLocation().pathname.split('/dashboard/services/')[1];
-  const [serviceDoctors, setServiceDoctors] = useState(data?.doctors);
+
+  const customDoctors = data?.doctors?.map(i => {
+    return { value: i._id, label: `${i.name} (${i.email})` }
+  });
+
+  const [serviceDoctors, setServiceDoctors] = useState(customDoctors);
 
 
   const handleEditForm = (data, form) => {
 
-    fetch(`http://localhost:5001/services/edit/${id}`, {
+    fetch(`http://localhost:5000/api/v1/services/edit/${id}`, {
       method: 'PATCH',
       headers: {
         'content-type': 'application/json'
@@ -20,7 +24,7 @@ const ServiceForm = ({ data }) => {
     })
       .then(req => req.json())
       .then(data => {
-        if (data.acknowledged) {
+        if (data.status) {
           toast.success('Service Update Successful..')
         }
         else {
@@ -34,7 +38,7 @@ const ServiceForm = ({ data }) => {
 
   const handleAddForm = (data, form) => {
 
-    fetch('http://localhost:5001/services/add', {
+    fetch('http://localhost:5000/api/v1/services/create', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -43,7 +47,7 @@ const ServiceForm = ({ data }) => {
     })
       .then(req => req.json())
       .then(data => {
-        if (data.acknowledged) {
+        if (data.status) {
           toast.success('Service Added Successful..');
           form.reset();
         }
@@ -65,16 +69,16 @@ const ServiceForm = ({ data }) => {
     const price = form.price.value;
     const doctors = serviceDoctors.map(i => i.value);
 
-    const data = { name, price, doctors }
+    const formData = { name, price, doctors }
 
-    return data ? handleEditForm(data, form) : handleAddForm(data, form);
+    return data ? handleEditForm(formData, form) : handleAddForm(formData, form);
   }
 
 
   const promiseOptions = (inputValue, callback) => {
 
     if (inputValue.length >= 3) {
-      fetch(`http://localhost:5001/doctors/name/${inputValue}`, {
+      fetch(`http://localhost:5000/api/v1/doctors/search?name=${inputValue}`, {
         method: 'GET',
         headers: {
           'content-type': 'application/json'
@@ -82,7 +86,7 @@ const ServiceForm = ({ data }) => {
       })
         .then(req => req.json())
         .then(data => {
-          callback(data);
+          callback(data?.status ? data.data : []);
         })
         .catch(error => {
           toast.error('Doctor Loaded Faild..');

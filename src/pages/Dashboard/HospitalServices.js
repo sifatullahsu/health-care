@@ -17,7 +17,7 @@ const HospitalServices = () => {
   const { data: services = [], isLoading } = useQuery({
     queryKey: ['services'],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5001/services`);
+      const res = await fetch(`http://localhost:5000/api/v1/services/list`);
       const data = await res.json();
 
       return data;
@@ -53,7 +53,7 @@ const HospitalServices = () => {
           footer={footer}
         />
       </div> */}
-      <Services services={services} selectedDate={selectedDate}></Services>
+      <Services services={services?.data} selectedDate={selectedDate}></Services>
 
 
     </div>

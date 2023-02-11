@@ -6,7 +6,7 @@ const EditDoctor = () => {
   const doctor = useLoaderData();
 
   return (
-    <DoctorForm data={doctor}></DoctorForm>
+    <DoctorForm data={doctor?.data}></DoctorForm>
   );
 };
 

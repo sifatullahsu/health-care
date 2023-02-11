@@ -69,7 +69,7 @@ export const route = createBrowserRouter([
       {
         path: 'doctors/:id',
         element: <EditDoctor></EditDoctor>,
-        loader: ({ params }) => fetch(`http://localhost:5001/doctors/${params.id}`)
+        loader: ({ params }) => fetch(`http://localhost:5000/api/v1/doctors/single/${params.id}`)
       },
       {
         path: 'services',
@@ -82,7 +82,7 @@ export const route = createBrowserRouter([
       {
         path: 'services/:id',
         element: <EditService></EditService>,
-        loader: ({ params }) => fetch(`http://localhost:5001/services/${params.id}`)
+        loader: ({ params }) => fetch(`http://localhost:5000/api/v1/services/single/${params.id}`)
       },
       {
         path: 'appointments',

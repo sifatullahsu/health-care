@@ -8,7 +8,7 @@ const AllServices = () => {
   const { data: services = [] } = useQuery({
     queryKey: ['services'],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5001/services`);
+      const res = await fetch(`http://localhost:5000/api/v1/services/list`);
       const data = await res.json();
 
       return data;
@@ -27,7 +27,7 @@ const AllServices = () => {
           </tr>
         </thead>
         <tbody>
-          {services.map((service, index) => {
+          {services?.data?.map((service, index) => {
             return (
               <tr key={index}>
                 <th>{index + 1}</th>

@@ -33,7 +33,7 @@ const BookingModal = ({ treatment, setTreatment, selectedDate, refetch }) => {
       }
     }
 
-    fetch('http://localhost:5001/booking', {
+    fetch('http://localhost:5000/api/v1/bookings/create', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'

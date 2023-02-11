@@ -16,17 +16,17 @@ const Checkout = () => {
     console.log(data);
   }
 
-  const { data: service = {}, isLoading } = useQuery({
+  const { data: service = {} } = useQuery({
     queryKey: ['service', paramsId],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5001/services/${paramsId}`);
+      const res = await fetch(`http://localhost:5000/api/v1/services/${paramsId}`);
       const data = await res.json();
 
       return data?.[0];
     }
   });
 
-
+  console.log(service);
 
   if (!state) {
     return <Navigate to='/dashboard/hospital-services'></Navigate>
