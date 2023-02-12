@@ -28,32 +28,32 @@ const HospitalServicesDetails = () => {
       <p className='text-sm text-accent mb-2'>{`Price: $${service?.price} / Appointment`}</p>
       <p className='text-sm text-accent'>No spaces available</p>
 
-      {
-        service?.doctors.map(doctor => {
-          return (
-            <div className='flex gap-3 pt-2 pb-3 shadow-sm'>
-              <div className='basis-14'>
-                <img src={doctor?.image} className='w-full h-12 mt-1' alt="" />
-              </div>
-              <div className='basis-full'>
-                <div>
-                  <h3 className="text-lg text-secondary font-bold capitalize">{doctor?.name}</h3>
-                  <p className='text-sm text-accent text-ellipsis'>{doctor?.designation}</p>
-                </div>
-                <p className='text-sm text-accent'>{doctor?.slots.length} spaces available</p>
-                <div className='absolute top-2 right-2'>
-                  <div className="tooltip tooltip-left" data-tip={doctor?.qualifications}>
-                    <FaInfoCircle></FaInfoCircle>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-5 mt-10'>
+        {
+          service?.doctors.map(doctor => {
+            return (
+              <div className='card bg-white shadow-xl relative'>
+                <div className='card-body'>
+                  <p className='text-sm text-accent absolute top-5 right-5'>{doctor?.slots.length} spaces available</p>
+                  <div key={doctor?._id} className='flex gap-3'>
+                    <div className='basis-14'>
+                      <img src={doctor?.image} className='w-full h-12 mt-1' alt="" />
+                    </div>
+                    <div className='basis-full'>
+                      <div>
+                        <h3 className="text-lg text-secondary font-bold capitalize">{doctor?.name}</h3>
+                        <p className='text-sm text-accent text-ellipsis'>{`${doctor?.designation} - [${doctor.qualifications}]`}</p>
+                      </div>
+                    </div>
                   </div>
+                  <p className='text-sm text-accent'>{doctor?.about.length > 160 ? <>{`${doctor.about.slice(0, 160)}...`}</> : doctor?.about}</p>
+                  <div><button className='btn btn-primary btn-sm text-xs min-h-[25px] h-[25px]'>Book Now</button></div>
                 </div>
               </div>
-            </div>
-          );
-        })
-      }
-
-
-
+            );
+          })
+        }
+      </div>
     </div>
   );
 };

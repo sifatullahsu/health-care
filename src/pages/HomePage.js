@@ -12,7 +12,7 @@ const HomePage = () => {
             <h1 className='text-5xl text-white uppercase mb-5'>We safeguard your
               <small className='block mt-3'>health & beauty.</small>
             </h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti quod obcaecati qui dignissimos quia libero consequuntur fugit incidunt, delectus nihil.</p>
+            <p className='text-lg'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti quod obcaecati qui dignissimos quia libero consequuntur fugit incidunt, delectus nihil corrupti quod obcaecati.</p>
 
             <div className='my-10'>
               <div className="grid grid-cols-2 gap-3">
