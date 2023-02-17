@@ -56,7 +56,8 @@ export const route = createBrowserRouter([
       },
       {
         path: 'hospital-services/:id',
-        element: <HospitalServicesDetails></HospitalServicesDetails>
+        element: <HospitalServicesDetails></HospitalServicesDetails>,
+        loader: ({ params }) => params.id
       },
       {
         path: 'doctors',
@@ -109,9 +110,8 @@ export const route = createBrowserRouter([
         element: <Settings></Settings>
       },
       {
-        path: 'checkout/:id',
+        path: 'checkout',
         element: <Checkout></Checkout>,
-        loader: ({ params }) => params.id
       }
     ]
   }

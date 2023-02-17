@@ -1,107 +1,51 @@
-import React, { useContext } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { useForm } from 'react-hook-form';
-import { Navigate, useLoaderData, useLocation } from 'react-router-dom';
-import { AuthContext } from '../../contexts/AuthProvider';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import React from 'react';
+import { useLocation } from 'react-router-dom';
+import CheckoutForm from '../../components/Dashboard/CheckoutForm';
+
+
+const stripePromise = loadStripe(process.env.REACT_APP_PK);
 
 const Checkout = () => {
-  const paramsId = useLoaderData();
+
   const state = useLocation().state;
-  const { _id, name, price, date, slots } = state;
-  const { user } = useContext(AuthContext);
-
-  const { register, handleSubmit } = useForm();
-
-  const handleCheckout = (data) => {
-    console.log(data);
-  }
-
-  const { data: service = {} } = useQuery({
-    queryKey: ['service', paramsId],
-    queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/api/v1/services/${paramsId}`);
-      const data = await res.json();
-
-      return data?.[0];
-    }
-  });
-
-  console.log(service);
-
-  if (!state) {
-    return <Navigate to='/dashboard/hospital-services'></Navigate>
-  }
 
   return (
-    <div>
-      <ul className="steps w-full">
-        <li className="step step-primary">Payment</li>
-        <li className="step">Successful</li>
-      </ul>
+    <div className='flex space-x-5'>
 
-      <form onSubmit={handleSubmit(handleCheckout)}>
-        <div className='grid grid-cols-1 gap-5'>
-          <div>
-            <input {...register("serviceID")} defaultValue={_id} readOnly hidden />
-            <input {...register("serviceName")} defaultValue={name} readOnly hidden />
-            <input {...register("price")} defaultValue={price} readOnly hidden />
-            <input {...register("appointmentDate")} defaultValue={date} readOnly hidden />
-            <input {...register("appointmentSlot")} readOnly hidden />
+      <div className='basis-4/6'>
 
-            <div className='grid grid-cols-2 gap-5'>
-              <div className="form-control">
-                <label className="label"><span className="label-text">First Name</span></label>
-                <input {...register("firstName", { required: true })} />
-              </div>
+        <ul className="steps w-full">
+          <li className="step step-primary">Payment</li>
+          <li className="step">Successful</li>
+        </ul>
 
-              <div className="form-control">
-                <label className="label"><span className="label-text">Last Name</span></label>
-                <input {...register("lastName", { required: true })} />
-              </div>
-            </div>
+        <Elements stripe={stripePromise}>
+          <CheckoutForm state={state}></CheckoutForm>
+        </Elements>
 
-            <div className="form-control">
-              <label className="label"><span className="label-text">Age</span></label>
-              <input {...register("age", { required: true })} type='number' min="1" max="70" />
-            </div>
+      </div>
+      <div className='basis-2/6'>
+        <div className='bg-white p-5'>
+          <h3 className="text-xl text-secondary font-bold mb-2">{state.service.name}</h3>
+          <p className='text-sm text-accent mb-5'>{`Price: $${state.service.price} / Appointment`}</p>
 
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Appointment slots</span>
-                <span className="label-text-alt">{state.date}</span>
-              </label>
-              <select {...register("slots", { required: true })}>
-                <option value=''>Select appointment slots</option>
-                {
-                  state.slots.map((slot, index) => {
-                    return (
-                      <option key={index} value={slot}>{slot}</option>
-                    );
-                  })
-                }
-              </select>
-            </div>
-
-            <div className="form-control">
-              <label className="label"><span className="label-text">Contact Number</span></label>
-              <input {...register("number", { required: true })} type="tel" pattern="[0-9]{11}" />
-            </div>
-
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">Email</span>
-                <span className="label-text-alt">Readonly field..</span>
-              </label>
-              <input {...register("email", { required: true })} defaultValue={user?.email} readOnly />
+          <div className='flex space-x-3 mb-5'>
+            <img src={state.doctor.image} className='basis-14 h-12 mt-1' alt="" />
+            <div className='basis-full'>
+              <h3 className="text-lg text-secondary font-bold capitalize">{state.doctor.name}</h3>
+              <p className='text-sm text-accent'>{`${state.doctor.designation} - [${state.doctor.qualifications}]`}</p>
             </div>
           </div>
-          <div>
 
-          </div>
+          <h3 className="text-base text-secondary font-bold mb-2">Appointment Time</h3>
+          <ul className='list-disc pl-10 text-sm'>
+            <li>{state.appointment.date}</li>
+            <li>{state.appointment.slot}</li>
+          </ul>
         </div>
-
-        <button type="submit" className='btn btn-primary mt-5 w-full'>Confirm Booking</button>
-      </form>
+      </div>
     </div>
   );
 };

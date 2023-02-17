@@ -1,0 +1,88 @@
+import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useAuth } from '../../contexts/AuthProvider';
+
+const CheckoutForm = ({ state }) => {
+
+  const { register, handleSubmit } = useForm();
+  const { user } = useAuth();
+
+  const stripe = useStripe();
+  const elements = useElements();
+
+  const price = parseFloat(state.service.price);
+
+  const [clientSecret, setClientSecret] = useState("");
+
+
+
+  const handleCheckout = (data) => {
+
+    if (!stripe || !elements) return;
+
+    const card = elements.getElement(CardElement);
+
+    if (card == null) return;
+
+
+    
+
+    const finalData = {
+      date: state.appointment.date,
+      slot: state.appointment.slot,
+      doctor: {
+        _id: state.doctor._id,
+        name: state.doctor.name
+      },
+      service: { ...state.service },
+      patient: {
+        name: data.name,
+        age: data.age,
+        number: data.number
+      },
+      metaInfo: {
+        author: user.uid,
+        created: '',
+        lastModified: '',
+      }
+    }
+
+    console.log(data);
+
+  }
+
+  return (
+    <form onSubmit={handleSubmit(handleCheckout)}>
+
+      <div className='grid grid-cols-2 gap-x-5 gap-y-1'>
+        <div className="form-control">
+          <label className="label"><span className="label-text">Patient Name</span></label>
+          <input {...register("name", { required: true })} />
+        </div>
+
+        <div className="form-control">
+          <label className="label"><span className="label-text">Patient Age</span></label>
+          <input {...register("age", { required: true })} type='number' min="1" max="70" />
+        </div>
+
+        <div className="form-control">
+          <label className="label"><span className="label-text">Contact Number</span></label>
+          <input {...register("number", { required: true })} type="tel" pattern="[0-9]{11}" />
+        </div>
+
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">Email</span>
+            <span className="label-text-alt">Readonly field..</span>
+          </label>
+          <input {...register("email", { required: true })} defaultValue={user?.email} readOnly />
+        </div>
+      </div>
+
+      <button type="submit" className='btn btn-primary mt-5 w-full'>Confirm Booking</button>
+    </form>
+  );
+};
+
+export default CheckoutForm;
