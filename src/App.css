@@ -71,6 +71,15 @@ body {
 
 /* ========== */
 
+input[readonly] {
+  background: #f0f0f0 !important;
+  color: #7a7a7a;
+}
+
+.form-control input:focus[readonly] {
+  outline: 0 !important;
+}
+
 .form-control input {
   @apply input input-bordered w-full;
   border-color: #e5e7eb;
@@ -99,8 +108,21 @@ body {
   }
 }
 
+.payment-table {
+  @apply text-sm;
+}
 
+.payment-table td {
+  text-align: right;
+}
 
+.payment-table td,
+.payment-table th {
+  padding: 10px 20px;
+  border-radius: 0;
+  background-color: transparent;
+  border-width: 0;
+}
 
 
 

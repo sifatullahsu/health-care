@@ -1,54 +1,86 @@
-import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import { PaymentElement, useElements, useStripe, } from '@stripe/react-stripe-js';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../../contexts/AuthProvider';
 
-const CheckoutForm = ({ state }) => {
+const CheckoutForm = ({ state, setSuccessData }) => {
 
-  const { register, handleSubmit } = useForm();
   const { user } = useAuth();
+  const { register, handleSubmit } = useForm();
 
   const stripe = useStripe();
   const elements = useElements();
 
-  const price = parseFloat(state.service.price);
+  const [isProcessing, setIsProcessing] = useState(false);
 
-  const [clientSecret, setClientSecret] = useState("");
-
-
-
-  const handleCheckout = (data) => {
+  const handleCheckout = async (data) => {
 
     if (!stripe || !elements) return;
 
-    const card = elements.getElement(CardElement);
+    setIsProcessing(true);
 
-    if (card == null) return;
+    const { paymentIntent, error } = await stripe.confirmPayment({
+      elements,
+      confirmParams: {
+        return_url: '',
+        payment_method_data: {
+          billing_details: {
+            name: data.name,
+            email: user.email
+          }
+        }
+      },
+      redirect: 'if_required'
+    })
 
+    if (error) {
+      return console.log(error);
+    }
 
-    
+    setIsProcessing(false);
 
     const finalData = {
       date: state.appointment.date,
       slot: state.appointment.slot,
+      service: { ...state.service },
       doctor: {
         _id: state.doctor._id,
         name: state.doctor.name
       },
-      service: { ...state.service },
       patient: {
         name: data.name,
         age: data.age,
-        number: data.number
+        number: data.number,
+        email: user.email
       },
-      metaInfo: {
-        author: user.uid,
-        created: '',
-        lastModified: '',
-      }
+      payment: {
+        id: paymentIntent.id,
+        amount: (paymentIntent.amount / 100).toFixed(2),
+        currency: paymentIntent.currency
+      },
+      // metaInfo: {
+      //   author: user.uid,
+      //   created: '',
+      //   lastModified: '',
+      // }
     }
 
-    console.log(data);
+    fetch("http://localhost:5000/api/v1/appointment/create", {
+      method: "POST",
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(finalData),
+    })
+      .then(res => res.json())
+      .then(data => {
+        setSuccessData({
+          status: true,
+          data: { ...finalData }
+        });
+        console.log(data);
+      })
+      .catch(err => console.log(err))
 
   }
 
@@ -76,9 +108,11 @@ const CheckoutForm = ({ state }) => {
             <span className="label-text">Email</span>
             <span className="label-text-alt">Readonly field..</span>
           </label>
-          <input {...register("email", { required: true })} defaultValue={user?.email} readOnly />
+          <input defaultValue={user?.email} readOnly />
         </div>
       </div>
+
+      <PaymentElement id='payment-element' className='mt-5'></PaymentElement>
 
       <button type="submit" className='btn btn-primary mt-5 w-full'>Confirm Booking</button>
     </form>
