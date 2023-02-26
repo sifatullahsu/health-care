@@ -23,7 +23,7 @@ const AllDoctors = () => {
             <th>No.</th>
             <th>Name</th>
             <th>Email</th>
-            <th>Qualifications</th>
+            {/* <th>Qualifications</th> */}
             <th>Designation</th>
             <th className='text-right'>Actions</th>
           </tr>
@@ -35,7 +35,7 @@ const AllDoctors = () => {
                 <th>{index + 1}</th>
                 <td>{doctor?.name}</td>
                 <td>{doctor?.email}</td>
-                <td>{doctor?.qualifications}</td>
+                {/* <td>{doctor?.qualifications}</td> */}
                 <td>{doctor?.designation}</td>
                 <td className='text-right'>
                   <Link to={`/dashboard/doctors/${doctor?._id}`}><FaRegEdit className='inline'></FaRegEdit></Link>
