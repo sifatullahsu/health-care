@@ -7,6 +7,7 @@ import AddService from "../pages/Dashboard/AddService";
 import AllAppointments from "../pages/Dashboard/AllAppointments";
 import AllDoctors from "../pages/Dashboard/AllDoctors";
 import AllServices from "../pages/Dashboard/AllServices";
+import AllUsers from "../pages/Dashboard/AllUsers";
 import Checkout from "../pages/Dashboard/Checkout";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import EditDoctor from "../pages/Dashboard/EditDoctor";
@@ -96,7 +97,7 @@ export const route = createBrowserRouter([
       },
       {
         path: 'users',
-        element: <AllDoctors></AllDoctors>
+        element: <AllUsers></AllUsers>
       },
       {
         path: 'users/add-new',
