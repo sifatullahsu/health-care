@@ -44,11 +44,11 @@ export const route = createBrowserRouter([
   },
   {
     path: '/dashboard',
-    element: <DashboardTemp></DashboardTemp>,
+    element: <PrivateRoute><DashboardTemp /></PrivateRoute>,
     children: [
       {
         path: '',
-        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+        element: <Dashboard></Dashboard>,
       },
       {
         path: 'hospital-services',

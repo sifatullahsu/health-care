@@ -58,14 +58,14 @@ const CheckoutForm = ({ state, setSuccessData }) => {
         amount: (paymentIntent.amount / 100).toFixed(2),
         currency: paymentIntent.currency
       },
-      // metaInfo: {
-      //   author: user.uid,
-      //   created: '',
-      //   lastModified: '',
-      // }
+      metaInfo: {
+        author: user.data._id,
+        created: new Date().toISOString,
+        lastModified: new Date().toISOString,
+      }
     }
 
-    fetch("http://localhost:5000/api/v1/appointment/create", {
+    fetch("http://localhost:5000/api/v1/appointments/create", {
       method: "POST",
       headers: {
         'content-type': 'application/json'

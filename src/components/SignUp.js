@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { Link, useNavigate } from 'react-router-dom';
@@ -6,31 +6,36 @@ import { AuthContext } from '../contexts/AuthProvider';
 import GoogleSignIn from './GoogleSignIn';
 
 const SignUp = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
-  const { createUser, updateUser } = useContext(AuthContext);
-  const [signUpError, setSignUPError] = useState('')
+  const { createUser } = useContext(AuthContext);
+  const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
 
   const handleSignUp = (data) => {
-    setSignUPError('');
-    createUser(data.email, data.password)
-      .then(result => {
-        const user = result.user;
-        console.log(user);
-        toast('User Created Successfully.')
-        const userInfo = {
-          displayName: data.name
-        }
-        updateUser(userInfo)
-          .then(() => {
-            navigate('/');
-          })
-          .catch(err => console.log(err));
-      })
-      .catch(error => {
-        console.log(error)
-        setSignUPError(error.message)
-      });
+
+    try {
+      createUser(data.email, data.password)
+        .then(result => {
+
+          if (result?.user) {
+            fetch('http://localhost:5000/api/v1/users/create', {
+              method: 'POST',
+              headers: { 'content-type': 'application/json' },
+              body: JSON.stringify({ name: data.name, role: 'subscriber', uid: result?.user?.uid })
+            })
+              .then(res => res.json())
+              .then(data => {
+                console.log(data);
+                toast('User Created Successfully.');
+                navigate('/');
+              })
+          }
+
+        })
+    }
+    catch (error) {
+      console.log(error)
+    }
+
   }
 
   return (
@@ -44,7 +49,6 @@ const SignUp = () => {
             <input type="text" {...register("name", {
               required: "Name is Required"
             })} className="input input-bordered" />
-            {errors.name && <p className='text-red-500'>{errors.name.message}</p>}
           </div>
 
           <div className="form-control">
@@ -52,7 +56,6 @@ const SignUp = () => {
             <input type="email" {...register("email", {
               required: true
             })} className="input input-bordered" />
-            {errors.email && <p className='text-red-500'>{errors.email.message}</p>}
           </div>
 
           <div className="form-control">
@@ -60,14 +63,11 @@ const SignUp = () => {
             <input type="password" {...register("password", {
               required: "Password is required",
               minLength: { value: 6, message: "Password must be 6 characters long" },
-              pattern: { value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/, message: 'Password must have uppercase, number and special characters' }
             })} className="input input-bordered" />
-            {errors.password && <p className='text-red-500'>{errors.password.message}</p>}
           </div>
 
           <input className='btn btn-accent w-full mt-4' value="Sign Up" type="submit" />
 
-          {signUpError && <p className='text-red-600'>{signUpError}</p>}
         </form>
         <p>Already have an account <Link className='text-secondary' to="/login">Please Login</Link></p>
         <div className="divider">OR</div>
