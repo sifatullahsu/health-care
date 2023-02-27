@@ -2,7 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import React, { useState } from 'react';
 import { DayPicker } from 'react-day-picker';
-import { Link, useLoaderData, useNavigate } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
+import { SlCalender } from 'react-icons/sl';
 
 const HospitalServicesDetails = () => {
   const id = useLoaderData();
@@ -22,6 +23,7 @@ const HospitalServicesDetails = () => {
     }
   });
 
+  const totalSlots = service?.doctors?.map(({ slots }) => slots.length).reduce((a, b) => a + b, 0);
 
   const handleCheckout = (event, slotRadio, doctor) => {
     event.preventDefault();
@@ -51,21 +53,38 @@ const HospitalServicesDetails = () => {
 
   return (
     <div>
-      <h3 className="text-xl text-secondary font-bold mb-2">{service?.name}</h3>
-      <p className='text-sm text-accent mb-2'>{`Price: $${service?.price} / Appointment`}</p>
-      <p className='text-sm text-accent'>No spaces available</p>
+      <div className='flex justify-between mb-7'>
+        <div>
+          <h3 className="text-xl text-secondary font-bold mb-2">{service?.name}</h3>
+          <p className='text-sm text-accent mb-2'>{`Price: $${service?.price} / Appointment`}</p>
+          <p className='text-sm text-accent'>{totalSlots ? `Total ${totalSlots} slots available` : 'No slots available'}</p>
+        </div>
+        <div>
+          <div className="dropdown dropdown-end">
+            <div tabIndex={0} className="form-control">
+              <label className="input-group input-group-sm">
+                <input type="text" defaultValue={formatedDate} readOnly className="input input-bordered !input-sm" />
+                <span><SlCalender></SlCalender></span>
+              </label>
+            </div>
+            <div tabIndex={0} className="dropdown-content p-2 shadow bg-base-100 rounded-box">
+              <DayPicker
+                mode="single"
+                disabled={{ before: date }}
+                selected={selectedDate}
+                onSelect={(event) => {
+                  if (event) setSelectedDate(event);
+                }}
+                footer={footer}
+              />
 
-      <DayPicker
-        mode="single"
-        disabled={{ before: date }}
-        selected={selectedDate}
-        onSelect={(event) => {
-          if (event) setSelectedDate(event);
-        }}
-        footer={footer}
-      />
+            </div>
+          </div>
 
-      <div className='grid grid-cols-1 md:grid-cols-2 gap-5 mt-10'>
+        </div>
+      </div>
+
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
         {
           service?.doctors.map((doctor, i) => {
             return (
@@ -80,7 +99,7 @@ const HospitalServicesDetails = () => {
                 })}>
                   <div className='card-body justify-between'>
                     <div>
-                      <p className='text-sm text-accent absolute top-5 right-5'>{doctor?.slots.length} spaces available</p>
+                      <p className='text-sm text-accent absolute top-5 right-5'>{doctor?.slots.length} slots available</p>
                       <div key={doctor?._id} className='flex gap-3 min-h-[5rem]'>
                         <img src={doctor?.image} className='basis-14 h-12 mt-1' alt="" />
                         <div className='basis-full'>
@@ -104,6 +123,7 @@ const HospitalServicesDetails = () => {
                                       name={`radio_${i}`}
                                       value={slot}
                                       className="radio radio-xs checked:bg-red-500 mr-1"
+                                      required
                                     />
                                     <span className="label-text">{slot}</span>
                                   </label>

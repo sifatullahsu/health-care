@@ -10,12 +10,14 @@ import "swiper/css/navigation";
 const Service = ({ service, selectedDate }) => {
   const { _id, name, price, doctors } = service;
 
+  const totalSlots = doctors?.map(({ slots }) => slots.length).reduce((a, b) => a + b, 0);
+
   return (
     <div className="card bg-white shadow-xl">
       <div className="card-body">
         <h2 className="text-xl text-secondary font-bold">{name}</h2>
         <p className='text-sm text-accent'>{`Price: $${price} / Appointment`}</p>
-        <p className='text-sm text-accent'>No spaces available</p>
+        <p className='text-sm text-accent'>{totalSlots ? `Total ${totalSlots} slots available` : 'No slots available'}</p>
         <Swiper
           slidesPerView={1}
           grid={{
