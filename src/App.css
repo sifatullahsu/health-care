@@ -124,6 +124,37 @@ input[readonly] {
   border-width: 0;
 }
 
+.table :where(th, td) {
+  padding: 0.6rem;
+  border-radius: 0;
+}
+
+.table :where(thead, tfoot) :where(th, td) {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  @apply bg-primary text-white;
+}
+
+
+.pagination li.page-item {
+  display: inline-block;
+  /* margin: 0 4px; */
+}
+
+.pagination li.page-item a {
+  padding: 2px 10px;
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  display: inline-block;
+}
+
+.pagination li.page-item.active a {
+  @apply bg-primary border-primary text-white;
+}
+
+.pagination li.page-item a[aria-disabled="true"] {
+  color: #ddd;
+}
 
 
 .swiper {
