@@ -124,6 +124,10 @@ input[readonly] {
   border-width: 0;
 }
 
+.dash-table {
+  @apply table w-full border;
+}
+
 .table :where(th, td) {
   padding: 0.6rem;
   border-radius: 0;
