@@ -28,18 +28,18 @@ const AllServices = () => {
 
           <tbody>
             {
-              services?.data?.map((service, index) => {
-                return (
-                  <tr key={index}>
-                    <th>{index + 1}</th>
-                    <td>{service.name}</td>
-                    <td>${service.price}</td>
-                    <td className='text-right'>
-                      <Link to={`/dashboard/services/${service._id}`}><FaRegEdit className='inline'></FaRegEdit></Link>
-                    </td>
-                  </tr>
-                );
-              })
+              services?.data?.map((service, index) =>
+                <tr key={index}>
+                  <th>{index + 1}</th>
+                  <td>{service.name}</td>
+                  <td>${service.price}</td>
+                  <td className='text-right'>
+                    <Link to={`/dashboard/services/${service._id}`}>
+                      <FaRegEdit className='inline'></FaRegEdit>
+                    </Link>
+                  </td>
+                </tr>
+              )
             }
           </tbody>
 
