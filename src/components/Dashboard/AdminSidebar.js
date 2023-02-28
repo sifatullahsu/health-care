@@ -49,24 +49,24 @@ const AdminSidebar = () => {
 
         <li>
           <NavLink to='/dashboard/appointments'>Appointments</NavLink>
-          <ul className="bg-primary">
+          {/* <ul className="bg-primary">
             <li><NavLink
               to='/dashboard/appointments'
               className={({ isActive }) => isActive && path === '/dashboard/appointments' ? 'active' : ''}
             >All Appointments</NavLink></li>
             <li><NavLink to='/dashboard/appointments/add-new'>Add New</NavLink></li>
-          </ul>
+          </ul> */}
         </li>
 
         <li>
           <NavLink to='/dashboard/users'>Users</NavLink>
-          <ul className="bg-primary">
+          {/* <ul className="bg-primary">
             <li><NavLink
               to='/dashboard/users'
               className={({ isActive }) => isActive && path === '/dashboard/users' ? 'active' : ''}
             >All Users</NavLink></li>
             <li><NavLink to='/dashboard/users/add-new'>Add New</NavLink></li>
-          </ul>
+          </ul> */}
         </li>
       </>
     );

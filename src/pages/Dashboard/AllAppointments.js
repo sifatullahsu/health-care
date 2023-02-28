@@ -4,8 +4,13 @@ import { Link } from 'react-router-dom';
 import { FaRegEdit } from 'react-icons/fa';
 import Pagination from '../../components/Pagination';
 import Thead from '../../components/Thead';
+import { useData } from '../../contexts/DataProvider';
+import { useEffect } from 'react';
 
 const AllAppointments = () => {
+
+  const { setBreadcrumbs } = useData();
+  useEffect(() => setBreadcrumbs('Appointments'), [setBreadcrumbs]);
 
   const [pagination, setPagination] = useState({ page: 1, size: 10 });
 

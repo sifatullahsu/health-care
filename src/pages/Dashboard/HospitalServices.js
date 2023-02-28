@@ -2,8 +2,13 @@ import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import Services from '../../templates/loops/Services';
 import { format } from 'date-fns';
+import { useData } from '../../contexts/DataProvider';
+import { useEffect } from 'react';
 
 const HospitalServices = () => {
+
+  const { setBreadcrumbs } = useData();
+  useEffect(() => setBreadcrumbs('Hospital Services'), [setBreadcrumbs]);
 
   const date = format(new Date(), 'PP');
 

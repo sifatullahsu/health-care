@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import successfulImg from '../assets/images/successful.png';
 
 const CheckoutSuccessful = ({ successData }) => {
@@ -29,7 +29,7 @@ const CheckoutSuccessful = ({ successData }) => {
         </table>
       </div>
       <div className='text-center'>
-        <Link to='/dashboard/appointments' className='btn btn-primary btn-sm mt-8'>Go to Appointments</Link>
+        <Link to='/dashboard/my-appointments' className='btn btn-primary btn-sm mt-8'>Go to Appointments</Link>
       </div>
     </div>
   );

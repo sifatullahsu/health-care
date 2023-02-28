@@ -1,11 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import { FaRegEdit } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import Pagination from '../../components/Pagination';
 import Thead from '../../components/Thead';
+import { useData } from '../../contexts/DataProvider';
 
 const AllDoctors = () => {
+
+  const { setBreadcrumbs } = useData();
+  useEffect(() => setBreadcrumbs('Doctors'), [setBreadcrumbs]);
 
   const [pagination, setPagination] = useState({ page: 1, size: 10 });
 
