@@ -70,7 +70,7 @@ const HospitalServicesDetails = () => {
             <div tabIndex={0} className="dropdown-content p-2 shadow bg-base-100 rounded-box">
               <DayPicker
                 mode="single"
-                disabled={{ before: date }}
+                disabled={{ before: new Date(), after: new Date().setDate(date.getDate() + 6) }}
                 selected={selectedDate}
                 onSelect={(event) => {
                   if (event) setSelectedDate(event);
