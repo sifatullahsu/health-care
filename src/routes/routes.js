@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Login from "../components/Login";
 import SignUp from "../components/SignUp";
 import AppointmentPage from "../pages/AppointmentPage";
+import AuthPage from "../pages/AuthPage";
 import AddDoctor from "../pages/Dashboard/AddDoctor";
 import AddService from "../pages/Dashboard/AddService";
 import AllAppointments from "../pages/Dashboard/AllAppointments";
@@ -36,13 +37,10 @@ export const route = createBrowserRouter([
         // element: <HospitalServices></HospitalServices>
       },
       {
-        path: 'login',
-        element: <Login></Login>
+        path: 'authentication',
+        element: <AuthPage></AuthPage>
       },
-      {
-        path: 'signup',
-        element: <SignUp></SignUp>
-      }
+
     ]
   },
   {

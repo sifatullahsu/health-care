@@ -1,9 +1,8 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthProvider';
-import GoogleSignIn from './GoogleSignIn';
 
 const SignUp = () => {
   const { createUser } = useContext(AuthContext);
@@ -39,41 +38,26 @@ const SignUp = () => {
   }
 
   return (
-    <div className='container my-24'>
-      <div className='max-w-xl mx-auto'>
-        <h2 className='text-4xl font-semibold uppercase text-center'>Sign Up</h2>
-        <form onSubmit={handleSubmit(handleSignUp)}>
+    <form onSubmit={handleSubmit(handleSignUp)}>
 
-          <div className="form-control">
-            <label className="label"> <span className="label-text">Name</span></label>
-            <input type="text" {...register("name", {
-              required: "Name is Required"
-            })} className="input input-bordered" />
-          </div>
-
-          <div className="form-control">
-            <label className="label"> <span className="label-text">Email</span></label>
-            <input type="email" {...register("email", {
-              required: true
-            })} className="input input-bordered" />
-          </div>
-
-          <div className="form-control">
-            <label className="label"> <span className="label-text">Password</span></label>
-            <input type="password" {...register("password", {
-              required: "Password is required",
-              minLength: { value: 6, message: "Password must be 6 characters long" },
-            })} className="input input-bordered" />
-          </div>
-
-          <input className='btn btn-accent w-full mt-4' value="Sign Up" type="submit" />
-
-        </form>
-        <p>Already have an account <Link className='text-secondary' to="/login">Please Login</Link></p>
-        <div className="divider">OR</div>
-        <GoogleSignIn></GoogleSignIn>
+      <div className="form-control">
+        <label className="label"> <span className="label-text">Name</span></label>
+        <input type="text" {...register("name", { required: "Name is Required" })} className="input input-bordered" />
       </div>
-    </div>
+
+      <div className="form-control">
+        <label className="label"> <span className="label-text">Email</span></label>
+        <input type="email" {...register("email", { required: true })} className="input input-bordered" />
+      </div>
+
+      <div className="form-control">
+        <label className="label"> <span className="label-text">Password</span></label>
+        <input type="password" {...register("password", { required: "Password is required", minLength: { value: 6, message: "Password must be 6 characters long" }, })} className="input input-bordered" />
+      </div>
+
+      <input className='btn btn-primary btn-sm w-full h-[2.5rem] mt-6' value="Registration" type="submit" />
+
+    </form>
   );
 };
 

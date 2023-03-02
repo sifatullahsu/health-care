@@ -1,7 +1,10 @@
 import React from 'react';
+import { useAuth } from '../../contexts/AuthProvider';
 import Service from '../grids/Service';
 
 const Services = ({ services, selectedDate }) => {
+  const { user } = useAuth();
+
   return (
     <div className='grid grid-cols-3 gap-4'>
       {
@@ -9,6 +12,7 @@ const Services = ({ services, selectedDate }) => {
           key={service._id}
           service={service}
           selectedDate={selectedDate}
+          user={user}
         ></Service>)
       }
     </div>

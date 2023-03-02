@@ -7,7 +7,7 @@ import "swiper/css";
 import "swiper/css/grid";
 import "swiper/css/navigation";
 
-const Service = ({ service, selectedDate }) => {
+const Service = ({ service, selectedDate, user }) => {
   const { _id, name, price, doctors } = service;
 
   const totalSlots = doctors?.map(({ slots }) => slots.length).reduce((a, b) => a + b, 0);
@@ -53,7 +53,12 @@ const Service = ({ service, selectedDate }) => {
             );
           })}
         </Swiper>
-        <Link to={`/dashboard/hospital-services/${_id}`} className='btn btn-primary btn-sm mt-3'>Book Appointment</Link>
+        {
+          user ?
+            <Link to={`/dashboard/hospital-services/${_id}`} className='btn btn-primary btn-sm mt-3'>Book Appointment</Link>
+            :
+            <Link to={`/authentication`} className='btn btn-primary btn-sm mt-3' state={`/dashboard/hospital-services/${_id}`}>Login for Appointment</Link>
+        }
       </div>
     </div>
   );

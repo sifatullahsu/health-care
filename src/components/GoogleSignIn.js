@@ -21,11 +21,11 @@ const GoogleSignIn = ({ from }) => {
   }
 
   return (
-    <>
-      <button onClick={handleGoogleSignIn} className='btn btn-outline w-full'>
+    <div className='text-center'>
+      <button onClick={handleGoogleSignIn} className='btn btn-sm btn-primary text-xs'>
         <FcGoogle className='inline-block mr-2'></FcGoogle> CONTINUE WITH GOOGLE
       </button>
-    </>
+    </div>
   );
 };
 

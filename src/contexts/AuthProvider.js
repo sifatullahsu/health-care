@@ -77,7 +77,7 @@ const AuthProvider = ({ children }) => {
     updateUser,
     logOut,
     user,
-    loading,
+    loading, setLoading,
     userSocialLogin
   }
   return (

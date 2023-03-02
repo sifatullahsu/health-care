@@ -1,6 +1,6 @@
 import React from 'react';
 import { useContext } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 import logo from '../../assets/images/logo.png';
 import { toast } from 'react-hot-toast';
@@ -8,13 +8,16 @@ import { toast } from 'react-hot-toast';
 const AdminSidebar = () => {
 
   const location = useLocation();
+  const navigate = useNavigate();
   const path = location.pathname;
 
   const { user, logOut } = useContext(AuthContext);
 
   const handleLogout = () => {
-    logOut()
-      .then(data => toast.success('Logout Successfull'))
+    logOut().then(data => {
+      toast.success('Logout Successfull');
+      navigate('/authentication');
+    });
   }
 
 
