@@ -1,6 +1,4 @@
 import { createBrowserRouter } from "react-router-dom";
-import Login from "../components/Login";
-import SignUp from "../components/SignUp";
 import AppointmentPage from "../pages/AppointmentPage";
 import AuthPage from "../pages/AuthPage";
 import AddDoctor from "../pages/Dashboard/AddDoctor";
@@ -16,6 +14,7 @@ import EditService from "../pages/Dashboard/EditService";
 import HospitalServices from "../pages/Dashboard/HospitalServices";
 import HospitalServicesDetails from "../pages/Dashboard/HospitalServicesDetails";
 import MyAppointments from "../pages/Dashboard/MyAppointments";
+import MyAppointmentsDetails from "../pages/Dashboard/MyAppointmentsDetails";
 import Settings from "../pages/Dashboard/Settings";
 import HomePage from "../pages/HomePage";
 import DashboardTemp from "../templates/Dashboard";
@@ -32,9 +31,8 @@ export const route = createBrowserRouter([
         element: <HomePage></HomePage>
       },
       {
-        path: '/appointment',
+        path: 'appointment',
         element: <AppointmentPage></AppointmentPage>
-        // element: <HospitalServices></HospitalServices>
       },
       {
         path: 'authentication',
@@ -105,6 +103,11 @@ export const route = createBrowserRouter([
       {
         path: 'my-appointments',
         element: <MyAppointments></MyAppointments>
+      },
+      {
+        path: 'my-appointments/:id',
+        element: <MyAppointmentsDetails></MyAppointmentsDetails>,
+        loader: ({ params }) => params.id
       },
       {
         path: 'settings',

@@ -124,6 +124,15 @@ input[readonly] {
   border-width: 0;
 }
 
+.details.payment-table th {
+  padding-left: 0;
+}
+
+.details.payment-table td {
+  padding-right: 0;
+}
+
+
 .dash-table {
   @apply table w-full border;
 }

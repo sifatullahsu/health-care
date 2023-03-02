@@ -37,7 +37,7 @@ const HomePage = () => {
               </div>
             </div>
 
-            <Link to='/login' className='btn btn-primary px-12'>Book Your Doctor</Link>
+            <Link to='/appointment' className='btn btn-primary px-12'>Book Your Doctor</Link>
           </div>
         </div>
       </section>

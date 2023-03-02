@@ -1,12 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { useEffect } from 'react';
-import { FaRegEdit } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
 import Pagination from '../../components/Pagination';
-import Thead from '../../components/Thead';
 import { useAuth } from '../../contexts/AuthProvider';
 import { useData } from '../../contexts/DataProvider';
+import AppointmentGrid from '../../templates/grids/AppointmentGrid';
 
 const MyAppointments = () => {
 
@@ -29,30 +27,15 @@ const MyAppointments = () => {
   return (
     <>
 
-      <div className="overflow-x-auto">
-        <table className="dash-table">
-
-          <Thead data={['No.', 'Doctor', 'Date', 'Time', 'Actions']}></Thead>
-
-          <tbody>
-            {
-              myAppointments?.data?.map((appointment, index) =>
-                <tr key={index}>
-                  <th>{index + 1}</th>
-                  <td>{appointment?.doctor?.name}</td>
-                  <td>{appointment?.date}</td>
-                  <td>{appointment?.slot}</td>
-                  <td className='text-right'>
-                    <Link to={`/dashboard/appointments/${appointment?._id}`}>
-                      <FaRegEdit className='inline'></FaRegEdit>
-                    </Link>
-                  </td>
-                </tr>
-              )
-            }
-          </tbody>
-
-        </table>
+      <div className='grid grid-cols-2 gap-5 mb-10'>
+        {
+          myAppointments?.data?.map((appointment, i) =>
+            <AppointmentGrid
+              key={appointment._id}
+              appointment={appointment}
+              i={i}
+            ></AppointmentGrid>)
+        }
       </div>
 
       <Pagination

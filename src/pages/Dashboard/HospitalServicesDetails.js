@@ -135,7 +135,14 @@ const HospitalServicesDetails = () => {
                       </div>
                     </div>
                     <div>
-                      <button className='btn btn-primary btn-sm text-xs min-h-[25px] h-[25px]'>Book Now</button>
+                      {
+                        doctor.slots.length > 0 ?
+                          <button className='btn btn-primary btn-sm text-xs min-h-[25px] h-[25px]'>Book Now</button>
+                          :
+                          <div className='inline cursor-not-allowed'>
+                            <button className='btn btn-primary btn-sm text-xs min-h-[25px] h-[25px]' disabled >Book Now</button>
+                          </div>
+                      }
                     </div>
                   </div>
                 </form>
