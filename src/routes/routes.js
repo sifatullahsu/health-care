@@ -33,6 +33,7 @@ export const route = createBrowserRouter([
       {
         path: '/appointment',
         element: <AppointmentPage></AppointmentPage>
+        // element: <HospitalServices></HospitalServices>
       },
       {
         path: 'login',

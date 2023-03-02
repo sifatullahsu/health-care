@@ -36,7 +36,10 @@ const AllDoctors = () => {
               doctors?.data?.map((doctor, index) =>
                 <tr key={doctor?._id}>
                   <th>{doctors?.pagination?.start + index}</th>
-                  <td>{doctor?.name}</td>
+                  <td>
+                    <img src={doctor?.image} className='w-6 h-6 inline-block mr-2' alt="" />
+                    {doctor?.name}
+                  </td>
                   <td>{doctor?.email}</td>
                   <td>{doctor?.designation}</td>
                   <td className='text-right'>

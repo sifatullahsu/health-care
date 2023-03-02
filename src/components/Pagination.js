@@ -7,7 +7,7 @@ const Pagination = ({ data, isLoading, state, setState }) => {
       <select
         defaultValue='10'
         className="select !select-sm select-bordered focus:outline-none bg-[#f0f0f0] border-[#ddd]"
-        onChange={(e) => setState({ ...state, size: e.target.value })}
+        onChange={(e) => setState({ page: 1, size: e.target.value })}
       >
         <option value='10'>10</option>
         <option value='25'>25</option>
