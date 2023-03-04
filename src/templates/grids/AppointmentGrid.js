@@ -13,8 +13,7 @@ const AppointmentGrid = ({ appointment, i }) => {
       <div className='card-body relative'>
         <span className='text-xs text-gray-500'>ID: {appointment?._id}</span>
         <h3 className="text-lg text-secondary font-bold capitalize">{appointment?.doctor.name}</h3>
-        <p className='text-sm text-accent'>MBBS (DMC), FRCS(Glasg), FCPS (Urol) FCPS(S), FACS(USA), MCPS</p>
-        <p className='text-sm text-accent'>Senior Consultant</p>
+        <p className='text-sm text-accent'>{`${appointment?.doctor?.designation} - [${appointment?.doctor?.qualifications}]`}</p>
 
         <div className='text-sm text-accent font-semibold space-x-5 mt-5'>
           <span>Date: {appointment?.date}</span>

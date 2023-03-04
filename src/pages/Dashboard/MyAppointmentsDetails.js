@@ -22,8 +22,6 @@ const MyAppointmentsDetails = () => {
 
   const countdown = useCountdown(details?.date);
 
-  console.log(details);
-
   return (
     <div className='relative'>
       <h3 className="text-xl text-secondary font-bold mb-2">{details?.service?.name}</h3>
@@ -31,13 +29,9 @@ const MyAppointmentsDetails = () => {
 
       <div className='grid grid-cols-2 gap-5'>
         <div>
-          <div className='flex space-x-3 mb-5'>
-            <img src='https://i.ibb.co/8z18bdT/8.jpg' className='basis-14 h-12 mt-1' alt="" />
-            <div className='basis-full'>
-              <h3 className="text-lg text-secondary font-bold capitalize">{details?.doctor?.name}</h3>
-              {/* <p className='text-sm text-accent'>{`${state.doctor.designation} - [${state.doctor.qualifications}]`}</p> */}
-              <p className='text-sm text-accent'>Consultant - [MBBS, MD (Internal Medicine)]</p>
-            </div>
+          <div className='mb-5'>
+            <h3 className="text-lg text-secondary font-bold capitalize">{details?.doctor?.name}</h3>
+            <p className='text-sm text-accent max-w-xs'>{`${details?.doctor?.designation} - [${details?.doctor?.qualifications}]`}</p>
           </div>
 
           <div className=' top-7 right-10 space-y-3'>

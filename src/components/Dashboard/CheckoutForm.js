@@ -45,7 +45,9 @@ const CheckoutForm = ({ state, setSuccessData }) => {
       service: { ...state.service },
       doctor: {
         _id: state.doctor._id,
-        name: state.doctor.name
+        name: state.doctor.name,
+        qualifications: state.doctor.qualifications,
+        designation: state.doctor.designation,
       },
       patient: {
         name: data.name,
