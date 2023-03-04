@@ -14,7 +14,7 @@ const Dashboard = () => {
   const { data: dash = {}, isLoading } = useQuery({
     queryKey: ['dash'],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/api/v1/appointments/dash-data/${user.data._id}`);
+      const res = await fetch(`https://the-health-care.vercel.app/api/v1/appointments/dash-data/${user.data._id}`);
       const data = await res.json();
 
       return data.data;

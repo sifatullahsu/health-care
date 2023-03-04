@@ -15,7 +15,7 @@ const Checkout = () => {
   const [successData, setSuccessData] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/v1/appointments/create-payment-intent", {
+    fetch("https://the-health-care.vercel.app/api/v1/appointments/create-payment-intent", {
       method: "POST",
       headers: {
         'content-type': 'application/json'

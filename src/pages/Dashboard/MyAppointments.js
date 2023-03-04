@@ -17,7 +17,7 @@ const MyAppointments = () => {
   const { data: myAppointments = [], isLoading } = useQuery({
     queryKey: ['myAppointments', pagination],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/api/v1/appointments/list/${user?.data?._id}?page=${pagination.page}&size=${pagination.size}`);
+      const res = await fetch(`https://the-health-care.vercel.app/api/v1/appointments/list/${user?.data?._id}?page=${pagination.page}&size=${pagination.size}`);
       const data = await res.json();
 
       return data;

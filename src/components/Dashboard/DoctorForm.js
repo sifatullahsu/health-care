@@ -47,7 +47,7 @@ const DoctorForm = ({ data }) => {
 
     const processData = { name, email, qualifications, designation, image, slots, about }
 
-    fetch(`http://localhost:5000/api/v1/doctors/edit/${id}`, {
+    fetch(`https://the-health-care.vercel.app/api/v1/doctors/edit/${id}`, {
       method: 'PATCH',
       headers: {
         'content-type': 'application/json'
@@ -85,7 +85,7 @@ const DoctorForm = ({ data }) => {
     const processData = { name, email, qualifications, designation, image, slots, about }
 
 
-    fetch('http://localhost:5000/api/v1/doctors/create', {
+    fetch('https://the-health-care.vercel.app/api/v1/doctors/create', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'

@@ -17,7 +17,7 @@ const AllUsers = () => {
   const { data: users = [], isLoading } = useQuery({
     queryKey: ['users', pagination],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/api/v1/users/list?page=${pagination.page}&size=${pagination.size}`);
+      const res = await fetch(`https://the-health-care.vercel.app/api/v1/users/list?page=${pagination.page}&size=${pagination.size}`);
       const data = await res.json();
 
       return data;

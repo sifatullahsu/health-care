@@ -15,7 +15,7 @@ const ServiceForm = ({ data }) => {
 
   const handleEditForm = (data, form) => {
 
-    fetch(`http://localhost:5000/api/v1/services/edit/${id}`, {
+    fetch(`https://the-health-care.vercel.app/api/v1/services/edit/${id}`, {
       method: 'PATCH',
       headers: {
         'content-type': 'application/json'
@@ -38,7 +38,7 @@ const ServiceForm = ({ data }) => {
 
   const handleAddForm = (data, form) => {
 
-    fetch('http://localhost:5000/api/v1/services/create', {
+    fetch('https://the-health-care.vercel.app/api/v1/services/create', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -78,7 +78,7 @@ const ServiceForm = ({ data }) => {
   const promiseOptions = (inputValue, callback) => {
 
     if (inputValue.length >= 3) {
-      fetch(`http://localhost:5000/api/v1/doctors/search?name=${inputValue}`, {
+      fetch(`https://the-health-care.vercel.app/api/v1/doctors/search?name=${inputValue}`, {
         method: 'GET',
         headers: {
           'content-type': 'application/json'

@@ -67,7 +67,7 @@ const CheckoutForm = ({ state, setSuccessData }) => {
       }
     }
 
-    fetch("http://localhost:5000/api/v1/appointments/create", {
+    fetch("https://the-health-care.vercel.app/api/v1/appointments/create", {
       method: "POST",
       headers: {
         'content-type': 'application/json'

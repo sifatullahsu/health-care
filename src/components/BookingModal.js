@@ -33,7 +33,7 @@ const BookingModal = ({ treatment, setTreatment, selectedDate, refetch }) => {
       }
     }
 
-    fetch('http://localhost:5000/api/v1/bookings/create', {
+    fetch('https://the-health-care.vercel.app/api/v1/bookings/create', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'

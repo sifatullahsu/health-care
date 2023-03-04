@@ -15,7 +15,7 @@ const HospitalServices = () => {
   const { data: services = [], isLoading } = useQuery({
     queryKey: ['services'],
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/api/v1/services/list?date=${date}`);
+      const res = await fetch(`https://the-health-care.vercel.app/api/v1/services/list?date=${date}`);
       const data = await res.json();
 
       return data;
