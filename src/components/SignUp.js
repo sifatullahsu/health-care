@@ -16,10 +16,10 @@ const SignUp = () => {
         .then(result => {
 
           if (result?.user) {
-            fetch('https://the-health-care.vercel.app/api/v1/users/create', {
+            fetch('http://localhost:5000/api/v1/users/create', {
               method: 'POST',
               headers: { 'content-type': 'application/json' },
-              body: JSON.stringify({ name: data.name, role: 'subscriber', uid: result?.user?.uid })
+              body: JSON.stringify({ name: data.name, email: data.email, role: 'subscriber', uid: result?.user?.uid })
             })
               .then(res => res.json())
               .then(data => {

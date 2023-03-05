@@ -61,7 +61,7 @@ const CheckoutForm = ({ state, setSuccessData }) => {
         currency: paymentIntent.currency
       },
       metaInfo: {
-        author: user.data._id,
+        author: user._id,
         created: new Date().toISOString,
         lastModified: new Date().toISOString,
       }

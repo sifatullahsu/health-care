@@ -14,7 +14,7 @@ const Dashboard = () => {
   const { data: dash = {}, isLoading } = useQuery({
     queryKey: ['dash'],
     queryFn: async () => {
-      const res = await fetch(`https://the-health-care.vercel.app/api/v1/appointments/dash-data/${user.data._id}`);
+      const res = await fetch(`https://the-health-care.vercel.app/api/v1/appointments/dash-data/${user._id}`);
       const data = await res.json();
 
       return data.data;
@@ -24,7 +24,7 @@ const Dashboard = () => {
   return (
     <div className='space-y-5'>
       <div className='space-y-1'>
-        <h3 className="text-xl text-secondary font-bold capitalize">Welcome {user?.data?.name}</h3>
+        <h3 className="text-xl text-secondary font-bold capitalize">Welcome {user?.name}</h3>
         <p className="text-base text-accent">Here you can manage your appointment online!</p>
       </div>
 

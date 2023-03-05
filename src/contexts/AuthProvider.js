@@ -47,13 +47,8 @@ const AuthProvider = ({ children }) => {
         getUser(currentUser.uid)
           .then(result => {
             if (result?.status) {
-              setUser(
-                {
-                  uid: currentUser.uid,
-                  email: currentUser.email,
-                  data: result.data
-                }
-              );
+              // setUser({ uid: currentUser.uid, email: currentUser.email, data: result.data });
+              setUser(result.data);
               setLoading(false);
             }
             else {
