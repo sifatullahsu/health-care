@@ -12,7 +12,8 @@ const Header = () => {
     return (
       <>
         <li><Link to='/'>Home</Link></li>
-        <li><Link to='/appointment'>Appointment</Link></li>
+        <li><Link to='/hospital-services'>Hospital Services</Link></li>
+        <li><Link to='/doctors'>Doctors</Link></li>
         {
           user ?
             <li><Link to='/dashboard'>Dashboard</Link></li>

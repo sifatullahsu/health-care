@@ -208,10 +208,12 @@ input[readonly] {
 
 
 #hero {
-  background: linear-gradient(90deg, rgba(0, 0, 0, .9), rgba(0, 0, 0, .9)), url('./assets//images/hero-1.jpg');
+  /* background: linear-gradient(90deg, rgba(0, 0, 0, .9), rgba(0, 0, 0, .9)), url('./assets//images/hero-1.jpg');
   background-repeat: no-repeat;
   background-position: center right;
-  background-size: cover;
+  background-size: cover; */
+
+  @apply bg-primary;
 }
 
 

@@ -1,5 +1,4 @@
 import { createBrowserRouter } from "react-router-dom";
-import AppointmentPage from "../pages/AppointmentPage";
 import AuthPage from "../pages/AuthPage";
 import AddDoctor from "../pages/Dashboard/AddDoctor";
 import AddService from "../pages/Dashboard/AddService";
@@ -16,6 +15,7 @@ import HospitalServicesDetails from "../pages/Dashboard/HospitalServicesDetails"
 import MyAppointments from "../pages/Dashboard/MyAppointments";
 import MyAppointmentsDetails from "../pages/Dashboard/MyAppointmentsDetails";
 import Settings from "../pages/Dashboard/Settings";
+import DoctorsPage from "../pages/DoctorsPage";
 import HomePage from "../pages/HomePage";
 import DashboardTemp from "../templates/Dashboard";
 import Main from "../templates/Main";
@@ -32,8 +32,16 @@ export const route = createBrowserRouter([
         element: <HomePage />
       },
       {
-        path: 'appointment',
-        element: <AppointmentPage />
+        path: 'hospital-services',
+        element: <section style={{ backgroundColor: "rgb(245, 247, 248)" }}>
+          <div className='container py-16'>
+            <HospitalServices />
+          </div>
+        </section>
+      },
+      {
+        path: 'doctors',
+        element: <DoctorsPage />
       },
       {
         path: 'authentication',
