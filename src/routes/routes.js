@@ -20,23 +20,24 @@ import HomePage from "../pages/HomePage";
 import DashboardTemp from "../templates/Dashboard";
 import Main from "../templates/Main";
 import PrivateRoute from "./PrivateRoute";
+import RoleBaseRoute from "./RoleBaseRoute";
 
 export const route = createBrowserRouter([
   {
     path: '/',
-    element: <Main></Main>,
+    element: <Main />,
     children: [
       {
         path: '/',
-        element: <HomePage></HomePage>
+        element: <HomePage />
       },
       {
         path: 'appointment',
-        element: <AppointmentPage></AppointmentPage>
+        element: <AppointmentPage />
       },
       {
         path: 'authentication',
-        element: <AuthPage></AuthPage>
+        element: <AuthPage />
       },
 
     ]
@@ -47,75 +48,75 @@ export const route = createBrowserRouter([
     children: [
       {
         path: '',
-        element: <Dashboard></Dashboard>,
+        element: <Dashboard />
       },
       {
         path: 'hospital-services',
-        element: <HospitalServices></HospitalServices>
+        element: <HospitalServices />
       },
       {
         path: 'hospital-services/:id',
-        element: <HospitalServicesDetails></HospitalServicesDetails>,
+        element: <HospitalServicesDetails />,
         loader: ({ params }) => params.id
       },
       {
         path: 'doctors',
-        element: <AllDoctors></AllDoctors>
+        element: <RoleBaseRoute role={['admin']}><AllDoctors /></RoleBaseRoute>
       },
       {
         path: 'doctors/add-new',
-        element: <AddDoctor></AddDoctor>
+        element: <RoleBaseRoute role={['admin']}><AddDoctor /></RoleBaseRoute>
       },
       {
         path: 'doctors/:id',
-        element: <EditDoctor></EditDoctor>,
+        element: <RoleBaseRoute role={['admin']}><EditDoctor /></RoleBaseRoute>,
         loader: ({ params }) => fetch(`https://the-health-care.vercel.app/api/v1/doctors/single/${params.id}`)
       },
       {
         path: 'services',
-        element: <AllServices></AllServices>
+        element: <RoleBaseRoute role={['admin']}><AllServices /></RoleBaseRoute>
       },
       {
         path: 'services/add-new',
-        element: <AddService></AddService>
+        element: <RoleBaseRoute role={['admin']}><AddService /></RoleBaseRoute>
       },
       {
         path: 'services/:id',
-        element: <EditService></EditService>,
+        element: <RoleBaseRoute role={['admin']}><EditService /></RoleBaseRoute>,
         loader: ({ params }) => fetch(`https://the-health-care.vercel.app/api/v1/services/single/${params.id}`)
       },
       {
         path: 'appointments',
-        element: <AllAppointments></AllAppointments>
+        element: <RoleBaseRoute role={['admin', 'doctor']}><AllAppointments /></RoleBaseRoute>
       },
       {
         path: 'appointments/add-new',
-        element: <AddDoctor></AddDoctor>
+        element: <RoleBaseRoute role={['admin']}><AddDoctor /></RoleBaseRoute>
       },
       {
         path: 'users',
-        element: <AllUsers></AllUsers>
+        element: <RoleBaseRoute role={['admin']}><AllUsers /></RoleBaseRoute>
       },
       {
         path: 'users/add-new',
-        element: <AddDoctor></AddDoctor>
+        element: <RoleBaseRoute role={['admin']}><AddDoctor /></RoleBaseRoute>
       },
       {
         path: 'my-appointments',
-        element: <MyAppointments></MyAppointments>
+        element: <MyAppointments />
       },
       {
         path: 'my-appointments/:id',
-        element: <MyAppointmentsDetails></MyAppointmentsDetails>,
+        element: <MyAppointmentsDetails />,
         loader: ({ params }) => params.id
       },
       {
         path: 'settings',
-        element: <Settings></Settings>
+        element: <Settings />
       },
       {
         path: 'checkout',
-        element: <Checkout></Checkout>,
+        element: <Checkout />
       }
     ]
   }
