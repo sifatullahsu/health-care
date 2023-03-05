@@ -6,10 +6,10 @@ const DoctorGrid = ({ doctor }) => {
       <div className="card-body">
         <img src={doctor.image} className='w-full' alt="Shoes" />
         <div>
-          <h3 className="text-lg font-semibold truncate">{doctor.name}</h3>
+          <h3 className="text-base md:text-lg font-semibold truncate">{doctor.name}</h3>
           <p className='text-sm text-accent font-semibold truncate'>{doctor.designation}</p>
         </div>
-        <p className='text-accent'>{doctor.about.slice(0, 73)}...</p>
+        <p className='text-accent hidden lg:block'>{doctor.about.slice(0, 73)}...</p>
       </div>
     </div>
   );

@@ -28,7 +28,7 @@ const Dashboard = () => {
         <p className="text-base text-accent">Here you can manage your appointment online!</p>
       </div>
 
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5'>
+      <div className='grid grid-cols-2 md:grid-cols-4 gap-5'>
         <div className='bg-white p-5 rounded space-y-3'>
           <h3 className="text-lg text-secondary font-bold capitalize">Total Spend</h3>
           <p className="text-base text-accent">$ {dash?.totalSpend}</p>

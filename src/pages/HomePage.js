@@ -38,7 +38,7 @@ const HomePage = () => {
       <section id='hero' className='min-h-[90vh] text-white text-opacity-90'>
         <div className="container">
           <div className='max-w-xl py-20'>
-            <h1 className='text-5xl text-white capitalize mb-5'>We safeguard your
+            <h1 className='text-3xl md:text-5xl text-white capitalize mb-5'>We safeguard your
               <span className='block mt-3'>health & beauty.</span>
             </h1>
             <p className='text-lg'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti quod obcaecati qui dignissimos quia libero consequuntur fugit incidunt, delectus nihil corrupti quod obcaecati.</p>
