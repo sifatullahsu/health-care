@@ -98,20 +98,22 @@ const AdminSidebar = () => {
         </li>
 
         {
-          user?.uid &&
+          user?.uid && user?.role === 'admin' &&
           adminMenu()
         }
 
-        <div className='relative'><span>Account</span></div>
-
         {
-          user?.uid &&
+          user?.uid && user?.role === 'doctor' &&
           <>
-            <li><NavLink to='/dashboard/my-appointments'>My Appointments</NavLink></li>
-            <li><NavLink to='/dashboard/settings'>Settings</NavLink></li>
-            <li><button onClick={handleLogout}>Logout</button></li>
+            <div className='relative'><span>Doctors</span></div>
+            <li><NavLink to='/dashboard/appointments'>Appointments</NavLink></li>
           </>
         }
+
+        <div className='relative'><span>Account</span></div>
+        <li><NavLink to='/dashboard/my-appointments'>My Appointments</NavLink></li>
+        <li><NavLink to='/dashboard/settings'>Settings</NavLink></li>
+        <li><button onClick={handleLogout}>Logout</button></li>
 
       </ul>
       <div className='px-4'></div>
