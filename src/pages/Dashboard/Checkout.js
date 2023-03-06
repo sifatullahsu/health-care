@@ -30,9 +30,9 @@ const Checkout = () => {
   }, [state]);
 
   return (
-    <div className='flex space-x-5'>
+    <div className='flex flex-wrap md:flex-nowrap space-y-5 md:space-y-0 md:space-x-5'>
 
-      <div className='basis-4/6'>
+      <div className='basis-full md:basis-4/6'>
 
         <ul className="steps w-full text-xs uppercase mb-7">
           <li className={`step step-primary`}>Billing Area</li>
@@ -52,7 +52,7 @@ const Checkout = () => {
         }
 
       </div>
-      <div className='basis-2/6'>
+      <div className='basis-full md:basis-2/6'>
         <CheckoutSidebar state={state}></CheckoutSidebar>
       </div>
     </div>

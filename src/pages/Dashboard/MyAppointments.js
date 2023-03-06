@@ -27,7 +27,7 @@ const MyAppointments = () => {
   return (
     <>
 
-      <div className='grid grid-cols-2 gap-5 mb-10'>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-5 mb-10'>
         {
           myAppointments?.data?.map((appointment, i) =>
             <AppointmentGrid

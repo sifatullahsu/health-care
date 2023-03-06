@@ -118,8 +118,8 @@ const DoctorForm = ({ data }) => {
   return (
     <div>
       <form onSubmit={handleForm}>
-        <div className='flex flex-wrap'>
-          <div className='col basis-4/5'>
+        <div className='flex flex-wrap md:flex-nowrap space-y-5 md:space-y-0 md:space-x-5'>
+          <div className='basis-full md:basis-4/5'>
 
 
             <section className='bg-white border'>
@@ -228,9 +228,9 @@ const DoctorForm = ({ data }) => {
               </div>
             </section>
           </div>
-          <div className='col basis-1/5'>
+          <div className='basis-full md:basis-1/5'>
             <div className='flex bg-white border'>
-              <div className="col basis-full">
+              <div className="p-3 basis-full">
                 <input type="submit" className='btn btn-primary btn-sm w-full' />
               </div>
             </div>

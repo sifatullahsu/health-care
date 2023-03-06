@@ -27,7 +27,7 @@ const MyAppointmentsDetails = () => {
       <h3 className="text-xl text-secondary font-bold mb-2">{details?.service?.name}</h3>
       <p className='text-sm text-accent mb-10'>{`Price: $${details?.service?.price} / Appointment`}</p>
 
-      <div className='grid grid-cols-2 gap-5'>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
         <div>
           <div className='mb-5'>
             <h3 className="text-lg text-secondary font-bold capitalize">{details?.doctor?.name}</h3>
@@ -79,8 +79,8 @@ const MyAppointmentsDetails = () => {
           </div>
         </div>
       </div>
-      <img src={successfulImg} className='w-28 absolute -top-10 right-0' alt="" />
-      <p className='text-lg font-semibold  mt-20 text-gray-500'>Thanks for using our service!!</p>
+      <img src={successfulImg} className='w-14 md:w-28 absolute -top-10 -right-3 md:right-0' alt="" />
+      <p className='text-lg font-semibold mt-10 md:mt-20 text-gray-500'>Thanks for using our service!!</p>
 
     </div>
   );
