@@ -22,9 +22,6 @@ const HospitalServices = () => {
     }
   });
 
-
-  if (isLoading) return <progress className="progress"></progress>
-
   return (
     <div>
       <div className='flex justify-between mb-5'>
@@ -36,7 +33,7 @@ const HospitalServices = () => {
           <div className='text-right text-sm text-accent mb-5 font-semibold'>Showing slots for {date}</div>
         </div>
       </div>
-      <Services services={services?.data} selectedDate={date}></Services>
+      <Services services={services?.data} selectedDate={date} isLoading={isLoading}></Services>
     </div>
   );
 };
