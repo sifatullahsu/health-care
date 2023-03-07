@@ -4,7 +4,7 @@ import Doctors from '../templates/loops/Doctors';
 
 const DoctorsPage = () => {
 
-  const { data: doctors = [] } = useQuery({
+  const { data: doctors = [], isLoading } = useQuery({
     queryKey: ['doctors'],
     queryFn: async () => {
       const res = await fetch(`https://the-health-care.vercel.app/api/v1/doctors/list?size=20`);
@@ -23,7 +23,7 @@ const DoctorsPage = () => {
             <p className='text-sm text-accent mb-2'>These are some our talented doctors.</p>
           </div>
         </div>
-        <Doctors doctors={doctors.data} />
+        <Doctors doctors={doctors.data} isLoading={isLoading} />
       </div>
     </section>
   );
