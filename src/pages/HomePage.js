@@ -12,7 +12,7 @@ const HomePage = () => {
 
   const date = format(new Date(), 'PP');
 
-  const { data: services = [], isLoading } = useQuery({
+  const { data: services = [], isLoading: servicesLoading } = useQuery({
     queryKey: ['services'],
     queryFn: async () => {
       const res = await fetch(`https://the-health-care.vercel.app/api/v1/services/list?date=${date}`);
@@ -22,7 +22,7 @@ const HomePage = () => {
     }
   });
 
-  const { data: doctors = [] } = useQuery({
+  const { data: doctors = [], isLoading: doctorsLoading } = useQuery({
     queryKey: ['doctors'],
     queryFn: async () => {
       const res = await fetch(`https://the-health-care.vercel.app/api/v1/doctors/list?size=5`);
@@ -82,7 +82,7 @@ const HomePage = () => {
               <div className='text-right text-sm text-accent mb-5 font-semibold'>Showing slots for {date}</div>
             </div>
           </div>
-          <Services services={services?.data?.slice(0, 3)} selectedDate={date}></Services>
+          <Services services={services?.data?.slice(0, 3)} selectedDate={date} isLoading={servicesLoading}></Services>
 
           <div className='text-center mt-10'>
             <Link to='/hospital-services' className='btn btn-primary btn-sm px-10'>See More</Link>
@@ -98,7 +98,7 @@ const HomePage = () => {
               <p className='text-sm text-accent mb-2'>These are some our talented doctors.</p>
             </div>
           </div>
-          <Doctors doctors={doctors?.data}></Doctors>
+          <Doctors doctors={doctors?.data} isLoading={doctorsLoading}></Doctors>
           <div className='text-center mt-10'>
             <Link to='/doctors' className='btn btn-primary btn-sm px-10'>See More</Link>
           </div>

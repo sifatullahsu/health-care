@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { useEffect } from 'react';
+import DashItem from '../../components/DashItem';
 import { useAuth } from '../../contexts/AuthProvider';
 import { useData } from '../../contexts/DataProvider';
 
@@ -29,25 +30,11 @@ const Dashboard = () => {
       </div>
 
       <div className='grid grid-cols-2 md:grid-cols-4 gap-5'>
-        <div className='bg-white p-5 rounded space-y-3'>
-          <h3 className="text-lg text-secondary font-bold capitalize">Total Spend</h3>
-          <p className="text-base text-accent">$ {dash?.totalSpend}</p>
-        </div>
-        <div className='bg-white p-5 rounded space-y-3'>
-          <h3 className="text-lg text-secondary font-bold capitalize">Appointments</h3>
-          <p className="text-base text-accent">{dash?.appointments?.total}</p>
-        </div>
-        <div className='bg-white p-5 rounded space-y-3'>
-          <h3 className="text-lg text-secondary font-bold capitalize">Upcoming</h3>
-          <p className="text-base text-accent">{dash?.appointments?.upcoming}</p>
-        </div>
-        <div className='bg-white p-5 rounded space-y-3'>
-          <h3 className="text-lg text-secondary font-bold capitalize">Completed</h3>
-          <p className="text-base text-accent">{dash?.appointments?.completed}</p>
-        </div>
+        <DashItem title='Total Spend' data={`$ ${dash?.totalSpend}`} isLoading={isLoading}></DashItem>
+        <DashItem title='Appointments' data={dash?.appointments?.total} isLoading={isLoading}></DashItem>
+        <DashItem title='Upcoming' data={dash?.appointments?.upcoming} isLoading={isLoading}></DashItem>
+        <DashItem title='Completed' data={dash?.appointments?.completed} isLoading={isLoading}></DashItem>
       </div>
-
-
     </div>
   );
 };
