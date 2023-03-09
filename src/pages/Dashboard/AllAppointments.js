@@ -6,6 +6,7 @@ import Pagination from '../../components/Pagination';
 import Thead from '../../components/Thead';
 import { useData } from '../../contexts/DataProvider';
 import { useEffect } from 'react';
+import Skeleton from 'react-loading-skeleton';
 
 const AllAppointments = () => {
 
@@ -33,19 +34,38 @@ const AllAppointments = () => {
 
           <tbody>
             {
-              appointments?.data?.map((appointment, index) =>
-                <tr key={index}>
-                  <th>{index + 1}</th>
-                  <td>{appointment?.doctor?.name}</td>
-                  <td>{appointment?.patient?.name}</td>
-                  <td>{`${appointment?.date} (${appointment?.slot})`}</td>
-                  <td className='text-right'>
-                    <Link to={`/dashboard/appointments/${appointment?._id}`}>
-                      <FaRegEdit className='inline'></FaRegEdit>
-                    </Link>
-                  </td>
-                </tr>
-              )
+              !isLoading ?
+                <>
+                  {
+                    appointments?.data?.map((appointment, index) =>
+                      <tr key={index}>
+                        <th>{index + 1}</th>
+                        <td>{appointment?.doctor?.name}</td>
+                        <td>{appointment?.patient?.name}</td>
+                        <td>{`${appointment?.date} (${appointment?.slot})`}</td>
+                        <td className='text-right'>
+                          <Link to={`/dashboard/appointments/${appointment?._id}`}>
+                            <FaRegEdit className='inline'></FaRegEdit>
+                          </Link>
+                        </td>
+                      </tr>
+                    )
+                  }
+                </>
+                :
+                <>
+                  {
+                    Array(10).fill('').map((_, i) =>
+                      <tr key={i}>
+                        <th><Skeleton /></th>
+                        <td><Skeleton /></td>
+                        <td><Skeleton /></td>
+                        <td><Skeleton /></td>
+                        <td><Skeleton /></td>
+                      </tr>
+                    )
+                  }
+                </>
             }
           </tbody>
 
