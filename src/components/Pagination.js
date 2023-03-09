@@ -1,4 +1,5 @@
 import React from 'react';
+import Skeleton from 'react-loading-skeleton';
 import ReactPaginate from 'react-paginate';
 
 const Pagination = ({ data, isLoading, state, setState }) => {
@@ -17,7 +18,16 @@ const Pagination = ({ data, isLoading, state, setState }) => {
         </select>
       </div>
       <div className='order-1 md:order-2 basis-full md:basis-[unset] mb-4 md:mb-0'>
-        {`showing ${data?.start} to ${data?.end} out of ${data?.totalDocuments}`}
+        {
+          !isLoading ?
+            <>
+              {`showing ${data?.start} to ${data?.end} out of ${data?.totalDocuments}`}
+            </>
+            :
+            <>
+              <Skeleton width={200}></Skeleton>
+            </>
+        }
       </div>
       <div className='order-3'>
         {

@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { FaRegEdit } from 'react-icons/fa';
+import Skeleton from 'react-loading-skeleton';
 import { Link } from 'react-router-dom';
 import Pagination from '../../components/Pagination';
 import Thead from '../../components/Thead';
@@ -33,23 +34,43 @@ const AllDoctors = () => {
 
           <tbody>
             {
-              doctors?.data?.map((doctor, index) =>
-                <tr key={doctor?._id}>
-                  <th>{doctors?.pagination?.start + index}</th>
-                  <td>
-                    <img src={doctor?.image} className='w-6 h-6 inline-block mr-2' alt="" />
-                    {doctor?.name}
-                  </td>
-                  <td>{doctor?.email}</td>
-                  <td>{doctor?.designation}</td>
-                  <td className='text-right'>
-                    <Link to={`/dashboard/doctors/${doctor?._id}`}>
-                      <FaRegEdit className='inline'></FaRegEdit>
-                    </Link>
-                  </td>
-                </tr>
-              )
+              !isLoading ?
+                <>
+                  {
+                    doctors?.data?.map((doctor, index) =>
+                      <tr key={doctor?._id}>
+                        <th>{doctors?.pagination?.start + index}</th>
+                        <td>
+                          <img src={doctor?.image} className='w-6 h-6 inline-block mr-2' alt="" />
+                          {doctor?.name}
+                        </td>
+                        <td>{doctor?.email}</td>
+                        <td>{doctor?.designation}</td>
+                        <td className='text-right'>
+                          <Link to={`/dashboard/doctors/${doctor?._id}`}>
+                            <FaRegEdit className='inline'></FaRegEdit>
+                          </Link>
+                        </td>
+                      </tr>
+                    )
+                  }
+                </>
+                :
+                <>
+                  {
+                    Array(10).fill('').map((_, i) =>
+                      <tr key={i}>
+                        <th><Skeleton /></th>
+                        <td><Skeleton /></td>
+                        <td><Skeleton /></td>
+                        <td><Skeleton /></td>
+                        <td><Skeleton /></td>
+                      </tr>
+                    )
+                  }
+                </>
             }
+
           </tbody>
 
         </table>
