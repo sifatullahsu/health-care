@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { FaRegEdit } from 'react-icons/fa';
+import Skeleton from 'react-loading-skeleton';
 import { Link } from 'react-router-dom';
 import Pagination from '../../components/Pagination';
 import Thead from '../../components/Thead';
@@ -34,17 +35,36 @@ const AllUsers = () => {
 
           <tbody>
             {
-              users?.data?.map((user, index) =>
-                <tr key={index}>
-                  <th>{index + 1}</th>
-                  <td>{user?.name}</td>
-                  <td>{user?.uid}</td>
-                  <td>{user?.role}</td>
-                  <td className='text-right'>
-                    <Link to={`/dashboard/users/${user?._id}`}><FaRegEdit className='inline'></FaRegEdit></Link>
-                  </td>
-                </tr>
-              )
+              !isLoading ?
+                <>
+                  {
+                    users?.data?.map((user, index) =>
+                      <tr key={index}>
+                        <th>{index + 1}</th>
+                        <td>{user?.name}</td>
+                        <td>{user?.uid}</td>
+                        <td>{user?.role}</td>
+                        <td className='text-right'>
+                          <Link to={`/dashboard/users/${user?._id}`}><FaRegEdit className='inline'></FaRegEdit></Link>
+                        </td>
+                      </tr>
+                    )
+                  }
+                </>
+                :
+                <>
+                  {
+                    Array(10).fill('').map((_, i) =>
+                      <tr key={i}>
+                        <th><Skeleton /></th>
+                        <td><Skeleton /></td>
+                        <td><Skeleton /></td>
+                        <td><Skeleton /></td>
+                        <td><Skeleton /></td>
+                      </tr>
+                    )
+                  }
+                </>
             }
           </tbody>
 
