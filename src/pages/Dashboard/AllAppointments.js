@@ -1,12 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaRegEdit } from 'react-icons/fa';
 import Pagination from '../../components/Pagination';
 import Thead from '../../components/Thead';
 import { useData } from '../../contexts/DataProvider';
 import { useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
+import { AiOutlineEye } from 'react-icons/ai';
+import Heading from '../../components/Heading';
 
 const AllAppointments = () => {
 
@@ -27,6 +28,8 @@ const AllAppointments = () => {
 
   return (
     <>
+      <Heading title='All Appointments'></Heading>
+
       <div className="overflow-x-auto">
         <table className="dash-table">
 
@@ -45,7 +48,7 @@ const AllAppointments = () => {
                         <td>{`${appointment?.date} (${appointment?.slot})`}</td>
                         <td className='text-right'>
                           <Link to={`/dashboard/appointments/${appointment?._id}`}>
-                            <FaRegEdit className='inline'></FaRegEdit>
+                            <AiOutlineEye className='inline'></AiOutlineEye>
                           </Link>
                         </td>
                       </tr>

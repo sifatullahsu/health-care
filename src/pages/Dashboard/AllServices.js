@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { FaRegEdit } from "react-icons/fa";
 import Skeleton from 'react-loading-skeleton';
 import { Link } from 'react-router-dom';
+import Heading from '../../components/Heading';
 import Pagination from '../../components/Pagination';
 import Thead from '../../components/Thead';
 import { useData } from '../../contexts/DataProvider';
@@ -27,6 +28,8 @@ const AllServices = () => {
 
   return (
     <>
+      <Heading title='All Services'></Heading>
+
       <div className="overflow-x-auto">
         <table className="dash-table">
 

@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { useEffect } from 'react';
+import Heading from '../../components/Heading';
 import Pagination from '../../components/Pagination';
 import { useAuth } from '../../contexts/AuthProvider';
 import { useData } from '../../contexts/DataProvider';
@@ -26,6 +27,7 @@ const MyAppointments = () => {
 
   return (
     <>
+      <Heading title='My Appointments'></Heading>
 
       <div className='grid grid-cols-1 md:grid-cols-2 gap-5 mb-10'>
         {
