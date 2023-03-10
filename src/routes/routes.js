@@ -33,11 +33,12 @@ export const route = createBrowserRouter([
       },
       {
         path: 'hospital-services',
-        element: <section style={{ backgroundColor: "rgb(245, 247, 248)" }}>
-          <div className='container py-16'>
-            <HospitalServices />
-          </div>
-        </section>
+        element:
+          <section style={{ backgroundColor: "rgb(245, 247, 248)" }}>
+            <div className='container py-16'>
+              <HospitalServices />
+            </div>
+          </section>
       },
       {
         path: 'doctors',
@@ -100,6 +101,11 @@ export const route = createBrowserRouter([
       {
         path: 'appointments/add-new',
         element: <RoleBaseRoute role={['admin']}><AddDoctor /></RoleBaseRoute>
+      },
+      {
+        path: 'appointments/:id',
+        element: <RoleBaseRoute role={['admin']}><MyAppointmentsDetails /></RoleBaseRoute>,
+        loader: ({ params }) => params.id
       },
       {
         path: 'users',
