@@ -29,11 +29,11 @@ const MyAppointments = () => {
 
       <div className='grid grid-cols-1 md:grid-cols-2 gap-5 mb-10'>
         {
-          myAppointments?.data?.map((appointment, i) =>
+          (isLoading ? Array(4).fill('') : myAppointments?.data).map((appointment, i) =>
             <AppointmentGrid
               key={appointment._id}
               appointment={appointment}
-              i={i}
+              isLoading={isLoading}
             ></AppointmentGrid>)
         }
       </div>
