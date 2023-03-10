@@ -6,7 +6,7 @@ import DashHeader from '../components/DashHeader';
 const DashboardTemp = () => {
   return (
     <>
-      <div className="drawer drawer-mobile overflow-visible">
+      <div className="drawer drawer-mobile">
         <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
 
         <div className="drawer-side lg:overflow-y-visible">
@@ -14,9 +14,11 @@ const DashboardTemp = () => {
           <AdminSidebar></AdminSidebar>
         </div>
 
-        <div className="drawer-content px-5 py-3" style={{ backgroundColor: '#F5F7F8' }}>
+        <div className="drawer-content" style={{ backgroundColor: '#F5F7F8' }}>
           <DashHeader></DashHeader>
-          <Outlet></Outlet>
+          <div className='px-5 py-3'>
+            <Outlet></Outlet>
+          </div>
         </div>
 
       </div>

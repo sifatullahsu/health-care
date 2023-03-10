@@ -4,6 +4,7 @@ import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 import logo from '../../assets/images/logo.png';
 import { toast } from 'react-hot-toast';
+import { BsXCircleFill } from 'react-icons/bs'
 
 const AdminSidebar = () => {
 
@@ -78,12 +79,15 @@ const AdminSidebar = () => {
 
   return (
     <div className='bg-primary text-gray-300'>
-      <div className='mt-5 mb-10 px-4'>
+      <div className='mt-5 mb-10 px-4 flex justify-between'>
         <Link to='/'>
-          <img src={logo} className='w-[200px]' alt="" />
+          <img src={logo} className='w-[120px]' alt="" />
         </Link>
+        <label htmlFor="dashboard-drawer" className="btn btn-ghost btn-sm drawer-button lg:hidden">
+          <BsXCircleFill />
+        </label>
       </div>
-      <ul className="menu w-80 ">
+      <ul className="menu">
 
         <li>
           <NavLink to='/dashboard'

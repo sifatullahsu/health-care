@@ -64,6 +64,11 @@ body {
   max-height: unset !important;
 }
 
+.drawer-toggle:checked~.drawer-side>div,
+.drawer-toggle:checked~.drawer-side {
+  max-width: 280px;
+}
+
 .drawer {
   height: unset;
   min-height: 100vh;

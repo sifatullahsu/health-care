@@ -1,12 +1,13 @@
 import React from 'react';
 import { FaBars } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import logo from '../assets/images/logo.png';
 import { useAuth } from '../contexts/AuthProvider';
 
 const Header = () => {
 
   const { user } = useAuth();
+  const isDash = useLocation().pathname.search('/dashboard') != -1 ? true : false;
 
   const menu = () => {
     return (
@@ -38,8 +39,14 @@ const Header = () => {
           <div><Link to='/'><img src={logo} className='w-[200px]' alt="" /></Link></div>
         </div>
 
-        <div className="navbar-end hidden lg:flex">
-          <ul className="menu menu-horizontal text-white p-0">
+        <div className="navbar-end">
+          {
+            isDash &&
+            <label htmlFor="dashboard-drawer" className="btn btn-secondary text-xs btn-sm drawer-button lg:hidden">
+              Menu
+            </label>
+          }
+          <ul className="menu menu-horizontal text-white p-0  hidden lg:flex">
             {menu()}
           </ul>
         </div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useData } from '../contexts/DataProvider';
+import Header from './Header';
 
 const DashHeader = () => {
 
@@ -8,13 +9,14 @@ const DashHeader = () => {
 
   return (
     <header className='mb-5'>
-      <div className="text-sm breadcrumbs text-accent">
+      <div className='lg:hidden'><Header></Header></div>
+
+      <div className="text-sm breadcrumbs text-accent px-5 py-3">
         <ul>
           <li><Link to='/'>Home</Link></li>
           <li><Link to='/dashboard'>Dashboard</Link></li>
           <li>{breadcrumbs}</li>
         </ul>
-        <label htmlFor="dashboard-drawer" className="btn btn-primary drawer-button lg:hidden">Open drawer</label>
       </div>
     </header>
   );
