@@ -5,6 +5,7 @@ import { AuthContext } from '../../contexts/AuthProvider';
 import logo from '../../assets/images/logo.png';
 import { toast } from 'react-hot-toast';
 import { BsXCircleFill } from 'react-icons/bs'
+import { useData } from '../../contexts/DataProvider';
 
 const AdminSidebar = () => {
 
@@ -13,6 +14,7 @@ const AdminSidebar = () => {
   const path = location.pathname;
 
   const { user, logOut } = useContext(AuthContext);
+  const { setIsDashOpen } = useData();
 
   const handleLogout = () => {
     logOut().then(data => {
@@ -79,13 +81,13 @@ const AdminSidebar = () => {
 
   return (
     <div className='bg-primary text-gray-300'>
-      <div className='mt-5 mb-10 px-4 flex justify-between'>
+      <div className='mt-5 mb-10 px-4 lg:pr-20 flex justify-between'>
         <Link to='/'>
           <img src={logo} className='w-[120px] lg:w-[200px]' alt="" />
         </Link>
-        <label htmlFor="dashboard-drawer" className="btn btn-ghost btn-sm drawer-button lg:hidden">
+        <div className="btn btn-ghost btn-sm drawer-button lg:hidden" onClick={() => setIsDashOpen(false)}>
           <BsXCircleFill />
-        </label>
+        </div>
       </div>
       <ul className="menu">
 

@@ -8,22 +8,23 @@ import { useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
 import { AiOutlineEye } from 'react-icons/ai';
 import Heading from '../../components/Heading';
+import { getAppointments, getAppointmentsByDoctor } from '../../queries/appointments';
+import { useAuth } from '../../contexts/AuthProvider';
+import { loop } from '../../utilities/utilities';
 
 const AllAppointments = () => {
 
   const { setBreadcrumbs } = useData();
   useEffect(() => setBreadcrumbs('Appointments'), [setBreadcrumbs]);
 
+  const { user } = useAuth();
+
   const [pagination, setPagination] = useState({ page: 1, size: 10 });
 
   const { data: appointments = [], isLoading } = useQuery({
     queryKey: ['appointments', pagination],
-    queryFn: async () => {
-      const res = await fetch(`https://the-health-care.vercel.app/api/v1/appointments/list?page=${pagination.page}&size=${pagination.size}`);
-      const data = await res.json();
-
-      return data;
-    }
+    queryFn: async () => user?.role === 'admin' ?
+      getAppointments(pagination.page, pagination.size) : getAppointmentsByDoctor(user._id, pagination.page, pagination.size)
   });
 
   return (
@@ -37,11 +38,11 @@ const AllAppointments = () => {
 
           <tbody>
             {
-              !isLoading ?
-                <>
+              loop(appointments?.data, 10)?.map((appointment, index) =>
+                <tr key={index}>
                   {
-                    appointments?.data?.map((appointment, index) =>
-                      <tr key={index}>
+                    !isLoading ?
+                      <>
                         <th>{index + 1}</th>
                         <td>{appointment?.doctor?.name}</td>
                         <td>{appointment?.patient?.name}</td>
@@ -51,24 +52,18 @@ const AllAppointments = () => {
                             <AiOutlineEye className='inline'></AiOutlineEye>
                           </Link>
                         </td>
-                      </tr>
-                    )
-                  }
-                </>
-                :
-                <>
-                  {
-                    Array(10).fill('').map((_, i) =>
-                      <tr key={i}>
+                      </>
+                      :
+                      <>
                         <th><Skeleton /></th>
                         <td><Skeleton /></td>
                         <td><Skeleton /></td>
                         <td><Skeleton /></td>
                         <td><Skeleton /></td>
-                      </tr>
-                    )
+                      </>
                   }
-                </>
+                </tr>
+              )
             }
           </tbody>
 

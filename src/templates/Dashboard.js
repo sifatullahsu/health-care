@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Outlet } from 'react-router-dom';
 import AdminSidebar from '../components/Dashboard/AdminSidebar';
 import DashHeader from '../components/DashHeader';
+import { useData } from '../contexts/DataProvider';
 
 const DashboardTemp = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const { isDashOpen, setIsDashOpen } = useData();
 
   return (
     <>
-      <div className="drawer drawer-mobile" onClick={() => setIsOpen(false)}>
+      <div className="drawer drawer-mobile" onClick={() => setIsDashOpen(false)}>
         <input id="dashboard-drawer" type="checkbox" className="drawer-toggle"
-          onChange={(e) => setIsOpen(e.target.checked)}
-          checked={isOpen}
+          onChange={(e) => setIsDashOpen(e.target.checked)}
+          checked={isDashOpen}
         />
 
         <div className="drawer-side lg:overflow-y-visible">

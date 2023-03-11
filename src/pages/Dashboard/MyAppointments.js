@@ -29,11 +29,16 @@ const MyAppointments = () => {
     <>
       <Heading title='My Appointments'></Heading>
 
+      {
+        myAppointments?.data?.length === 0 && !isLoading &&
+        <p>No Data Found..</p>
+      }
+
       <div className='grid grid-cols-1 md:grid-cols-2 gap-5 mb-10'>
         {
           (isLoading ? Array(4).fill('') : myAppointments?.data).map((appointment, i) =>
             <AppointmentGrid
-              key={appointment._id}
+              key={appointment._id || i}
               appointment={appointment}
               isLoading={isLoading}
             ></AppointmentGrid>)

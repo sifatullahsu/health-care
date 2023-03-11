@@ -7,10 +7,12 @@ const DataContext = createContext();
 const DataProvider = ({ children }) => {
 
   const [breadcrumbs, setBreadcrumbs] = useState('');
+  const [isDashOpen, setIsDashOpen] = useState(false);
 
 
   const pass = {
-    breadcrumbs, setBreadcrumbs
+    breadcrumbs, setBreadcrumbs,
+    isDashOpen, setIsDashOpen,
   }
 
   return (

@@ -3,6 +3,9 @@ import Skeleton from 'react-loading-skeleton';
 import ReactPaginate from 'react-paginate';
 
 const Pagination = ({ data, isLoading, state, setState }) => {
+
+  if (data?.totalDocuments === 0) return;
+
   return (
     <div className='flex flex-wrap items-center justify-between md:justify-end md:space-x-5 mt-5'>
       <div className='order-2 md:order-1'>
