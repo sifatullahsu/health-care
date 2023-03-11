@@ -51,7 +51,7 @@ const DoctorForm = ({ data }) => {
     const image = form.image.value;
     const slots = repeter;
     const about = form.about.value;
-    const user = associateDoctor?.value;
+    const user = associateDoctor?.value || null;
 
     const processData = { name, email, qualifications, designation, image, slots, about, user }
 
@@ -167,6 +167,18 @@ const DoctorForm = ({ data }) => {
                 <div className='basis-full p-5'>
 
                   <div className="form-control sm">
+                    <label className="label"><span className="label-text">Associate User</span></label>
+                    <AsyncSelect
+                      name="doctor"
+                      isClearable
+                      closeMenuOnSelect={false}
+                      defaultValue={associateDoctor}
+                      loadOptions={promiseOptions}
+                      onChange={(items) => setAssociateDoctor(items)}
+                    />
+                  </div>
+
+                  <div className="form-control sm mt-5">
                     <label className="label"><span className="label-text">Email</span></label>
                     <input name='email' type="mail" defaultValue={data?.email} required />
                   </div>
@@ -188,7 +200,7 @@ const DoctorForm = ({ data }) => {
 
                   <div className='form-control sm mt-5'>
                     <label className="label"><span className="label-text">Slots</span></label>
-                    <div className='grid grid-cols-3 gap-x-5 gap-y-1'>
+                    <div className='grid grid-cols-2 md:grid-cols-3 gap-x-5 gap-y-1'>
                       {
                         repeter.map((slot, index) => {
                           return (
@@ -250,17 +262,6 @@ const DoctorForm = ({ data }) => {
                       defaultValue={data?.about}
                       required
                     ></textarea>
-                  </div>
-
-                  <div className="form-control sm mt-5">
-                    <label className="label"><span className="label-text">Associate User</span></label>
-                    <AsyncSelect
-                      name="doctor"
-                      closeMenuOnSelect={false}
-                      defaultValue={associateDoctor}
-                      loadOptions={promiseOptions}
-                      onChange={(items) => setAssociateDoctor(items)}
-                    />
                   </div>
 
                 </div>

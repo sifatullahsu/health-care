@@ -8,9 +8,11 @@ const auth = getAuth(app)
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [doctor, setDoctor] = useState(null);
   const [loading, setLoading] = useState(true);
 
   // console.log(user);
+  // console.log(doctor);
 
   const googleProvider = new GoogleAuthProvider();
 
@@ -46,9 +48,17 @@ const AuthProvider = ({ children }) => {
         setLoading(true);
         getUser(currentUser.uid)
           .then(result => {
+
             if (result?.status) {
-              // setUser({ uid: currentUser.uid, email: currentUser.email, data: result.data });
-              setUser(result.data);
+              if (!result.data.hasOwnProperty('doctor')) {
+                setUser(result.data);
+              }
+              else {
+                setDoctor(result.data.doctor);
+                delete result.data.doctor;
+                setUser(result.data);
+              }
+
               setLoading(false);
             }
             else {
@@ -72,6 +82,7 @@ const AuthProvider = ({ children }) => {
     updateUser,
     logOut,
     user,
+    doctor,
     loading, setLoading,
     userSocialLogin
   }
