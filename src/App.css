@@ -143,6 +143,10 @@ input[readonly] {
   @apply table w-full border;
 }
 
+.dash-table thead th:last-child {
+  text-align: right;
+}
+
 .table :where(th, td) {
   padding: 0.6rem;
   border-radius: 0;

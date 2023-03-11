@@ -36,7 +36,7 @@ const Header = () => {
               {menu()}
             </ul>
           </div>
-          <div><Link to='/'><img src={logo} className='w-[200px]' alt="" /></Link></div>
+          <div><Link to='/'><img src={logo} className='w-[160px]' alt="" /></Link></div>
         </div>
 
         <div className="navbar-end">

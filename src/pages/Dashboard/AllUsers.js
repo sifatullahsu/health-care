@@ -49,7 +49,7 @@ const AllUsers = () => {
       <div className="overflow-x-auto">
         <table className="dash-table">
 
-          <Thead data={['No.', 'Name', 'Email', 'Role', 'Make Doctor']}></Thead>
+          <Thead data={['No.', 'Name', 'Email', 'Role', 'Make Doctor', 'Actions']}></Thead>
 
           <tbody>
             {
@@ -71,6 +71,7 @@ const AllUsers = () => {
                             onChange={(e) => handleMakeDoctor(e.target.checked, user._id)}
                           />
                         </td>
+                        <td></td>
                         {/* <td className='text-right'>
                           <Link to={`/dashboard/users/${user?._id}`}><FaRegEdit className='inline'></FaRegEdit></Link>
                         </td> */}
@@ -84,6 +85,7 @@ const AllUsers = () => {
                     Array(10).fill('').map((_, i) =>
                       <tr key={i}>
                         <th><Skeleton /></th>
+                        <td><Skeleton /></td>
                         <td><Skeleton /></td>
                         <td><Skeleton /></td>
                         <td><Skeleton /></td>

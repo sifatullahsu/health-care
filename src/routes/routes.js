@@ -104,7 +104,7 @@ export const route = createBrowserRouter([
       },
       {
         path: 'appointments/:id',
-        element: <RoleBaseRoute role={['admin']}><MyAppointmentsDetails /></RoleBaseRoute>,
+        element: <RoleBaseRoute role={['admin', 'doctor']}><MyAppointmentsDetails /></RoleBaseRoute>,
         loader: ({ params }) => params.id
       },
       {

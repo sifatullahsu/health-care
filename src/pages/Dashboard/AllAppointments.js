@@ -17,14 +17,14 @@ const AllAppointments = () => {
   const { setBreadcrumbs } = useData();
   useEffect(() => setBreadcrumbs('Appointments'), [setBreadcrumbs]);
 
-  const { user } = useAuth();
+  const { user, doctor } = useAuth();
 
   const [pagination, setPagination] = useState({ page: 1, size: 10 });
 
   const { data: appointments = [], isLoading } = useQuery({
     queryKey: ['appointments', pagination],
     queryFn: async () => user?.role === 'admin' ?
-      getAppointments(pagination.page, pagination.size) : getAppointmentsByDoctor(user._id, pagination.page, pagination.size)
+      getAppointments(pagination.page, pagination.size) : getAppointmentsByDoctor(doctor?._id, pagination.page, pagination.size)
   });
 
   return (
