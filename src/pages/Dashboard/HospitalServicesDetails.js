@@ -53,13 +53,13 @@ const HospitalServicesDetails = () => {
 
   return (
     <div>
-      <div className='flex justify-between mb-7'>
+      <div className='md:flex md:justify-between mb-7'>
         <div>
           <h3 className="text-xl text-secondary font-bold mb-2">{service?.name}</h3>
           <p className='text-sm text-accent mb-2'>{`Price: $${service?.price} / Appointment`}</p>
           <p className='text-sm text-accent'>{totalSlots ? `Total ${totalSlots} slots available` : 'No slots available'}</p>
         </div>
-        <div>
+        <div className='text-right mt-5 md:mt-0'>
           <div className="dropdown dropdown-end">
             <div tabIndex={0} className="form-control">
               <label className="input-group input-group-sm">
