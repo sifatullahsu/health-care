@@ -5,8 +5,12 @@ import { useLocation } from 'react-router-dom';
 import CheckoutForm from '../../components/Dashboard/CheckoutForm'
 import CheckoutSidebar from '../../components/CheckoutSidebar';
 import CheckoutSuccessful from '../../components/CheckoutSuccessful';
+import { useData } from '../../contexts/DataProvider';
 
 const Checkout = () => {
+
+  const { setBreadcrumbs } = useData();
+  useEffect(() => setBreadcrumbs('Checkout'), [setBreadcrumbs]);
 
   const state = useLocation().state;
 

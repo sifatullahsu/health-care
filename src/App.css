@@ -64,6 +64,7 @@ body {
   max-height: unset !important;
 }
 
+.drawer-toggle~.drawer-side>.drawer-overlay+*,
 .drawer-toggle:checked~.drawer-side>div,
 .drawer-toggle:checked~.drawer-side {
   max-width: 280px;

@@ -7,7 +7,7 @@ import { useAuth } from '../contexts/AuthProvider';
 const Header = () => {
 
   const { user } = useAuth();
-  const isDash = useLocation().pathname.search('/dashboard') != -1 ? true : false;
+  const isDash = useLocation().pathname.search('/dashboard') !== -1 ? true : false;
 
   const menu = () => {
     return (

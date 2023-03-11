@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { useEffect } from 'react';
-import { FaRegEdit } from 'react-icons/fa';
+// import { FaRegEdit } from 'react-icons/fa';
 import Skeleton from 'react-loading-skeleton';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import Heading from '../../components/Heading';
 import Pagination from '../../components/Pagination';
 import Thead from '../../components/Thead';

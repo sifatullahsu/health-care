@@ -17,7 +17,7 @@ const Pagination = ({ data, isLoading, state, setState }) => {
           <option value='100'>100</option>
         </select>
       </div>
-      <div className='order-1 md:order-2 basis-full md:basis-[unset] mb-4 md:mb-0'>
+      <div className='order-1 md:order-2 basis-full md:basis-[unset] mb-4 md:mb-0 text-right'>
         {
           !isLoading ?
             <>
