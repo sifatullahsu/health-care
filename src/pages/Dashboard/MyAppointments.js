@@ -31,7 +31,7 @@ const MyAppointments = () => {
 
       {
         myAppointments?.data?.length === 0 && !isLoading &&
-        <p>No Data Found..</p>
+        <p>No data found...</p>
       }
 
       <div className='grid grid-cols-1 md:grid-cols-2 gap-5 mb-10'>

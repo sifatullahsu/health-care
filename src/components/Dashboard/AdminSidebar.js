@@ -81,10 +81,12 @@ const AdminSidebar = () => {
 
   return (
     <div className='bg-primary text-gray-300'>
-      <div className='mt-5 mb-10 px-4 lg:pr-20 flex justify-between'>
-        <Link to='/'>
-          <img src={logo} className='w-[120px] lg:w-[200px]' alt="" />
-        </Link>
+      <div className='mt-5 mb-10 px-4 flex justify-between'>
+        <div className='w-[120px] lg:w-[200px]'>
+          <Link to='/'>
+            <img src={logo} className="lg:w-[80%]" alt="" />
+          </Link>
+        </div>
         <div className="btn btn-ghost btn-sm drawer-button lg:hidden" onClick={() => setIsDashOpen(false)}>
           <BsXCircleFill />
         </div>

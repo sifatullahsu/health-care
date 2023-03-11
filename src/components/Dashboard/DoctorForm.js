@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useLocation } from 'react-router-dom';
+import AsyncSelect from 'react-select/async';
 
 const DoctorForm = ({ data }) => {
 
@@ -16,6 +17,12 @@ const DoctorForm = ({ data }) => {
   ]
 
   const remainingSlots = defaultSlots.filter(slot => !repeter.includes(slot));
+
+  const customUser = data => {
+    return data ? { value: data._id, label: `${data.name} (${data.email}) - ${data.role}` } : null;
+  }
+
+  const [associateDoctor, setAssociateDoctor] = useState(customUser(data?.user));
 
   const handleAddRepeter = () => {
     const newRepeter = [...repeter, ''];
@@ -44,8 +51,9 @@ const DoctorForm = ({ data }) => {
     const image = form.image.value;
     const slots = repeter;
     const about = form.about.value;
+    const user = associateDoctor?.value;
 
-    const processData = { name, email, qualifications, designation, image, slots, about }
+    const processData = { name, email, qualifications, designation, image, slots, about, user }
 
     fetch(`https://the-health-care.vercel.app/api/v1/doctors/edit/${id}`, {
       method: 'PATCH',
@@ -68,7 +76,6 @@ const DoctorForm = ({ data }) => {
       })
   }
 
-
   const handleAddForm = (event) => {
     event.preventDefault();
 
@@ -81,8 +88,9 @@ const DoctorForm = ({ data }) => {
     const image = form.image.value;
     const slots = repeter;
     const about = form.about.value;
+    const user = associateDoctor?.value;
 
-    const processData = { name, email, qualifications, designation, image, slots, about }
+    const processData = { name, email, qualifications, designation, image, slots, about, user }
 
 
     fetch('https://the-health-care.vercel.app/api/v1/doctors/create', {
@@ -114,6 +122,25 @@ const DoctorForm = ({ data }) => {
     return data ? handleEditForm(event) : handleAddForm(event);
   }
 
+
+  const promiseOptions = (inputValue, callback) => {
+
+    if (inputValue.length >= 3) {
+      fetch(`https://the-health-care.vercel.app/api/v1/users/associat-doctor?name=${inputValue}`, {
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json'
+        }
+      })
+        .then(req => req.json())
+        .then(data => {
+          callback(data?.status ? data.data : []);
+        })
+        .catch(error => {
+          toast.error('Doctor Loaded Faild..');
+        })
+    }
+  };
 
   return (
     <div>
@@ -224,6 +251,18 @@ const DoctorForm = ({ data }) => {
                       required
                     ></textarea>
                   </div>
+
+                  <div className="form-control sm mt-5">
+                    <label className="label"><span className="label-text">Associate User</span></label>
+                    <AsyncSelect
+                      name="doctor"
+                      closeMenuOnSelect={false}
+                      defaultValue={associateDoctor}
+                      loadOptions={promiseOptions}
+                      onChange={(items) => setAssociateDoctor(items)}
+                    />
+                  </div>
+
                 </div>
               </div>
             </section>
