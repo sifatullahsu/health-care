@@ -1,5 +1,6 @@
 import React from 'react';
 import { useEffect } from 'react';
+import Heading from '../../components/Heading';
 import { useData } from '../../contexts/DataProvider';
 
 const Settings = () => {
@@ -8,9 +9,9 @@ const Settings = () => {
   useEffect(() => setBreadcrumbs('Settings'), [setBreadcrumbs]);
 
   return (
-    <div>
-
-    </div>
+    <>
+      <Heading title='Settings'></Heading>
+    </>
   );
 };
 

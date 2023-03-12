@@ -2,6 +2,7 @@ import React from 'react';
 import { Outlet } from 'react-router-dom';
 import AdminSidebar from '../components/Dashboard/AdminSidebar';
 import DashHeader from '../components/DashHeader';
+import ScrollToTop from '../components/ScrollToTop';
 import { useData } from '../contexts/DataProvider';
 
 const DashboardTemp = () => {
@@ -28,6 +29,7 @@ const DashboardTemp = () => {
         </div>
 
       </div>
+      <ScrollToTop></ScrollToTop>
     </>
   );
 };

@@ -1,15 +1,19 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import Countdown from '../../components/Countdown';
 import { useCountdown } from '../../hooks/useCountdown';
 import Skeleton from 'react-loading-skeleton';
 
 import successfulImg from '../../assets/images/successful.png';
+import { useData } from '../../contexts/DataProvider';
 
 
 const MyAppointmentsDetails = () => {
   const id = useLoaderData();
+
+  const { setBreadcrumbs } = useData();
+  useEffect(() => setBreadcrumbs('Appointment Details'), [setBreadcrumbs]);
 
   const { data: details = [], isLoading } = useQuery({
     queryKey: [`appointments-${id}`],

@@ -412,3 +412,27 @@ input[readonly] {
     transform: translateX(-50px);
   }
 }
+
+.checkout.steps .step:nth-child(1)::after {
+  content: "SERVICE" !important;
+  width: unset;
+  height: 1.5rem;
+  padding: 0 10px;
+  border-radius: 4px;
+}
+
+.checkout.steps .step:nth-child(2)::after {
+  content: "BILLING AREA" !important;
+  width: unset;
+  height: 1.5rem;
+  padding: 0 10px;
+  border-radius: 4px;
+}
+
+.checkout.steps .step:nth-child(3)::after {
+  content: "SUCCESSFUL" !important;
+  width: unset;
+  height: 1.5rem;
+  padding: 0 10px;
+  border-radius: 4px;
+}

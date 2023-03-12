@@ -89,7 +89,7 @@ const CheckoutForm = ({ state, setSuccessData }) => {
   return (
     <form onSubmit={handleSubmit(handleCheckout)}>
 
-      <div className='grid grid-cols-2 gap-x-5 gap-y-1'>
+      <div className='grid grid-cols-2 gap-x-2 md:gap-x-5 gap-y-1'>
         <div className="form-control">
           <label className="label"><span className="label-text">Patient Name</span></label>
           <input {...register("name", { required: true })} />
@@ -114,7 +114,7 @@ const CheckoutForm = ({ state, setSuccessData }) => {
         </div>
       </div>
 
-      <PaymentElement id='payment-element' className='mt-5'></PaymentElement>
+      <PaymentElement id='payment-element' className='mt-4 md:mt-5' options={{ layout: 'accordion' }}></PaymentElement>
 
       <button type="submit" className='btn btn-primary mt-5 w-full'>Confirm Booking</button>
     </form>

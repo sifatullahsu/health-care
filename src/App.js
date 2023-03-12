@@ -5,7 +5,6 @@ import 'react-day-picker/dist/style.css';
 import 'react-loading-skeleton/dist/skeleton.css'
 import { Toaster } from 'react-hot-toast';
 
-
 function App() {
   return (
     <>
