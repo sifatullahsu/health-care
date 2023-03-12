@@ -1,21 +1,26 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthProvider';
 
-const Login = ({ from }) => {
+const Login = ({ from, loading, setLoading }) => {
   const { register, formState: { errors }, handleSubmit } = useForm();
   const { signIn } = useContext(AuthContext);
   const [loginError, setLoginError] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = data => {
+    setLoading(true);
     setLoginError('');
     signIn(data.email, data.password)
-      .then(result => {
+      .then(() => {
+        toast.success('login successful!');
+        setLoading(false);
         navigate(from, { replace: true });
       })
       .catch(error => {
+        setLoading(false);
         setLoginError(error.message);
       });
   }
@@ -41,7 +46,7 @@ const Login = ({ from }) => {
         <label><span className="label-text">Forget Password?</span></label>
       </div>
 
-      <input className='btn btn-primary btn-sm w-full h-[2.5rem]' value="Login" type="submit" />
+      <input className='btn btn-primary btn-sm w-full h-[2.5rem]' value="Login" type="submit" disabled={loading} />
 
       <div>{loginError && <p className='text-red-600'>{loginError}</p>}</div>
 

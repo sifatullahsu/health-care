@@ -3,10 +3,12 @@ import { useLocation } from 'react-router-dom';
 import GoogleSignIn from '../components/GoogleSignIn';
 import Login from '../components/Login';
 import SignUp from '../components/SignUp';
+import spinner from '../assets/images/spinner.webp';
 
 const AuthPage = () => {
   const location = useLocation();
   const from = location.state || '/dashboard';
+  const [loading, setLoading] = useState(false);
 
   const [tab, setTab] = useState('login')
 
@@ -16,18 +18,29 @@ const AuthPage = () => {
 
         <div className='max-w-4xl mx-auto px-8 pt-5 pb-8 bg-white shadow-xl grid grid-cols-1 md:grid-cols-3 gap-10'>
 
-          <div className='md:col-span-2'>
+          <div className='md:col-span-2 relative'>
             <div className="tabs">
               <div className={`tab md:tab-lg tab-bordered ${tab === 'login' ? 'tab-active' : ''}`} onClick={() => setTab('login')}>Login</div>
               <div className={`tab md:tab-lg tab-bordered ${tab === 'registration' ? 'tab-active' : ''}`} onClick={() => setTab('registration')}>Registration</div>
             </div>
 
             <div className='pt-5'>
-              {tab === 'login' ? <Login from={from}></Login> : <SignUp></SignUp>}
-
+              {
+                tab === 'login' ?
+                  <Login from={from} loading={loading} setLoading={setLoading}></Login>
+                  :
+                  <SignUp from={from} loading={loading} setLoading={setLoading}></SignUp>
+              }
               <div className="divider">OR</div>
-              <GoogleSignIn></GoogleSignIn>
+              <GoogleSignIn from={from} loading={loading} setLoading={setLoading}></GoogleSignIn>
             </div>
+
+            {
+              loading &&
+              <div className='absolute top-0 right-0'>
+                <img src={spinner} alt="" className='w-10' />
+              </div>
+            }
           </div>
 
           <div>

@@ -4,37 +4,28 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthProvider';
 
-const SignUp = () => {
-  const { createUser } = useContext(AuthContext);
-  const { register, handleSubmit } = useForm();
+const SignUp = ({ from, loading, setLoading }) => {
+  const { signUp, setIsUserCreating } = useContext(AuthContext);
+  const { register, handleSubmit, reset } = useForm();
   const navigate = useNavigate();
 
   const handleSignUp = (data) => {
 
-    try {
-      createUser(data.email, data.password)
-        .then(result => {
+    setLoading(true);
 
-          if (result?.user) {
-            fetch('https://the-health-care.vercel.app/api/v1/users/create', {
-              method: 'POST',
-              headers: { 'content-type': 'application/json' },
-              body: JSON.stringify({ name: data.name, email: data.email, role: 'subscriber', uid: result?.user?.uid })
-            })
-              .then(res => res.json())
-              .then(data => {
-                console.log(data);
-                toast('User Created Successfully.');
-                navigate('/');
-              })
-          }
+    signUp(data).then((results) => {
+      setIsUserCreating(false);
+      setLoading(false);
 
-        })
-    }
-    catch (error) {
-      console.log(error)
-    }
-
+      if (results.status) {
+        toast.success('user created successful!');
+        navigate(from, { replace: true });
+        reset();
+      }
+      else {
+        toast.error(results.message);
+      }
+    });
   }
 
   return (
@@ -57,7 +48,7 @@ const SignUp = () => {
         <input type="password" {...register("password", { required: "Password is required", minLength: { value: 6, message: "Password must be 6 characters long" }, })} className="input input-bordered" />
       </div>
 
-      <input className='btn btn-primary btn-sm w-full h-[2.5rem] mt-6' value="Registration" type="submit" />
+      <input className='btn btn-primary btn-sm w-full h-[2.5rem] mt-6' value="Registration" type="submit" disabled={loading} />
 
     </form>
   );

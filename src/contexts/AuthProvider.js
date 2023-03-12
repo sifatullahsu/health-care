@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import app from '../firebase/firebase.config';
-import { getUser } from '../queries/users';
+import { createUser, getUser } from '../queries/users';
 
 export const AuthContext = createContext();
 const auth = getAuth(app)
@@ -10,15 +10,38 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [doctor, setDoctor] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isUserCreating, setIsUserCreating] = useState(false);
 
   // console.log(user);
   // console.log(doctor);
 
   const googleProvider = new GoogleAuthProvider();
 
-  const createUser = (email, password) => {
+  const signUp = async (data) => {
     setLoading(true);
-    return createUserWithEmailAndPassword(auth, email, password);
+    setIsUserCreating(true);
+
+    try {
+      const firebase = await createUserWithEmailAndPassword(auth, data?.email, data?.password);
+
+      if (firebase?.user) {
+
+        const finalData = {
+          name: data.name,
+          email: data.email,
+          role: 'subscriber',
+          uid: firebase?.user?.uid
+        }
+
+        return createUser(finalData);
+      }
+    }
+    catch (error) {
+      return {
+        status: false,
+        message: error.message
+      };
+    }
   }
 
   const signIn = (email, password) => {
@@ -27,6 +50,7 @@ const AuthProvider = ({ children }) => {
   }
 
   const updateUser = (userInfo) => {
+    setLoading(true);
     return updateProfile(auth.currentUser, userInfo);
   }
 
@@ -43,11 +67,10 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, currentUser => {
-
-      try {
-        setLoading(true);
-        getUser(currentUser.uid)
-          .then(result => {
+      if (!isUserCreating) {
+        try {
+          setLoading(true);
+          getUser(currentUser.uid).then(result => {
 
             if (result?.status) {
               if (!result.data.hasOwnProperty('doctor')) {
@@ -66,24 +89,26 @@ const AuthProvider = ({ children }) => {
               setLoading(false);
             }
           })
-      }
-      catch (error) {
-        setUser(null);
-        setLoading(false);
+        }
+        catch (error) {
+          setUser(null);
+          setLoading(false);
+        }
       }
     });
 
     return () => unsubscribe();
-  }, [])
+  }, [isUserCreating])
 
   const authInfo = {
-    createUser,
+    signUp,
     signIn,
     updateUser,
     logOut,
     user,
     doctor,
     loading, setLoading,
+    isUserCreating, setIsUserCreating,
     userSocialLogin
   }
   return (

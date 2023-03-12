@@ -18,3 +18,17 @@ export const editUser = async (id, body) => {
 
   return data;
 }
+
+export const createUser = async (body) => {
+  const res = await fetch(`https://the-health-care.vercel.app/api/v1/users/create`, {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  })
+
+  const data = res.json();
+
+  return data;
+}
