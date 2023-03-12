@@ -23,13 +23,15 @@ const Login = ({ from }) => {
   return (
     <form onSubmit={handleSubmit(handleLogin)}>
 
-      <div className="form-control">
+      <p className='text-sm text-accent font-semibold mb-2'>Welcome! please login...</p>
+
+      <div className="form-control sm">
         <label className="label"><span className="label-text">Email</span></label>
         <input type="text" {...register("email", { required: "Email Address is required" })} />
         {errors.email && <p className='text-red-600'>{errors.email?.message}</p>}
       </div>
 
-      <div className="form-control">
+      <div className="form-control sm">
         <label className="label"> <span className="label-text">Password</span></label>
         <input type="password" {...register("password", { required: "Password is required", minLength: { value: 6, message: 'Password must be 6 characters or longer' } })} className="input input-bordered" />
         {errors.password && <p className='text-red-600'>{errors.password?.message}</p>}

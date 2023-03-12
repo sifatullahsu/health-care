@@ -11,26 +11,51 @@ const AuthPage = () => {
   const [tab, setTab] = useState('login')
 
   return (
-    <div className='container py-16'>
+    <section style={{ backgroundColor: "rgb(245, 247, 248)" }}>
+      <div className='container py-16' >
 
-      <div className='max-w-lg mx-auto'>
-        <div className='tabbed round'>
-          <ul>
-            <li className={tab === 'login' ? 'active' : ''} onClick={() => setTab('login')}>Login</li>
-            <li className={tab === 'registration' ? 'active' : ''} onClick={() => setTab('registration')}>Registration</li>
-          </ul>
+        <div className='max-w-4xl mx-auto px-8 pt-5 pb-8 bg-white shadow-xl grid grid-cols-1 md:grid-cols-3 gap-10'>
+
+          <div className='md:col-span-2'>
+            <div className="tabs">
+              <div className={`tab md:tab-lg tab-bordered ${tab === 'login' ? 'tab-active' : ''}`} onClick={() => setTab('login')}>Login</div>
+              <div className={`tab md:tab-lg tab-bordered ${tab === 'registration' ? 'tab-active' : ''}`} onClick={() => setTab('registration')}>Registration</div>
+            </div>
+
+            <div className='pt-5'>
+              {tab === 'login' ? <Login from={from}></Login> : <SignUp></SignUp>}
+
+              <div className="divider">OR</div>
+              <GoogleSignIn></GoogleSignIn>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-xl text-secondary font-bold mb-2">Our Accounts!</h3>
+            <p className='text-sm text-accent mb-2'>You can also logged in via existing accounts.</p>
+            <div className='text-sm text-accent'>
+              <p><span className='font-bold'>Admin:</span> admin@email.com</p>
+              <p><span className='font-bold'>Doctor:</span> doctor@email.com</p>
+              <p><span className='font-bold'>User:</span> user@email.com</p>
+              <p className='mt-3'><span className='font-bold'>Password:</span> 123456</p>
+            </div>
+          </div>
+
         </div>
 
-        <div className='p-5 pt-7'>
-          {tab === 'login' ? <Login from={from}></Login> : <SignUp></SignUp>}
-
-          <div className="divider">OR</div>
-          <GoogleSignIn></GoogleSignIn>
-        </div>
       </div>
+    </section>
 
-    </div>
   );
 };
 
 export default AuthPage;
+
+/* 
+<div className='tabbed round'>
+  <ul>
+    <li className={tab === 'login' ? 'active' : ''} onClick={() => setTab('login')}>Login</li>
+    <li className={tab === 'registration' ? 'active' : ''} onClick={() => setTab('registration')}>Registration</li>
+  </ul>
+</div> 
+*/

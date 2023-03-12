@@ -40,17 +40,19 @@ const SignUp = () => {
   return (
     <form onSubmit={handleSubmit(handleSignUp)}>
 
-      <div className="form-control">
+      <p className='text-sm text-accent font-semibold mb-2'>Registration for free...</p>
+
+      <div className="form-control sm">
         <label className="label"> <span className="label-text">Name</span></label>
         <input type="text" {...register("name", { required: "Name is Required" })} className="input input-bordered" />
       </div>
 
-      <div className="form-control">
+      <div className="form-control sm">
         <label className="label"> <span className="label-text">Email</span></label>
         <input type="email" {...register("email", { required: true })} className="input input-bordered" />
       </div>
 
-      <div className="form-control">
+      <div className="form-control sm">
         <label className="label"> <span className="label-text">Password</span></label>
         <input type="password" {...register("password", { required: "Password is required", minLength: { value: 6, message: "Password must be 6 characters long" }, })} className="input input-bordered" />
       </div>
