@@ -32,7 +32,7 @@ const AuthPage = () => {
                   <SignUp from={from} loading={loading} setLoading={setLoading}></SignUp>
               }
               <div className="divider">OR</div>
-              <GoogleSignIn from={from} loading={loading} setLoading={setLoading}></GoogleSignIn>
+              <GoogleSignIn from={from} setLoading={setLoading}></GoogleSignIn>
             </div>
 
             {

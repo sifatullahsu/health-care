@@ -1,23 +1,58 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../contexts/AuthProvider';
+import { useAuth } from '../contexts/AuthProvider';
 import { FcGoogle } from 'react-icons/fc';
+import { getUser, createUser } from '../queries/users';
 
 
-const GoogleSignIn = ({ from }) => {
-  const { userSocialLogin } = useContext(AuthContext);
+const GoogleSignIn = ({ from, setLoading }) => {
+  const { userSocialLogin, setIsUserCreating } = useAuth();
   const navigate = useNavigate();
 
-  const handleGoogleSignIn = () => {
-    userSocialLogin('google')
-      .then(res => {
+  const handleGoogleSignIn = async () => {
+
+    try {
+      setLoading(true);
+      setIsUserCreating(true);
+      const authenticate = await userSocialLogin('google');
+      const isUserExist = await getUser(authenticate.user.uid);
+
+      if (!isUserExist.status) {
+
+        const data = {
+          name: authenticate.user.displayName,
+          email: authenticate.user.email,
+          role: 'subscriber',
+          uid: authenticate.user.uid
+        }
+
+        const res = await createUser(data);
+
+        if (res.status) {
+          setIsUserCreating(false);
+          setLoading(false);
+          toast.success('Successfully logged in!!');
+          navigate(from, { replace: true });
+        }
+        else {
+          setIsUserCreating(false);
+          setLoading(false);
+          toast.error('Something is wrong!!');
+        }
+      }
+      else {
+        setIsUserCreating(false);
+        setLoading(false);
         toast.success('Successfully logged in!!');
-        navigate(from);
-      })
-      .catch(err => {
-        toast.error('Something is wrong!!');
-      })
+        navigate(from, { replace: true });
+      }
+    }
+    catch (err) {
+      setIsUserCreating(false);
+      setLoading(false);
+      toast.error('Something is wrong!!');
+    }
   }
 
   return (

@@ -60,6 +60,7 @@ const AuthProvider = ({ children }) => {
   }
 
   const userSocialLogin = (provider) => {
+    setLoading(true);
     if (provider === 'google') {
       return signInWithPopup(auth, googleProvider);
     }
