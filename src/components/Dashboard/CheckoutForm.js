@@ -116,7 +116,7 @@ const CheckoutForm = ({ state, setSuccessData }) => {
 
       <PaymentElement id='payment-element' className='mt-4 md:mt-5' options={{ layout: 'accordion' }}></PaymentElement>
 
-      <button type="submit" className='btn btn-primary mt-5 w-full'>Confirm Booking</button>
+      <button type="submit" className='btn btn-primary mt-5 w-full' disabled={isProcessing}>Confirm Booking</button>
     </form>
   );
 };

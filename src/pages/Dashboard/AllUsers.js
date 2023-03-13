@@ -60,7 +60,7 @@ const AllUsers = () => {
                       <tr key={index}>
                         <th>{index + 1}</th>
                         <td>{user?.name}</td>
-                        <td>{user?.uid}</td>
+                        <td>{user?.email}</td>
                         <td>{user?.role}</td>
                         <td>
                           <input

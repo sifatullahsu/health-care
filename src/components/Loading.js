@@ -4,8 +4,8 @@ import logo from '../assets/images/health-care-icon.png';
 
 const Loading = () => {
   return (
-    <div>
-      <img src={logo} alt="" className='w-10 -mt-16 opacity-80' />
+    <div className='-mt-14'>
+      <img src={logo} alt="" className='block w-10 mx-auto mb-10 opacity-80' />
       <div className="loading">
         <span>Loading...</span>
       </div>

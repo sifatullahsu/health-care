@@ -7,7 +7,6 @@ import CheckoutSidebar from '../../components/CheckoutSidebar';
 import CheckoutSuccessful from '../../components/CheckoutSuccessful';
 import { useData } from '../../contexts/DataProvider';
 import Heading from '../../components/Heading';
-import { useQuery } from '@tanstack/react-query';
 import Skeleton from 'react-loading-skeleton';
 
 const Checkout = () => {

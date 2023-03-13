@@ -333,13 +333,12 @@ input[readonly] {
 
   width: 150px;
   text-align: center;
-  line-height: 50px;
-
+  /* line-height: 50px;
   position: absolute;
   left: 0;
   right: 0;
   top: 50%;
-  margin: auto;
+  margin: auto; */
   transform: translateY(-50%);
 }
 
