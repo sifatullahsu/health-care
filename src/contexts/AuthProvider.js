@@ -11,6 +11,7 @@ const AuthProvider = ({ children }) => {
   const [doctor, setDoctor] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isUserCreating, setIsUserCreating] = useState(false);
+  const [refetch, setRefetch] = useState(false); // Only When User Data Updating
 
   // console.log(user);
   // console.log(doctor);
@@ -99,7 +100,7 @@ const AuthProvider = ({ children }) => {
     });
 
     return () => unsubscribe();
-  }, [isUserCreating])
+  }, [isUserCreating, refetch])
 
   const authInfo = {
     signUp,
@@ -110,6 +111,7 @@ const AuthProvider = ({ children }) => {
     doctor,
     loading, setLoading,
     isUserCreating, setIsUserCreating,
+    refetch, setRefetch,
     userSocialLogin
   }
   return (
