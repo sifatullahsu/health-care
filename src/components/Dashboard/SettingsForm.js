@@ -1,31 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { useAuth } from '../../contexts/AuthProvider';
+import { editUser } from '../../queries/users';
 
 const SettingsForm = () => {
-  const { user, refetch, setRefetch } = useAuth();
+  const { user, refetch, setRefetch, changePassword } = useAuth();
 
-  const handleForm = (event) => {
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
+  const handleForm = async (event) => {
     event.preventDefault();
 
     const form = event.target;
 
     const name = form.name.value;
     const email = form.email.value;
+    const newPass = form.new_pass.value;
 
     const formData = { name, email }
 
-    fetch(`https://the-health-care.vercel.app/api/v1/users/edit/${user._id}`, {
-      method: 'PATCH',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify(formData)
-    })
-      .then(req => req.json())
+    if (newPass) {
+      try {
+        await changePassword(newPass);
+        toast.success('Password update successful!');
+      }
+      catch (error) {
+        toast.error('Password update failed!');
+        return;
+      }
+    }
+
+    editUser(user._id, formData)
       .then(data => {
         if (data.status) {
-          toast.success('User Update Successful..');
+          toast.success('User Update Successful!');
           setRefetch(!refetch);
         }
         else {
@@ -33,7 +42,6 @@ const SettingsForm = () => {
         }
       })
       .catch(() => {
-        console.log('ss');
         toast.error('User Update Faild..');
       })
   }
@@ -46,7 +54,7 @@ const SettingsForm = () => {
           <div className='basis-full md:basis-4/5'>
 
             <section className='bg-white border'>
-              <div className='border-b px-5 py-3 font-semibold uppercase'>Unique ID</div>
+              <div className='border-b px-5 py-3 font-semibold'>Unique ID</div>
               <div className="flex">
                 <div className='basis-full p-5'>
                   <div className="form-control">
@@ -57,7 +65,7 @@ const SettingsForm = () => {
             </section>
 
             <section className='bg-white border mt-5'>
-              <div className='border-b px-5 py-3 font-semibold uppercase'>Settings</div>
+              <div className='border-b px-5 py-3 font-semibold'>Settings</div>
               <div className="flex">
                 <div className='basis-full p-5'>
 
@@ -75,6 +83,32 @@ const SettingsForm = () => {
                     <label className="label"><span className="label-text">Role</span></label>
                     <input name='role' defaultValue={user?.role} readOnly required />
                   </div> */}
+
+                </div>
+              </div>
+            </section>
+
+            <section className='bg-white border mt-5'>
+              <div className='border-b px-5 py-3 font-semibold'>Password Change?</div>
+              <div className="flex">
+                <div className='basis-full p-5'>
+
+                  <div className="form-control sm relative">
+                    <label className="label"><span className="label-text">New password</span></label>
+                    <span className='absolute right-1 top-10'>
+                      {
+                        passwordVisible ?
+                          <button type="button" className='btn-dash' onClick={() => setPasswordVisible(false)}>
+                            <AiOutlineEyeInvisible></AiOutlineEyeInvisible>
+                          </button>
+                          :
+                          <button type="button" className='btn-dash' onClick={() => setPasswordVisible(true)}>
+                            <AiOutlineEye></AiOutlineEye>
+                          </button>
+                      }
+                    </span>
+                    <input type={passwordVisible ? 'text' : 'password'} name='new_pass' />
+                  </div>
 
                 </div>
               </div>

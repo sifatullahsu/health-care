@@ -150,7 +150,7 @@ const DoctorForm = ({ data }) => {
 
 
             <section className='bg-white border'>
-              <div className='border-b px-5 py-3 font-semibold uppercase'>Title</div>
+              <div className='border-b px-5 py-3 font-semibold'>Title</div>
               <div className="flex">
                 <div className='basis-full p-5'>
                   <div className="form-control">
@@ -162,7 +162,7 @@ const DoctorForm = ({ data }) => {
             </section>
 
             <section className='bg-white border mt-5'>
-              <div className='border-b px-5 py-3 font-semibold uppercase'>Settings</div>
+              <div className='border-b px-5 py-3 font-semibold'>Settings</div>
               <div className="flex">
                 <div className='basis-full p-5'>
 
