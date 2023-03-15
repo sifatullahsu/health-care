@@ -435,3 +435,7 @@ input[readonly] {
   padding: 0 10px;
   border-radius: 4px;
 }
+
+.btn-dash {
+  @apply btn btn-ghost btn-sm p-1 h-[unset] min-h-[unset];
+}

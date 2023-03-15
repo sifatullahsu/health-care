@@ -67,7 +67,7 @@ const ServiceForm = ({ data }) => {
 
     const name = form.name.value;
     const price = form.price.value;
-    const doctors = serviceDoctors.map(i => i.value);
+    const doctors = serviceDoctors?.map(i => i.value);
 
     const formData = { name, price, doctors }
 

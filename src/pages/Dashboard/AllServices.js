@@ -1,30 +1,45 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { useEffect } from 'react';
+import { toast } from 'react-hot-toast';
+import { AiOutlineDelete } from 'react-icons/ai';
 import { FaRegEdit } from "react-icons/fa";
 import Skeleton from 'react-loading-skeleton';
 import { Link } from 'react-router-dom';
+import DeleteModal from '../../components/DeleteModal';
 import Heading from '../../components/Heading';
 import Pagination from '../../components/Pagination';
 import Thead from '../../components/Thead';
 import { useData } from '../../contexts/DataProvider';
+import { deleteService, getServices } from '../../queries/services';
+import { loop } from '../../utilities/utilities';
 
 const AllServices = () => {
 
   const { setBreadcrumbs } = useData();
   useEffect(() => setBreadcrumbs('Services'), [setBreadcrumbs]);
 
+
   const [pagination, setPagination] = useState({ page: 1, size: 10 });
+  const [isDelete, setIsDelete] = useState(false);
 
-  const { data: services = [], isLoading } = useQuery({
+
+  const { data: services = [], isLoading, refetch } = useQuery({
     queryKey: ['services', pagination],
-    queryFn: async () => {
-      const res = await fetch(`https://the-health-care.vercel.app/api/v1/services/list?page=${pagination.page}&size=${pagination.size}`);
-      const data = await res.json();
-
-      return data;
-    }
+    queryFn: () => getServices(pagination.page, pagination.size)
   });
+
+
+  const handleDelete = id => {
+    deleteService(id)
+      .then(data => {
+        toast.success(data.message);
+        refetch();
+      })
+      .catch(error => {
+        toast.error(error.message);
+      })
+  }
 
   return (
     <>
@@ -37,36 +52,33 @@ const AllServices = () => {
 
           <tbody>
             {
-              !isLoading ?
-                <>
+              loop(services?.data, 10)?.map((service, index) =>
+                <tr key={index}>
                   {
-                    services?.data?.map((service, index) =>
-                      <tr key={index}>
+                    !isLoading ?
+                      <>
                         <th>{index + 1}</th>
                         <td>{service.name}</td>
                         <td>${service.price}</td>
                         <td className='text-right'>
-                          <Link to={`/dashboard/services/${service._id}`}>
+                          <Link to={`/dashboard/services/${service._id}`} className='btn-dash'>
                             <FaRegEdit className='inline'></FaRegEdit>
                           </Link>
+                          <label htmlFor="delete-modal" className='btn-dash' onClick={() => setIsDelete(service._id)}>
+                            <AiOutlineDelete className='inline'></AiOutlineDelete>
+                          </label>
                         </td>
-                      </tr>
-                    )
-                  }
-                </>
-                :
-                <>
-                  {
-                    Array(10).fill('').map((_, i) =>
-                      <tr key={i}>
+                      </>
+                      :
+                      <>
                         <th><Skeleton /></th>
                         <td><Skeleton /></td>
                         <td><Skeleton /></td>
                         <td><Skeleton /></td>
-                      </tr>
-                    )
+                      </>
                   }
-                </>
+                </tr>
+              )
             }
           </tbody>
 
@@ -79,6 +91,8 @@ const AllServices = () => {
         state={pagination}
         setState={setPagination}
       ></Pagination>
+
+      <DeleteModal isDelete={isDelete} setIsDelete={setIsDelete} handleDelete={handleDelete}></DeleteModal>
     </>
   );
 };
