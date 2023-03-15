@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthProvider';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 
-const Login = ({ from, loading, setLoading }) => {
+const Login = ({ from, loading, setLoading, setIsForgetPassword }) => {
   const { register, formState: { errors }, handleSubmit } = useForm();
   const { signIn } = useContext(AuthContext);
   const [loginError, setLoginError] = useState('');
@@ -44,11 +44,11 @@ const Login = ({ from, loading, setLoading }) => {
         <span className='absolute right-1 top-10'>
           {
             passwordVisible ?
-              <button className='btn-dash' onClick={() => setPasswordVisible(false)}>
+              <button type='button' className='btn-dash' onClick={() => setPasswordVisible(false)}>
                 <AiOutlineEyeInvisible></AiOutlineEyeInvisible>
               </button>
               :
-              <button className='btn-dash' onClick={() => setPasswordVisible(true)}>
+              <button type='button' className='btn-dash' onClick={() => setPasswordVisible(true)}>
                 <AiOutlineEye></AiOutlineEye>
               </button>
           }
@@ -65,7 +65,11 @@ const Login = ({ from, loading, setLoading }) => {
       </div>
 
       <div className='text-right my-2'>
-        <label><span className="label-text">Forget Password?</span></label>
+        <button
+          type='button'
+          className='text-sm text-accent font-semibold hover:underline'
+          onClick={() => setIsForgetPassword(true)}
+        >Forget Password?</button>
       </div>
 
       <input className='btn btn-primary btn-sm w-full h-[2.5rem]' value="Login" type="submit" disabled={loading} />

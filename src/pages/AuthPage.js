@@ -4,13 +4,15 @@ import GoogleSignIn from '../components/GoogleSignIn';
 import Login from '../components/Login';
 import SignUp from '../components/SignUp';
 import spinner from '../assets/images/spinner.webp';
+import ForgetPassword from '../components/ForgetPassword';
 
 const AuthPage = () => {
   const location = useLocation();
   const from = location.state || '/dashboard';
   const [loading, setLoading] = useState(false);
 
-  const [tab, setTab] = useState('login')
+  const [tab, setTab] = useState('login');
+  const [isForgetPassword, setIsForgetPassword] = useState(false);
 
   return (
     <section style={{ backgroundColor: "rgb(245, 247, 248)" }}>
@@ -20,14 +22,20 @@ const AuthPage = () => {
 
           <div className='md:col-span-2 relative'>
             <div className="tabs">
-              <div className={`tab md:tab-lg tab-bordered ${tab === 'login' ? 'tab-active' : ''}`} onClick={() => setTab('login')}>Login</div>
+              <div className={`tab md:tab-lg tab-bordered ${tab === 'login' ? 'tab-active' : ''}`} onClick={() => {
+                setTab('login');
+                setIsForgetPassword(false);
+              }}>Login</div>
               <div className={`tab md:tab-lg tab-bordered ${tab === 'registration' ? 'tab-active' : ''}`} onClick={() => setTab('registration')}>Registration</div>
             </div>
 
             <div className='pt-5'>
               {
                 tab === 'login' ?
-                  <Login from={from} loading={loading} setLoading={setLoading}></Login>
+                  !isForgetPassword ?
+                    <Login from={from} loading={loading} setLoading={setLoading} setIsForgetPassword={setIsForgetPassword}></Login>
+                    :
+                    <ForgetPassword from={from} loading={loading} setLoading={setLoading} setIsForgetPassword={setIsForgetPassword}></ForgetPassword>
                   :
                   <SignUp from={from} loading={loading} setLoading={setLoading}></SignUp>
               }

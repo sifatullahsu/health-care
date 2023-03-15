@@ -51,11 +51,11 @@ const SignUp = ({ from, loading, setLoading }) => {
         <span className='absolute right-1 top-10'>
           {
             passwordVisible ?
-              <button className='btn-dash' onClick={() => setPasswordVisible(false)}>
+              <button type='button' className='btn-dash' onClick={() => setPasswordVisible(false)}>
                 <AiOutlineEyeInvisible></AiOutlineEyeInvisible>
               </button>
               :
-              <button className='btn-dash' onClick={() => setPasswordVisible(true)}>
+              <button type='button' className='btn-dash' onClick={() => setPasswordVisible(true)}>
                 <AiOutlineEye></AiOutlineEye>
               </button>
           }
