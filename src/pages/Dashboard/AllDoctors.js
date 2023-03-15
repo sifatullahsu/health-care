@@ -1,30 +1,45 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { useEffect } from 'react';
+import { toast } from 'react-hot-toast';
+import { AiOutlineDelete } from 'react-icons/ai';
 import { FaRegEdit } from 'react-icons/fa';
 import Skeleton from 'react-loading-skeleton';
 import { Link } from 'react-router-dom';
+import DeleteModal from '../../components/DeleteModal';
 import Heading from '../../components/Heading';
 import Pagination from '../../components/Pagination';
 import Thead from '../../components/Thead';
 import { useData } from '../../contexts/DataProvider';
+import { deleteDoctor, getDoctors } from '../../queries/doctors';
+import { loop } from '../../utilities/utilities';
 
 const AllDoctors = () => {
 
   const { setBreadcrumbs } = useData();
   useEffect(() => setBreadcrumbs('Doctors'), [setBreadcrumbs]);
 
+
   const [pagination, setPagination] = useState({ page: 1, size: 10 });
+  const [isDelete, setIsDelete] = useState(false);
 
-  const { data: doctors = [], isLoading } = useQuery({
+
+  const { data: doctors = [], isLoading, refetch } = useQuery({
     queryKey: ['doctors', pagination],
-    queryFn: async () => {
-      const res = await fetch(`https://the-health-care.vercel.app/api/v1/doctors/list?page=${pagination.page}&size=${pagination.size}`);
-      const data = await res.json();
-
-      return data;
-    }
+    queryFn: async () => getDoctors(pagination.page, pagination.size)
   });
+
+
+  const handleDelete = id => {
+    deleteDoctor(id)
+      .then(data => {
+        toast.success(data.message);
+        refetch();
+      })
+      .catch(error => {
+        toast.error(error.message);
+      })
+  }
 
   return (
     <>
@@ -37,43 +52,36 @@ const AllDoctors = () => {
 
           <tbody>
             {
-              !isLoading ?
-                <>
+              loop(doctors?.data, 10)?.map((doctor, index) =>
+                <tr key={doctor?._id || index}>
                   {
-                    doctors?.data?.map((doctor, index) =>
-                      <tr key={doctor?._id}>
+                    !isLoading ?
+                      <>
                         <th>{doctors?.pagination?.start + index}</th>
-                        <td>
-                          <img src={doctor?.image} className='w-6 h-6 inline-block mr-2' alt="" />
-                          {doctor?.name}
-                        </td>
+                        <td><img src={doctor?.image} className='w-6 h-6 inline-block mr-2' alt="" />{doctor?.name}</td>
                         <td>{doctor?.email}</td>
                         <td>{doctor?.designation}</td>
                         <td className='text-right'>
-                          <Link to={`/dashboard/doctors/${doctor?._id}`}>
+                          <Link to={`/dashboard/doctors/${doctor?._id}`} className='btn-dash'>
                             <FaRegEdit className='inline'></FaRegEdit>
                           </Link>
+                          <label htmlFor="delete-modal" className='btn-dash' onClick={() => setIsDelete(doctor._id)}>
+                            <AiOutlineDelete className='inline'></AiOutlineDelete>
+                          </label>
                         </td>
-                      </tr>
-                    )
-                  }
-                </>
-                :
-                <>
-                  {
-                    Array(10).fill('').map((_, i) =>
-                      <tr key={i}>
+                      </>
+                      :
+                      <>
                         <th><Skeleton /></th>
                         <td><Skeleton /></td>
                         <td><Skeleton /></td>
                         <td><Skeleton /></td>
                         <td><Skeleton /></td>
-                      </tr>
-                    )
+                      </>
                   }
-                </>
+                </tr>
+              )
             }
-
           </tbody>
 
         </table>
@@ -86,6 +94,7 @@ const AllDoctors = () => {
         setState={setPagination}
       ></Pagination>
 
+      <DeleteModal isDelete={isDelete} setIsDelete={setIsDelete} handleDelete={handleDelete}></DeleteModal>
     </>
   );
 };

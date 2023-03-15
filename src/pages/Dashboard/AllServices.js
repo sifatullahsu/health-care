@@ -53,7 +53,7 @@ const AllServices = () => {
           <tbody>
             {
               loop(services?.data, 10)?.map((service, index) =>
-                <tr key={index}>
+                <tr key={service?._id || index}>
                   {
                     !isLoading ?
                       <>
