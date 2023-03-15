@@ -1,9 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from '../assets/images/logo2.png';
+import { IoIosArrowUp } from 'react-icons/io';
 
 const Footer = () => {
+
+  const [scrollUp, setScrollUp] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  }, [scrollUp]);
+
   return (
-    <footer className="footer footer-center p-10 bg-primary text-primary-content">
+    <footer className="footer footer-center p-10 bg-primary text-primary-content relative">
+
+      <button
+        className='btn btn-accent btn-sm h-10 min-h-[2.5rem] w-10 absolute bottom-5 right-5'
+        onClick={() => setScrollUp(!scrollUp)}
+      >
+        <IoIosArrowUp></IoIosArrowUp>
+      </button>
       <div>
         <img src={logo} className='w-16' alt="" />
         <p className="font-bold">
