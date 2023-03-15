@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile, GoogleAuthProvider, signInWithPopup, updatePassword, sendPasswordResetEmail } from 'firebase/auth';
 import app from '../firebase/firebase.config';
-import { createUser, getUser } from '../queries/users';
+import { createUser, getUserByUid } from '../queries/users';
 
 export const AuthContext = createContext();
 const auth = getAuth(app)
@@ -80,7 +80,7 @@ const AuthProvider = ({ children }) => {
       if (!isUserCreating) {
         try {
           setLoading(true);
-          getUser(currentUser.uid).then(result => {
+          getUserByUid(currentUser.uid).then(result => {
 
             if (result?.status) {
               if (!result.data.hasOwnProperty('doctor')) {

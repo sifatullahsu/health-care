@@ -4,8 +4,8 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { useAuth } from '../../contexts/AuthProvider';
 import { editUser } from '../../queries/users';
 
-const SettingsForm = () => {
-  const { user, refetch, setRefetch, changePassword } = useAuth();
+const SettingsForm = ({ user, isSettings }) => {
+  const { refetch, setRefetch, changePassword } = useAuth();
 
   const [passwordVisible, setPasswordVisible] = useState(false);
 
@@ -15,10 +15,9 @@ const SettingsForm = () => {
     const form = event.target;
 
     const name = form.name.value;
-    const email = form.email.value;
-    const newPass = form.new_pass.value;
+    const newPass = form?.new_pass?.value;
 
-    const formData = { name, email }
+    const formData = { name }
 
     if (newPass) {
       try {
@@ -35,7 +34,10 @@ const SettingsForm = () => {
       .then(data => {
         if (data.status) {
           toast.success('User Update Successful!');
-          setRefetch(!refetch);
+
+          if (isSettings) {
+            setRefetch(!refetch);
+          }
         }
         else {
           toast.error('User Update Faild..');
@@ -54,7 +56,7 @@ const SettingsForm = () => {
           <div className='basis-full md:basis-4/5'>
 
             <section className='bg-white border'>
-              <div className='border-b px-5 py-3 font-semibold'>Unique ID</div>
+              <div className='border-b px-5 py-3 font-semibold'>Unique _ID</div>
               <div className="flex">
                 <div className='basis-full p-5'>
                   <div className="form-control">
@@ -76,44 +78,54 @@ const SettingsForm = () => {
 
                   <div className="form-control sm">
                     <label className="label"><span className="label-text">Email</span></label>
-                    <input name='email' defaultValue={user?.email} required />
+                    <input defaultValue={user?.email} readOnly required />
                   </div>
 
-                  {/* <div className="form-control sm">
+                  <div className="form-control sm">
                     <label className="label"><span className="label-text">Role</span></label>
-                    <input name='role' defaultValue={user?.role} readOnly required />
-                  </div> */}
-
-                </div>
-              </div>
-            </section>
-
-            <section className='bg-white border mt-5'>
-              <div className='border-b px-5 py-3 font-semibold'>Password Change?</div>
-              <div className="flex">
-                <div className='basis-full p-5'>
-
-                  <div className="form-control sm relative">
-                    <label className="label"><span className="label-text">New password</span></label>
-                    <span className='absolute right-1 top-10'>
-                      {
-                        passwordVisible ?
-                          <button type="button" className='btn-dash' onClick={() => setPasswordVisible(false)}>
-                            <AiOutlineEyeInvisible></AiOutlineEyeInvisible>
-                          </button>
-                          :
-                          <button type="button" className='btn-dash' onClick={() => setPasswordVisible(true)}>
-                            <AiOutlineEye></AiOutlineEye>
-                          </button>
-                      }
-                    </span>
-                    <input type={passwordVisible ? 'text' : 'password'} name='new_pass' />
+                    <input defaultValue={user?.role} readOnly required />
                   </div>
 
+                  {
+                    !isSettings &&
+                    <div className="form-control sm">
+                      <label className="label"><span className="label-text">Uid</span></label>
+                      <input defaultValue={user?.uid} readOnly required />
+                    </div>
+                  }
+
                 </div>
               </div>
             </section>
 
+            {
+              isSettings &&
+              <section className='bg-white border mt-5'>
+                <div className='border-b px-5 py-3 font-semibold'>Password Change?</div>
+                <div className="flex">
+                  <div className='basis-full p-5'>
+
+                    <div className="form-control sm relative">
+                      <label className="label"><span className="label-text">New password</span></label>
+                      <span className='absolute right-1 top-10'>
+                        {
+                          passwordVisible ?
+                            <button type="button" className='btn-dash' onClick={() => setPasswordVisible(false)}>
+                              <AiOutlineEyeInvisible></AiOutlineEyeInvisible>
+                            </button>
+                            :
+                            <button type="button" className='btn-dash' onClick={() => setPasswordVisible(true)}>
+                              <AiOutlineEye></AiOutlineEye>
+                            </button>
+                        }
+                      </span>
+                      <input type={passwordVisible ? 'text' : 'password'} name='new_pass' />
+                    </div>
+
+                  </div>
+                </div>
+              </section>
+            }
           </div>
           <div className='basis-full md:basis-1/5'>
             <div className='flex bg-white border'>
@@ -122,9 +134,9 @@ const SettingsForm = () => {
               </div>
             </div>
           </div>
-        </div>
-      </form>
-    </div>
+        </div >
+      </form >
+    </div >
   );
 };
 

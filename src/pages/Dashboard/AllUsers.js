@@ -2,14 +2,15 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { toast } from 'react-hot-toast';
-// import { FaRegEdit } from 'react-icons/fa';
+import { FaRegEdit } from 'react-icons/fa';
 import Skeleton from 'react-loading-skeleton';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Heading from '../../components/Heading';
 import Pagination from '../../components/Pagination';
 import Thead from '../../components/Thead';
 import { useData } from '../../contexts/DataProvider';
-import { editUser } from '../../queries/users';
+import { editUser, getUsers } from '../../queries/users';
+import { loop } from '../../utilities/utilities';
 
 const AllUsers = () => {
 
@@ -18,15 +19,12 @@ const AllUsers = () => {
 
   const [pagination, setPagination] = useState({ page: 1, size: 10 });
 
+
   const { data: users = [], isLoading, refetch } = useQuery({
     queryKey: ['users', pagination],
-    queryFn: async () => {
-      const res = await fetch(`https://the-health-care.vercel.app/api/v1/users/list?page=${pagination.page}&size=${pagination.size}`);
-      const data = await res.json();
-
-      return data;
-    }
+    queryFn: async () => getUsers(pagination.page, pagination.size)
   });
+
 
   const handleMakeDoctor = (isDoctor, id) => {
     const data = {
@@ -53,11 +51,11 @@ const AllUsers = () => {
 
           <tbody>
             {
-              !isLoading ?
-                <>
+              loop(users?.data, 10)?.map((user, index) =>
+                <tr key={user?._id || index}>
                   {
-                    users?.data?.map((user, index) =>
-                      <tr key={index}>
+                    !isLoading ?
+                      <>
                         <th>{index + 1}</th>
                         <td>{user?.name}</td>
                         <td>{user?.email}</td>
@@ -71,29 +69,24 @@ const AllUsers = () => {
                             onChange={(e) => handleMakeDoctor(e.target.checked, user._id)}
                           />
                         </td>
-                        <td></td>
-                        {/* <td className='text-right'>
-                          <Link to={`/dashboard/users/${user?._id}`}><FaRegEdit className='inline'></FaRegEdit></Link>
-                        </td> */}
-                      </tr>
-                    )
-                  }
-                </>
-                :
-                <>
-                  {
-                    Array(10).fill('').map((_, i) =>
-                      <tr key={i}>
+                        <td className='text-right'>
+                          <Link to={`/dashboard/users/${user?._id}`} className='btn-dash'>
+                            <FaRegEdit className='inline'></FaRegEdit>
+                          </Link>
+                        </td>
+                      </>
+                      :
+                      <>
                         <th><Skeleton /></th>
                         <td><Skeleton /></td>
                         <td><Skeleton /></td>
                         <td><Skeleton /></td>
                         <td><Skeleton /></td>
                         <td><Skeleton /></td>
-                      </tr>
-                    )
+                      </>
                   }
-                </>
+                </tr>
+              )
             }
           </tbody>
 

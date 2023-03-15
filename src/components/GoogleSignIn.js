@@ -3,7 +3,7 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthProvider';
 import { FcGoogle } from 'react-icons/fc';
-import { getUser, createUser } from '../queries/users';
+import { getUserByUid, createUser } from '../queries/users';
 
 
 const GoogleSignIn = ({ from, setLoading }) => {
@@ -16,7 +16,7 @@ const GoogleSignIn = ({ from, setLoading }) => {
       setLoading(true);
       setIsUserCreating(true);
       const authenticate = await userSocialLogin('google');
-      const isUserExist = await getUser(authenticate.user.uid);
+      const isUserExist = await getUserByUid(authenticate.user.uid);
 
       if (!isUserExist.status) {
 

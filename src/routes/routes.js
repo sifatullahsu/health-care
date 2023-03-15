@@ -10,6 +10,7 @@ import Checkout from "../pages/Dashboard/Checkout";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import EditDoctor from "../pages/Dashboard/EditDoctor";
 import EditService from "../pages/Dashboard/EditService";
+import EditUser from "../pages/Dashboard/EditUser";
 import HospitalServices from "../pages/Dashboard/HospitalServices";
 import HospitalServicesDetails from "../pages/Dashboard/HospitalServicesDetails";
 import MyAppointments from "../pages/Dashboard/MyAppointments";
@@ -114,6 +115,11 @@ export const route = createBrowserRouter([
       {
         path: 'users/add-new',
         element: <RoleBaseRoute role={['admin']}><AddDoctor /></RoleBaseRoute>
+      },
+      {
+        path: 'users/:id',
+        element: <RoleBaseRoute role={['admin']}><EditUser /></RoleBaseRoute>,
+        loader: ({ params }) => fetch(`https://the-health-care.vercel.app/api/v1/users/single/${params.id}`)
       },
       {
         path: 'my-appointments',
