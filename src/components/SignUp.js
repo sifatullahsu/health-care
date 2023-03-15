@@ -1,6 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthProvider';
 
@@ -8,6 +9,8 @@ const SignUp = ({ from, loading, setLoading }) => {
   const { signUp, setIsUserCreating } = useContext(AuthContext);
   const { register, handleSubmit, reset } = useForm();
   const navigate = useNavigate();
+
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const handleSignUp = (data) => {
 
@@ -43,9 +46,21 @@ const SignUp = ({ from, loading, setLoading }) => {
         <input type="email" {...register("email", { required: true })} className="input input-bordered" />
       </div>
 
-      <div className="form-control sm">
+      <div className="form-control sm relative">
         <label className="label"> <span className="label-text">Password</span></label>
-        <input type="password" {...register("password", { required: "Password is required", minLength: { value: 6, message: "Password must be 6 characters long" }, })} className="input input-bordered" />
+        <span className='absolute right-1 top-10'>
+          {
+            passwordVisible ?
+              <button className='btn-dash' onClick={() => setPasswordVisible(false)}>
+                <AiOutlineEyeInvisible></AiOutlineEyeInvisible>
+              </button>
+              :
+              <button className='btn-dash' onClick={() => setPasswordVisible(true)}>
+                <AiOutlineEye></AiOutlineEye>
+              </button>
+          }
+        </span>
+        <input type={passwordVisible ? 'text' : 'password'} {...register("password", { required: "Password is required", minLength: { value: 6, message: "Password must be 6 characters long" }, })} className="input input-bordered" />
       </div>
 
       <input className='btn btn-primary btn-sm w-full h-[2.5rem] mt-6' value="Registration" type="submit" disabled={loading} />

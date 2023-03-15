@@ -3,12 +3,15 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthProvider';
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 
 const Login = ({ from, loading, setLoading }) => {
   const { register, formState: { errors }, handleSubmit } = useForm();
   const { signIn } = useContext(AuthContext);
   const [loginError, setLoginError] = useState('');
   const navigate = useNavigate();
+
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const handleLogin = data => {
     setLoading(true);
@@ -36,9 +39,28 @@ const Login = ({ from, loading, setLoading }) => {
         {errors.email && <p className='text-red-600'>{errors.email?.message}</p>}
       </div>
 
-      <div className="form-control sm">
+      <div className="form-control sm relative">
         <label className="label"> <span className="label-text">Password</span></label>
-        <input type="password" {...register("password", { required: "Password is required", minLength: { value: 6, message: 'Password must be 6 characters or longer' } })} className="input input-bordered" />
+        <span className='absolute right-1 top-10'>
+          {
+            passwordVisible ?
+              <button className='btn-dash' onClick={() => setPasswordVisible(false)}>
+                <AiOutlineEyeInvisible></AiOutlineEyeInvisible>
+              </button>
+              :
+              <button className='btn-dash' onClick={() => setPasswordVisible(true)}>
+                <AiOutlineEye></AiOutlineEye>
+              </button>
+          }
+        </span>
+        <input
+          type={passwordVisible ? 'text' : 'password'}
+          {...register("password", {
+            required: "Password is required",
+            minLength: { value: 6, message: 'Password must be 6 characters or longer' }
+          })}
+          className="input input-bordered"
+        />
         {errors.password && <p className='text-red-600'>{errors.password?.message}</p>}
       </div>
 
