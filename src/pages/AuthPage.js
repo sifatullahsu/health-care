@@ -18,7 +18,7 @@ const AuthPage = () => {
     <section style={{ backgroundColor: "rgb(245, 247, 248)" }}>
       <div className='container py-16' >
 
-        <div className='max-w-4xl mx-auto px-8 pt-5 pb-8 bg-white shadow-xl grid grid-cols-1 md:grid-cols-3 gap-10'>
+        <div className='max-w-4xl mx-auto px-8 pt-8 md:pt-5 pb-8 bg-white shadow-xl grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-10'>
 
           <div className='md:col-span-2 relative'>
             <div className="tabs">
@@ -51,7 +51,7 @@ const AuthPage = () => {
             }
           </div>
 
-          <div>
+          <div className='row-start-1 md:col-start-3'>
             <h3 className="text-xl text-secondary font-bold mb-2">Our Accounts!</h3>
             <p className='text-sm text-accent mb-2'>You can also logged in via existing accounts.</p>
             <div className='text-sm text-accent'>

@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
 import Services from '../templates/loops/Services';
 import Doctors from '../templates/loops/Doctors';
+import { getDoctors } from '../queries/doctors';
 
 
 const HomePage = () => {
@@ -24,12 +25,7 @@ const HomePage = () => {
 
   const { data: doctors = [], isLoading: doctorsLoading } = useQuery({
     queryKey: ['doctors'],
-    queryFn: async () => {
-      const res = await fetch(`https://the-health-care.vercel.app/api/v1/doctors/list?size=5`);
-      const data = await res.json();
-
-      return data;
-    }
+    queryFn: getDoctors(undefined, 5)
   });
 
 

@@ -15,6 +15,7 @@ const Header = () => {
         <li><Link to='/'>Home</Link></li>
         <li><Link to='/hospital-services'>Hospital Services</Link></li>
         <li><Link to='/doctors'>Doctors</Link></li>
+        <li><Link to='/contact'>Contact</Link></li>
         {
           user ?
             <li><Link to='/dashboard'>Dashboard</Link></li>
@@ -27,9 +28,9 @@ const Header = () => {
 
   return (
     <header className='bg-primary'>
-      <div className="navbar container">
+      <div className="navbar justify-between container">
 
-        <div className="navbar-start">
+        <div className="navbar-start !w-[unset]">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden"><FaBars className='text-white'></FaBars></label>
             <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
@@ -39,7 +40,7 @@ const Header = () => {
           <div><Link to='/'><img src={logo} className='w-[160px]' alt="" /></Link></div>
         </div>
 
-        <div className="navbar-end">
+        <div className="navbar-end !w-[unset]">
           {
             isDash &&
             <label htmlFor="dashboard-drawer" className="btn btn-secondary text-xs btn-sm drawer-button lg:hidden">

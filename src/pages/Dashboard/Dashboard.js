@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import DashItem from '../../components/DashItem';
 import { useAuth } from '../../contexts/AuthProvider';
 import { useData } from '../../contexts/DataProvider';
+import { getDashData } from '../../queries/appointments';
 
 const Dashboard = () => {
 
@@ -14,12 +15,7 @@ const Dashboard = () => {
 
   const { data: dash = {}, isLoading } = useQuery({
     queryKey: ['dash'],
-    queryFn: async () => {
-      const res = await fetch(`https://the-health-care.vercel.app/api/v1/appointments/dash-data/${user._id}`);
-      const data = await res.json();
-
-      return data.data;
-    }
+    queryFn: () => getDashData(user._id)
   });
 
   return (
@@ -30,10 +26,10 @@ const Dashboard = () => {
       </div>
 
       <div className='grid grid-cols-2 md:grid-cols-4 gap-5'>
-        <DashItem title='Total Spend' data={`$ ${dash?.totalSpend}`} isLoading={isLoading}></DashItem>
-        <DashItem title='Appointments' data={dash?.appointments?.total} isLoading={isLoading}></DashItem>
-        <DashItem title='Upcoming' data={dash?.appointments?.upcoming} isLoading={isLoading}></DashItem>
-        <DashItem title='Completed' data={dash?.appointments?.completed} isLoading={isLoading}></DashItem>
+        <DashItem title='Total Spend' data={`$ ${dash?.data?.totalSpend}`} isLoading={isLoading}></DashItem>
+        <DashItem title='Appointments' data={dash?.data?.appointments?.total} isLoading={isLoading}></DashItem>
+        <DashItem title='Upcoming' data={dash?.data?.appointments?.upcoming} isLoading={isLoading}></DashItem>
+        <DashItem title='Completed' data={dash?.data?.appointments?.completed} isLoading={isLoading}></DashItem>
       </div>
     </div>
   );

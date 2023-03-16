@@ -2,6 +2,7 @@ import { PaymentElement, useElements, useStripe, } from '@stripe/react-stripe-js
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useAuth } from '../../contexts/AuthProvider';
+import { createAppointment } from '../../queries/appointments';
 
 const CheckoutForm = ({ state, setSuccessData }) => {
 
@@ -67,20 +68,13 @@ const CheckoutForm = ({ state, setSuccessData }) => {
       }
     }
 
-    fetch("https://the-health-care.vercel.app/api/v1/appointments/create", {
-      method: "POST",
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify(finalData),
-    })
+    createAppointment(finalData)
       .then(res => res.json())
-      .then(data => {
+      .then(() => {
         setSuccessData({
           status: true,
           data: { ...finalData }
         });
-        console.log(data);
       })
       .catch(err => console.log(err))
 

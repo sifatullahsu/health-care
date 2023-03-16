@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import AuthPage from "../pages/AuthPage";
+import ContactPage from "../pages/ContactPage";
 import AddDoctor from "../pages/Dashboard/AddDoctor";
 import AddService from "../pages/Dashboard/AddService";
 import AllAppointments from "../pages/Dashboard/AllAppointments";
@@ -44,6 +45,10 @@ export const route = createBrowserRouter([
       {
         path: 'doctors',
         element: <DoctorsPage />
+      },
+      {
+        path: 'contact',
+        element: <ContactPage />
       },
       {
         path: 'authentication',

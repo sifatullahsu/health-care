@@ -7,6 +7,7 @@ import Skeleton from 'react-loading-skeleton';
 
 import successfulImg from '../../assets/images/successful.png';
 import { useData } from '../../contexts/DataProvider';
+import { getAppointment } from '../../queries/appointments';
 
 
 const MyAppointmentsDetails = () => {
@@ -15,31 +16,26 @@ const MyAppointmentsDetails = () => {
   const { setBreadcrumbs } = useData();
   useEffect(() => setBreadcrumbs('Appointment Details'), [setBreadcrumbs]);
 
-  const { data: details = [], isLoading } = useQuery({
+  const { data: details = {}, isLoading } = useQuery({
     queryKey: [`appointments-${id}`],
-    queryFn: async () => {
-      const res = await fetch(`https://the-health-care.vercel.app/api/v1/appointments/single/${id}`);
-      const data = await res.json();
-
-      return data.data;
-    }
+    queryFn: () => getAppointment(id)
   });
 
-  const countdown = useCountdown(details?.date);
+  const countdown = useCountdown(details?.data?.date);
 
   return (
     <div className='relative'>
       {
         !isLoading ?
           <>
-            <h3 className="text-xl text-secondary font-bold mb-2">{details?.service?.name}</h3>
-            <p className='text-sm text-accent mb-10'>{`Price: $${details?.service?.price} / Appointment`}</p>
+            <h3 className="text-xl text-secondary font-bold mb-2">{details?.data?.service?.name}</h3>
+            <p className='text-sm text-accent mb-10'>{`Price: $${details?.data?.service?.price} / Appointment`}</p>
 
             <div className='grid grid-cols-1 md:grid-cols-2 gap-5'>
               <div>
                 <div className='mb-5'>
-                  <h3 className="text-lg text-secondary font-bold capitalize">{details?.doctor?.name}</h3>
-                  <p className='text-sm text-accent max-w-xs'>{`${details?.doctor?.designation} - [${details?.doctor?.qualifications}]`}</p>
+                  <h3 className="text-lg text-secondary font-bold capitalize">{details?.data?.doctor?.name}</h3>
+                  <p className='text-sm text-accent max-w-xs'>{`${details?.data?.doctor?.designation} - [${details?.data?.doctor?.qualifications}]`}</p>
                 </div>
 
                 <div className=' top-7 right-10 space-y-3'>
@@ -50,8 +46,8 @@ const MyAppointmentsDetails = () => {
                   <div>
                     <span className='text-xs text-gray-500'>Appointment Time</span>
                     <ul className='list-disc pl-5 text-sm'>
-                      <li>{details?.date}</li>
-                      <li>{details?.slot}</li>
+                      <li>{details?.data?.date}</li>
+                      <li>{details?.data?.slot}</li>
                     </ul>
                   </div>
                 </div>
@@ -64,23 +60,31 @@ const MyAppointmentsDetails = () => {
                     <tbody>
                       <tr>
                         <th>Amount Paid</th>
-                        <td className='uppercase'>{`$${details.payment?.amount} `}</td>
+                        <td className='uppercase'>{`$${details?.data.payment?.amount} `}</td>
                       </tr>
                       <tr>
                         <th>Transaction ID</th>
-                        <td>{details.payment?.id}</td>
+                        <td>{details?.data.payment?.id}</td>
                       </tr>
                       <tr>
                         <th>Patient Name</th>
-                        <td>{details?.patient?.name}</td>
+                        <td>{details?.data?.patient?.name}</td>
                       </tr>
                       <tr>
                         <th>Patient Age</th>
-                        <td>{details?.patient?.age}</td>
+                        <td>{details?.data?.patient?.age}</td>
                       </tr>
                       <tr>
                         <th>Contact Number</th>
-                        <td>{details?.patient?.number}</td>
+                        <td>{details?.data?.patient?.number}</td>
+                      </tr>
+                      <tr>
+                        <th>Email</th>
+                        <td>{details?.data?.patient?.email}</td>
+                      </tr>
+                      <tr>
+                        <th>ID</th>
+                        <td>{details?.data?.metaInfo?.author}</td>
                       </tr>
                     </tbody>
                   </table>
