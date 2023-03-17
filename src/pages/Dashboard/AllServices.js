@@ -26,7 +26,7 @@ const AllServices = () => {
 
   const { data: services = [], isLoading, refetch } = useQuery({
     queryKey: ['services', pagination],
-    queryFn: () => getServices(pagination.page, pagination.size)
+    queryFn: () => getServices(pagination.page, pagination.size, undefined)
   });
 
 

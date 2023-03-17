@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import Services from '../../templates/loops/Services';
 import { format } from 'date-fns';
 import { useData } from '../../contexts/DataProvider';
-import { useEffect } from 'react';
+import { getServices } from '../../queries/services';
 
 const HospitalServices = () => {
 
@@ -14,12 +14,7 @@ const HospitalServices = () => {
 
   const { data: services = [], isLoading } = useQuery({
     queryKey: ['services'],
-    queryFn: async () => {
-      const res = await fetch(`https://the-health-care.vercel.app/api/v1/services/list?date=${date}`);
-      const data = await res.json();
-
-      return data;
-    }
+    queryFn: () => getServices(undefined, undefined, date)
   });
 
   return (

@@ -6,6 +6,7 @@ import Pagination from '../../components/Pagination';
 import { useAuth } from '../../contexts/AuthProvider';
 import { useData } from '../../contexts/DataProvider';
 import AppointmentGrid from '../../templates/grids/AppointmentGrid';
+import { getAppointmentsByUserId } from '../../queries/appointments';
 
 const MyAppointments = () => {
 
@@ -17,12 +18,7 @@ const MyAppointments = () => {
 
   const { data: myAppointments = [], isLoading } = useQuery({
     queryKey: ['myAppointments', pagination],
-    queryFn: async () => {
-      const res = await fetch(`https://the-health-care.vercel.app/api/v1/appointments/list/${user?._id}?page=${pagination.page}&size=${pagination.size}`);
-      const data = await res.json();
-
-      return data;
-    }
+    queryFn: () => getAppointmentsByUserId(user._id, pagination.page, pagination.size)
   });
 
   return (

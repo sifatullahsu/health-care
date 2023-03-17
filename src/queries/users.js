@@ -19,6 +19,13 @@ export const getUsers = async (page, size) => {
   return data;
 }
 
+export const getAssociateUsersSearch = async (inputValue) => {
+  const res = await fetch(`https://the-health-care.vercel.app/api/v1/users/associat-doctor?name=${inputValue}`);
+  const data = res.json();
+
+  return data;
+}
+
 export const editUser = async (id, body) => {
   const res = await fetch(`https://the-health-care.vercel.app/api/v1/users/edit/${id}`, {
     method: 'PATCH',

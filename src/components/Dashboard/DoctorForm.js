@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useLocation } from 'react-router-dom';
 import AsyncSelect from 'react-select/async';
+import { createDoctor, editDoctor } from '../../queries/doctors';
+import { getAssociateUsersSearch } from '../../queries/users';
 
 const DoctorForm = ({ data }) => {
 
@@ -55,14 +57,7 @@ const DoctorForm = ({ data }) => {
 
     const processData = { name, email, qualifications, designation, image, slots, about, user }
 
-    fetch(`https://the-health-care.vercel.app/api/v1/doctors/edit/${id}`, {
-      method: 'PATCH',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify(processData)
-    })
-      .then(req => req.json())
+    editDoctor(id, processData)
       .then(data => {
         if (data.status) {
           toast.success('Doctor Update Successful..')
@@ -93,14 +88,7 @@ const DoctorForm = ({ data }) => {
     const processData = { name, email, qualifications, designation, image, slots, about, user }
 
 
-    fetch('https://the-health-care.vercel.app/api/v1/doctors/create', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify(processData)
-    })
-      .then(req => req.json())
+    createDoctor(processData)
       .then(data => {
         if (data.status) {
           toast.success('Doctor Added Successful..');
@@ -126,13 +114,7 @@ const DoctorForm = ({ data }) => {
   const promiseOptions = (inputValue, callback) => {
 
     if (inputValue.length >= 3) {
-      fetch(`https://the-health-care.vercel.app/api/v1/users/associat-doctor?name=${inputValue}`, {
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json'
-        }
-      })
-        .then(req => req.json())
+      getAssociateUsersSearch(inputValue)
         .then(data => {
           callback(data?.status ? data.data : []);
         })

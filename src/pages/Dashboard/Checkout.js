@@ -8,6 +8,7 @@ import CheckoutSuccessful from '../../components/CheckoutSuccessful';
 import { useData } from '../../contexts/DataProvider';
 import Heading from '../../components/Heading';
 import Skeleton from 'react-loading-skeleton';
+import { createAppointmentPaymentIntent } from '../../queries/appointments';
 
 const Checkout = () => {
 
@@ -24,14 +25,7 @@ const Checkout = () => {
   useEffect(() => {
     setLoading(true);
 
-    fetch("https://the-health-care.vercel.app/api/v1/appointments/create-payment-intent", {
-      method: "POST",
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify({ price: state.service.price }),
-    })
-      .then(res => res.json())
+    createAppointmentPaymentIntent({ price: state.service.price })
       .then(data => {
         setStripePromise(loadStripe(data.publishableKey));
         setClientSecret(data.clientSecret);

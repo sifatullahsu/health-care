@@ -7,6 +7,7 @@ import { format } from 'date-fns';
 import Services from '../templates/loops/Services';
 import Doctors from '../templates/loops/Doctors';
 import { getDoctors } from '../queries/doctors';
+import { getServices } from '../queries/services';
 
 
 const HomePage = () => {
@@ -15,17 +16,12 @@ const HomePage = () => {
 
   const { data: services = [], isLoading: servicesLoading } = useQuery({
     queryKey: ['services'],
-    queryFn: async () => {
-      const res = await fetch(`https://the-health-care.vercel.app/api/v1/services/list?date=${date}`);
-      const data = await res.json();
-
-      return data;
-    }
+    queryFn: () => getServices(undefined, undefined, date)
   });
 
   const { data: doctors = [], isLoading: doctorsLoading } = useQuery({
     queryKey: ['doctors'],
-    queryFn: getDoctors(undefined, 5)
+    queryFn: () => getDoctors(undefined, 5)
   });
 
 

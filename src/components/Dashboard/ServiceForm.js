@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useLocation } from 'react-router-dom';
 import AsyncSelect from 'react-select/async';
+import { getAssociateDoctorsSearch } from '../../queries/doctors';
+import { createService, editService } from '../../queries/services';
 
 const ServiceForm = ({ data }) => {
   const id = useLocation().pathname.split('/dashboard/services/')[1];
@@ -15,14 +17,7 @@ const ServiceForm = ({ data }) => {
 
   const handleEditForm = (data, form) => {
 
-    fetch(`https://the-health-care.vercel.app/api/v1/services/edit/${id}`, {
-      method: 'PATCH',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-      .then(req => req.json())
+    editService(id, data)
       .then(data => {
         if (data.status) {
           toast.success('Service Update Successful..')
@@ -38,14 +33,7 @@ const ServiceForm = ({ data }) => {
 
   const handleAddForm = (data, form) => {
 
-    fetch('https://the-health-care.vercel.app/api/v1/services/create', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-      .then(req => req.json())
+    createService(data)
       .then(data => {
         if (data.status) {
           toast.success('Service Added Successful..');
@@ -78,13 +66,7 @@ const ServiceForm = ({ data }) => {
   const promiseOptions = (inputValue, callback) => {
 
     if (inputValue.length >= 3) {
-      fetch(`https://the-health-care.vercel.app/api/v1/doctors/search?name=${inputValue}`, {
-        method: 'GET',
-        headers: {
-          'content-type': 'application/json'
-        }
-      })
-        .then(req => req.json())
+      getAssociateDoctorsSearch(inputValue)
         .then(data => {
           callback(data?.status ? data.data : []);
         })

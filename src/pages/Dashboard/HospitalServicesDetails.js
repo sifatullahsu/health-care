@@ -7,6 +7,7 @@ import { SlCalender } from 'react-icons/sl';
 import { useData } from '../../contexts/DataProvider';
 import { useEffect } from 'react';
 import Skeleton from 'react-loading-skeleton';
+import { getService } from '../../queries/services';
 
 const HospitalServicesDetails = () => {
   const id = useLoaderData();
@@ -16,14 +17,9 @@ const HospitalServicesDetails = () => {
   const [selectedDate, setSelectedDate] = useState(date);
   const formatedDate = format(selectedDate, 'PP');
 
-  const { data: service = {}, isLoading } = useQuery({
+  const { data: { data: service } = {}, isLoading } = useQuery({
     queryKey: [`services-${id}`, formatedDate],
-    queryFn: async () => {
-      const res = await fetch(`https://the-health-care.vercel.app/api/v1/services/single/${id}?date=${formatedDate}`);
-      const data = await res.json();
-
-      return data?.status ? data.data : {};
-    }
+    queryFn: () => getService(id, formatedDate)
   });
 
   const { setBreadcrumbs } = useData();

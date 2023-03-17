@@ -19,6 +19,9 @@ import MyAppointmentsDetails from "../pages/Dashboard/MyAppointmentsDetails";
 import Settings from "../pages/Dashboard/Settings";
 import DoctorsPage from "../pages/DoctorsPage";
 import HomePage from "../pages/HomePage";
+import { getDoctor } from "../queries/doctors";
+import { getService } from "../queries/services";
+import { getUser } from "../queries/users";
 import DashboardTemp from "../templates/Dashboard";
 import Main from "../templates/Main";
 import PrivateRoute from "./PrivateRoute";
@@ -85,7 +88,7 @@ export const route = createBrowserRouter([
       {
         path: 'doctors/:id',
         element: <RoleBaseRoute role={['admin']}><EditDoctor /></RoleBaseRoute>,
-        loader: ({ params }) => fetch(`https://the-health-care.vercel.app/api/v1/doctors/single/${params.id}`)
+        loader: ({ params }) => getDoctor(params.id)
       },
       {
         path: 'services',
@@ -98,7 +101,7 @@ export const route = createBrowserRouter([
       {
         path: 'services/:id',
         element: <RoleBaseRoute role={['admin']}><EditService /></RoleBaseRoute>,
-        loader: ({ params }) => fetch(`https://the-health-care.vercel.app/api/v1/services/single/${params.id}`)
+        loader: ({ params }) => getService(params.id, undefined)
       },
       {
         path: 'appointments',
@@ -124,7 +127,7 @@ export const route = createBrowserRouter([
       {
         path: 'users/:id',
         element: <RoleBaseRoute role={['admin']}><EditUser /></RoleBaseRoute>,
-        loader: ({ params }) => fetch(`https://the-health-care.vercel.app/api/v1/users/single/${params.id}`)
+        loader: ({ params }) => getUser(params.id)
       },
       {
         path: 'my-appointments',

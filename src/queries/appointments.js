@@ -5,6 +5,13 @@ export const getAppointments = async (page, size) => {
   return data;
 }
 
+export const getAppointmentsByUserId = async (userId, page, size) => {
+  const res = await fetch(`https://the-health-care.vercel.app/api/v1/appointments/list/${userId}?page=${page}&size=${size}`);
+  const data = res.json();
+
+  return data;
+}
+
 export const getAppointmentsByDoctor = async (id, page, size) => {
   const res = await fetch(`https://the-health-care.vercel.app/api/v1/appointments/list/doctor/${id}?page=${page}&size=${size}`);
   const data = res.json();
@@ -28,6 +35,20 @@ export const getDashData = async (userId) => {
 
 export const createAppointment = async (body) => {
   const res = await fetch(`https://the-health-care.vercel.app/api/v1/appointments/create`, {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  })
+
+  const data = res.json();
+
+  return data;
+}
+
+export const createAppointmentPaymentIntent = async (body) => {
+  const res = await fetch(`https://the-health-care.vercel.app/api/v1/appointments/create-payment-intent`, {
     method: 'POST',
     headers: {
       'content-type': 'application/json'
