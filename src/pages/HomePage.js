@@ -9,6 +9,11 @@ import Doctors from '../templates/loops/Doctors';
 import { getDoctors } from '../queries/doctors';
 import { getServices } from '../queries/services';
 
+import icon3 from '../assets/images/icon-3.png';
+import icon4 from '../assets/images/icon-4.png';
+import icon5 from '../assets/images/icon-5.png';
+import icon6 from '../assets/images/icon-6.png';
+import icon7 from '../assets/images/icon-7.png';
 
 const HomePage = () => {
 
@@ -24,6 +29,33 @@ const HomePage = () => {
     queryFn: () => getDoctors(undefined, 5)
   });
 
+  const aboutHealthCare = [
+    {
+      img: icon3,
+      title: "Quality",
+      description: "We are committed to providing quality healthcare for every patient."
+    },
+    {
+      img: icon4,
+      title: "Integrity",
+      description: "We do the right thing, every time."
+    },
+    {
+      img: icon5,
+      title: "Passion",
+      description: "We are passionate abouthealthcare and this shows in the care we provide."
+    },
+    {
+      img: icon6,
+      title: "Respect",
+      description: "We are respectful of everyone regardless of our differences and diversity."
+    },
+    {
+      img: icon7,
+      title: "Innovative",
+      description: "We believe innovation allows us to improve experience to ensure the health of our business."
+    },
+  ];
 
   return (
     <div>
@@ -94,6 +126,30 @@ const HomePage = () => {
           <div className='text-center mt-10'>
             <Link to='/doctors' className='btn btn-primary btn-sm px-10'>See More</Link>
           </div>
+        </div>
+      </section>
+
+      <section className='container py-16'>
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-5'>
+          <div className='flex items-center'>
+            <div className='max-w-[250px]'>
+              <h3 className="text-xl text-secondary font-bold mb-2">About Health Care</h3>
+              <p className='text-sm text-accent mb-2'>To build a legacy of accessible, high quality, safe private healthcare for low and middle-income patients in emerging markets.</p>
+            </div>
+          </div>
+          {
+            aboutHealthCare.map((item, i) => (
+              <div key={i} className='card bg-white shadow-xl'>
+                <div className='card-body'>
+                  <div className='max-w-[240px]'>
+                    <img src={item.img} alt="" className='w-14 mb-5' />
+                    <h3 className="text-xl text-secondary font-bold mb-2">{item.title}</h3>
+                    <p className='text-sm text-accent mb-2'>{item.description}</p>
+                  </div>
+                </div>
+              </div>
+            ))
+          }
         </div>
       </section>
 
