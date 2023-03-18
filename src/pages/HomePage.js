@@ -14,6 +14,7 @@ import icon4 from '../assets/images/icon-4.png';
 import icon5 from '../assets/images/icon-5.png';
 import icon6 from '../assets/images/icon-6.png';
 import icon7 from '../assets/images/icon-7.png';
+import Collapses from '../templates/loops/Collapses';
 
 const HomePage = () => {
 
@@ -54,6 +55,29 @@ const HomePage = () => {
       img: icon7,
       title: "Innovative",
       description: "We believe innovation allows us to improve experience to ensure the health of our business."
+    },
+  ];
+
+  const faq = [
+    {
+      title: "How is the Emergency Department staffed?",
+      description: "The department is staffed with emergency medicine physicians and nurses, physician assistants, technicians, CNAs and unit coordinators along with specialists from the laboratory, cardiology, respiratory and radiology departments."
+    },
+    {
+      title: "What happens if I am admitted?",
+      description: "Upon admission to the hospital, you will remain in the Emergency Department until your inpatient room is ready. Your admitting physician will visit you during their designated patient rounds."
+    },
+    {
+      title: "What procedures will I have in the Emergency Department?",
+      description: "Treatments and procedures may include lab work, radiological studies, CAT scans, ultrasound, EKG for cardiac review, medication administration and physician evaluations."
+    },
+    {
+      title: "When will I see a physician?",
+      description: "All patients are first triaged by an ER nurse. Then patients are evaluated by a physician. Patients who have a higher acuity of illness (i.e. heart attack or stroke) may be treated before those patients with less severe conditions (laceration, sprained ankle, etc.). Your patience is always appreciated."
+    },
+    {
+      title: "When will I be able to eat?",
+      description: "Patients are able to eat after all their tests are completed and the physician has evaluated the results. On average, it is within three to four hours. However, it is sometimes necessary for patients to remain 'NPO' (nothing by mouth) until further tests and/or studies are completed."
     },
   ];
 
@@ -158,6 +182,24 @@ const HomePage = () => {
         </div>
       </section>
 
+      <section style={{ backgroundColor: "rgb(245, 247, 248)" }}>
+        <div className='container py-16'>
+          <div className='grid grid-cols-1 md:grid-cols-3 gap-5'>
+            <div>
+              <div>
+                <h3 className="text-xl text-secondary font-bold mb-2">Frequently asked questions</h3>
+                <p className='text-sm text-accent mb-2'>Still have more questions about the services? Contact us and we'll get back to you as soon as possible.</p>
+                <div className='mt-10'>
+                  <Link to='/contact' className='btn btn-primary btn-sm px-10'>Contact Us</Link>
+                </div>
+              </div>
+            </div>
+            <div className='md:col-span-2 mt-5 md:mt-0 space-y-1'>
+              <Collapses data={faq} tabIndex={0}></Collapses>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
