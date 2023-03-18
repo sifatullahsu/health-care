@@ -107,10 +107,12 @@ const HomePage = () => {
             </div>
           </div>
           <Services services={services?.data?.slice(0, 3)} selectedDate={date} isLoading={servicesLoading}></Services>
-
-          <div className='text-center mt-10'>
-            <Link to='/hospital-services' className='btn btn-primary btn-sm px-10'>See More</Link>
-          </div>
+          {
+            !servicesLoading &&
+            <div className='text-center mt-10'>
+              <Link to='/hospital-services' className='btn btn-primary btn-sm px-10'>See More</Link>
+            </div>
+          }
         </div>
       </section>
 
@@ -123,9 +125,12 @@ const HomePage = () => {
             </div>
           </div>
           <Doctors doctors={doctors?.data} isLoading={doctorsLoading}></Doctors>
-          <div className='text-center mt-10'>
-            <Link to='/doctors' className='btn btn-primary btn-sm px-10'>See More</Link>
-          </div>
+          {
+            !doctorsLoading &&
+            <div className='text-center mt-10'>
+              <Link to='/doctors' className='btn btn-primary btn-sm px-10'>See More</Link>
+            </div>
+          }
         </div>
       </section>
 
