@@ -140,7 +140,7 @@ const HomePage = () => {
         </div>
       </section>
 
-      <section className='' style={{ backgroundColor: "rgb(245, 247, 248)" }}>
+      <section style={{ backgroundColor: "rgb(245, 247, 248)" }}>
         <div className='container py-16'>
           <div className='flex justify-between mb-5'>
             <div>
@@ -161,7 +161,7 @@ const HomePage = () => {
       <section className='container py-16'>
         <div className='grid grid-cols-1 md:grid-cols-3 gap-5'>
           <div className='flex items-center'>
-            <div className='max-w-[250px]'>
+            <div className='md:pr-10'>
               <h3 className="text-xl text-secondary font-bold mb-2">About Health Care</h3>
               <p className='text-sm text-accent mb-2'>To build a legacy of accessible, high quality, safe private healthcare for low and middle-income patients in emerging markets.</p>
             </div>
@@ -197,6 +197,18 @@ const HomePage = () => {
             <div className='md:col-span-2 mt-5 md:mt-0 space-y-1'>
               <Collapses data={faq} tabIndex={0}></Collapses>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className='container py-16'>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-10'>
+          <div>
+            <h3 className="text-xl text-secondary font-bold mb-2">Health Care Provider With <br /> Hospitals in Multiple Locations.</h3>
+            <p className='text-sm text-accent mb-2'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio accusamus natus voluptas eum tempora vel reprehenderit dolores nesciunt eos culpa, placeat dolor, ea maiores voluptates minus inventore sequi voluptatum libero amet corrupti! Consequuntur maiores quidem quaerat impedit quod. Laborum incidunt est quos quia maiores unde rerum alias suscipit quod labore!</p>
+          </div>
+          <div className='md:ml-auto'>
+            <iframe width="350" height="200" src="https://www.youtube.com/embed/yN-MkRcOJjY" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
           </div>
         </div>
       </section>

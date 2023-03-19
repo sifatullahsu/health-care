@@ -5,7 +5,8 @@ const Collapses = ({ data, tabIndex }) => {
     <>
       {
         data?.map((item, i) => (
-          <div key={i} tabIndex={tabIndex} className="collapse collapse-arrow bg-white rounded-box">
+          <div key={i} className="collapse collapse-arrow bg-white rounded-box">
+            <input type="checkbox" className='!min-h-[unset]' />
             <div className="collapse-title !min-h-[unset] text-base text-secondary font-bold">{item.title}</div>
             <div className="collapse-content">
               <p className='text-sm text-accent'>{item.description}</p>
