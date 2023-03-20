@@ -8,13 +8,14 @@ import Services from '../templates/loops/Services';
 import Doctors from '../templates/loops/Doctors';
 import { getDoctors } from '../queries/doctors';
 import { getServices } from '../queries/services';
+import Collapses from '../templates/loops/Collapses';
 
 import icon3 from '../assets/images/icon-3.png';
 import icon4 from '../assets/images/icon-4.png';
 import icon5 from '../assets/images/icon-5.png';
 import icon6 from '../assets/images/icon-6.png';
 import icon7 from '../assets/images/icon-7.png';
-import Collapses from '../templates/loops/Collapses';
+import hospitalImg from '../assets/images/hospital.jpg';
 
 const HomePage = () => {
 
@@ -89,7 +90,7 @@ const HomePage = () => {
             <h1 className='text-3xl md:text-5xl text-white capitalize mb-5'>We safeguard your
               <span className='block mt-3'>health & beauty.</span>
             </h1>
-            <p className='text-lg'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti quod obcaecati qui dignissimos quia libero consequuntur fugit incidunt, delectus nihil corrupti quod obcaecati.</p>
+            <p className='text-lg'>If you are looking for a reliable dentist in town, we are here to help. We are known for the best, affordable, and painless dental treatments with quick appointments and timely solutions.</p>
 
             <div className='my-10'>
               <div className="grid grid-cols-2 gap-3">
@@ -205,10 +206,28 @@ const HomePage = () => {
         <div className='grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-10'>
           <div>
             <h3 className="text-xl text-secondary font-bold mb-2">Health Care Provider With <br /> Hospitals in Multiple Locations.</h3>
-            <p className='text-sm text-accent mb-2'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio accusamus natus voluptas eum tempora vel reprehenderit dolores nesciunt eos culpa, placeat dolor, ea maiores voluptates minus inventore sequi voluptatum libero amet corrupti! Consequuntur maiores quidem quaerat impedit quod. Laborum incidunt est quos quia maiores unde rerum alias suscipit quod labore!</p>
+            <p className='text-sm text-accent mb-2'>We are certified doctors specialised in offering the best dental treatments in town. With adequate experience of over 12 years, we have mastered the skills of offering the best solutions with the latest technologies. If you are looking for a reliable dentist in town, we are here to help. We are known for the best, affordable, and painless dental treatments with quick appointments and timely solutions.</p>
           </div>
           <div className='md:ml-auto'>
             <iframe width="350" height="200" src="https://www.youtube.com/embed/yN-MkRcOJjY" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
+          </div>
+        </div>
+      </section>
+
+      <section style={{ backgroundColor: "rgb(245, 247, 248)" }}>
+        <div className='container py-16'>
+          <div className='flex flex-col-reverse md:flex-row flex-wrap'>
+            <div className='basis-full md:basis-6/12 bg-white p-8 md:p-10'>
+              <h3 className="text-xl text-secondary font-bold mb-2">Book an Appointment & You're Done!</h3>
+              <p className='text-sm text-accent mb-2'>Book an Appointment & You're Done! Looking for the best & quick dental treatments without a long waiting time?</p>
+              <p className='text-sm text-accent mb-2'>Simply reserve a time slot, walk in at the appointed time and get prioritized treatments at no extra cost.?</p>
+              <div className='mt-10'>
+                <Link to='/hospital-services' className='btn btn-primary btn-sm px-10'>Resarve A Slot</Link>
+              </div>
+            </div>
+            <div className='basis-full md:basis-6/12'>
+              <img src={hospitalImg} alt="" className='h-full object-cover' />
+            </div>
           </div>
         </div>
       </section>
