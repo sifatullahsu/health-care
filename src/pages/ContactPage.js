@@ -1,7 +1,17 @@
 import React from 'react';
+import { toast } from 'react-hot-toast';
 import { FaFacebookF, FaGithub, FaLinkedinIn } from 'react-icons/fa';
 
 const ContactPage = () => {
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = event.target;
+
+    toast.success("Form submitted! We'll contacr very soon!");
+    form.reset();
+  }
+
   return (
     <section style={{ backgroundColor: "rgb(245, 247, 248)" }}>
       <div className='container py-16'>
@@ -36,7 +46,7 @@ const ContactPage = () => {
             </div>
           </div>
           <div className='col-span-2'>
-            <form className='grid grid-cols-1 md:grid-cols-2 gap-x-5'>
+            <form onSubmit={handleSubmit} className='grid grid-cols-1 md:grid-cols-2 gap-x-5'>
 
               <div className="form-control sm">
                 <label className="label"><span className="label-text">First Name</span></label>
