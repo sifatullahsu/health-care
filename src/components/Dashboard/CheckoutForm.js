@@ -69,7 +69,6 @@ const CheckoutForm = ({ state, setSuccessData }) => {
     }
 
     createAppointment(finalData)
-      .then(res => res.json())
       .then(() => {
         setSuccessData({
           status: true,

@@ -18,7 +18,7 @@ const ContactPage = () => {
         <div className='flex justify-between mb-5'>
           <div>
             <h3 className="text-xl text-secondary font-bold mb-2">Contact Us</h3>
-            <p className='text-sm text-accent mb-2'>Lorem ipsum dolor sit amet.</p>
+            <p className='text-sm text-accent mb-2'>Submit form, we'll contact very soon!</p>
           </div>
         </div>
 
