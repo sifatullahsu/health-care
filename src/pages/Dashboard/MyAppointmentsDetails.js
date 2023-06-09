@@ -38,7 +38,7 @@ const MyAppointmentsDetails = () => {
                   <p className='text-sm text-accent max-w-xs'>{`${details?.data?.doctor?.designation} - [${details?.data?.doctor?.qualifications}]`}</p>
                 </div>
 
-                <div className=' top-7 right-10 space-y-3'>
+                <div className='space-y-3'>
                   <div>
                     <span className='text-xs text-gray-500'>Remaining Time</span>
                     <Countdown data={countdown} className='mt-2'></Countdown>
@@ -51,6 +51,12 @@ const MyAppointmentsDetails = () => {
                     </ul>
                   </div>
                 </div>
+                {
+                  details?.data?.meeting?.id &&
+                  <div className='mt-10'>
+                    <a href={details?.data?.meeting.joinUrl} target='_blank' rel='noreferrer' className='btn btn-primary btn-sm px-10'>Join Meeting</a>
+                  </div>
+                }
               </div>
 
               <div>
